@@ -18,8 +18,14 @@ class MainWindow : public QMainWindow
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+  private slots:
+    void aboutClicked();
+
   private:
     Ui::MainWindow *ui;
 
-    QMenu m_aboutMenu;
+    QMenu m_help;
+    QAction m_about;
+
+    void createMenuBar();
 };
