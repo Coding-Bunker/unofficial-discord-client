@@ -2,6 +2,7 @@
 
 #include "./ui_mainwindow.h"
 
+#include <QMessageBox>
 #include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -21,7 +22,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::aboutClicked()
 {
-    qDebug() << "Prova";
+    QMessageBox::information(
+        this, "About",
+        QString("Version %1").arg(QApplication::applicationVersion()));
 }
 
 void MainWindow::createMenuBar()
