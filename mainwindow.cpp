@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     setWindowTitle(qAppName());
+
+    m_aboutMenu.setTitle("About");
+    ui->menubar->addMenu(&m_aboutMenu);
 }
 
 MainWindow::~MainWindow()
