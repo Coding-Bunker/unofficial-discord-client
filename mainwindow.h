@@ -19,13 +19,16 @@ class MainWindow : public QMainWindow
     ~MainWindow() override;
 
   private slots:
+    void quit();
     void aboutClicked();
 
   private:
     Ui::MainWindow *ui;
 
     QMenu m_help;
+    QMenu m_file;
     QAction m_about;
+    QAction m_quit;
 
     void createMenuBar();
 };
