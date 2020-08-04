@@ -4,6 +4,7 @@
 #include <QLineEdit>
 #include <QMainWindow>
 #include <QMenu>
+#include <QNetworkAccessManager>
 #include <QPushButton>
 
 QT_BEGIN_NAMESPACE
@@ -39,6 +40,8 @@ class MainWindow : public QMainWindow
     QLabel m_password;
     QLineEdit m_passwordLe;
     QPushButton m_login;
+
+    QNetworkAccessManager m_nam;
 
     void createMenuBar();
     void createLoginWidget();

@@ -1,9 +1,11 @@
 #include "MainWindow.hpp"
 
+#include "DiscordAPI.hpp"
 #include "ui_MainWindow.h"
 
 #include <QGridLayout>
 #include <QMessageBox>
+#include <QNetworkReply>
 #include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,7 +40,17 @@ void MainWindow::aboutClicked()
 
 void MainWindow::requestLogin()
 {
-    qDebug() << Q_FUNC_INFO;
+    // TODO(guerra): move this part in separated class
+    QNetworkRequest request(DiscordAPI::login);
+    const auto reply = m_nam.get(request);
+    connect(reply, &QNetworkReply::readyRead, this, [&]() {
+        const auto s = dynamic_cast<QNetworkReply *>(sender());
+        s->deleteLater();
+        if (s->error() != QNetworkReply::NoError) {
+            return;
+        }
+        qDebug() << "Response:" << s->readAll();
+    });
 }
 
 void MainWindow::createMenuBar()
@@ -60,6 +72,7 @@ void MainWindow::createMenuBar()
 
 void MainWindow::createLoginWidget()
 {
+    // TODO(guerra): move this widget in separated class
     centralWidget()->setLayout(new QGridLayout);
     auto l = qobject_cast<QGridLayout *>(centralWidget()->layout());
     m_email.setText("Email:");
