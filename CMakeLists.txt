@@ -13,20 +13,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-if(ANDROID)
-  add_library(unofficial-discord-client SHARED
+add_executable(unofficial-discord-client
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
-else()
-  add_executable(unofficial-discord-client
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
-endif()
+    MainWindow.cpp  MainWindow.hpp   MainWindow.ui
+    DiscordAPI.hpp
+)
 
 target_link_libraries(unofficial-discord-client PRIVATE Qt5::Widgets)
