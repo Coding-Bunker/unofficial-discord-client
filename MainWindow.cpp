@@ -45,6 +45,7 @@ void MainWindow::createMenuBar()
 {
     m_file.setTitle("File");
     m_quit.setText("Quit");
+    m_quit.setShortcut(QKeySequence::Quit);
     connect(&m_quit, &QAction::triggered, this, &MainWindow::quit);
     m_file.addAction(&m_quit);
 
