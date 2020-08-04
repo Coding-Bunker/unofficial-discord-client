@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
   private slots:
     void quit();
     void aboutClicked();
+    void requestLogin();
 
   private:
     Ui::MainWindow *ui;

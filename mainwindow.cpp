@@ -36,6 +36,11 @@ void MainWindow::aboutClicked()
         QString("Version %1").arg(QApplication::applicationVersion()));
 }
 
+void MainWindow::requestLogin()
+{
+    qDebug() << Q_FUNC_INFO;
+}
+
 void MainWindow::createMenuBar()
 {
     m_file.setTitle("File");
@@ -57,11 +62,13 @@ void MainWindow::createLoginWidget()
     centralWidget()->setLayout(new QGridLayout);
     auto l = qobject_cast<QGridLayout *>(centralWidget()->layout());
     m_email.setText("Email:");
-    m_password.setText("Login:");
+    m_password.setText("Password:");
     m_login.setText("Sign in...");
     l->addWidget(&m_email);
     l->addWidget(&m_emailLe, 0, 1);
     l->addWidget(&m_password);
     l->addWidget(&m_passwordLe, 1, 1);
     l->addWidget(&m_login, 2, 0, 1, 2);
+
+    connect(&m_login, &QPushButton::clicked, this, &MainWindow::requestLogin);
 }
