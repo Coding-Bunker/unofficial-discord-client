@@ -2,6 +2,7 @@
 
 #include "./ui_mainwindow.h"
 
+#include <QGridLayout>
 #include <QMessageBox>
 #include <QtDebug>
 
@@ -13,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle(qAppName());
 
     createMenuBar();
+
+    createLoginWidget();
 }
 
 MainWindow::~MainWindow()
@@ -47,4 +50,18 @@ void MainWindow::createMenuBar()
 
     ui->menubar->addMenu(&m_file);
     ui->menubar->addMenu(&m_help);
+}
+
+void MainWindow::createLoginWidget()
+{
+    centralWidget()->setLayout(new QGridLayout);
+    auto l = qobject_cast<QGridLayout *>(centralWidget()->layout());
+    m_email.setText("Email:");
+    m_password.setText("Login:");
+    m_login.setText("Sign in...");
+    l->addWidget(&m_email);
+    l->addWidget(&m_emailLe, 0, 1);
+    l->addWidget(&m_password);
+    l->addWidget(&m_passwordLe, 1, 1);
+    l->addWidget(&m_login, 2, 0, 1, 2);
 }
