@@ -3,10 +3,12 @@
 #include "DiscordAPI.hpp"
 #include "ui_MainWindow.h"
 
+#include <QDesktopServices>
 #include <QGridLayout>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QTcpServer>
+#include <QUrlQuery>
 #include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -44,7 +46,6 @@ void MainWindow::aboutClicked()
         QString("Version %1").arg(QApplication::applicationVersion()));
 }
 
-#include <QUrlQuery>
 void MainWindow::requestLogin()
 {
     // TODO(guerra): move this part in separated class
@@ -55,19 +56,7 @@ void MainWindow::requestLogin()
     query.addQueryItem("scope", "identify%20email");
     query.addQueryItem("redirect_uri", "http://localhost:8000");
     url.setQuery(query);
-    QNetworkRequest req(url);
-    req.setHeader(QNetworkRequest::ContentTypeHeader,
-                  "application/x-www-form-urlencoded");
-    qDebug() << url;
-    const auto reply = m_nam.get(req);
-    connect(reply, &QNetworkReply::readyRead, this, [&]() {
-        const auto s = dynamic_cast<QNetworkReply *>(sender());
-        s->deleteLater();
-        if (s->error() != QNetworkReply::NoError) {
-            return;
-        }
-        qDebug() << "Response:" << s->readAll();
-    });
+    QDesktopServices::openUrl(url);
 }
 
 void MainWindow::createMenuBar()
