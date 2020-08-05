@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include <QMessageBox>
 #include <QNetworkReply>
+#include <QTcpServer>
 #include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,6 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
     createMenuBar();
 
     createLoginWidget();
+
+    auto server = new QTcpServer(this);
+    server->listen(QHostAddress::LocalHost, 8000);
+    connect(server, &QTcpServer::newConnection, this,
+            [&]() { qDebug() << "new connection on server"; });
 }
 
 MainWindow::~MainWindow()
@@ -38,11 +44,22 @@ void MainWindow::aboutClicked()
         QString("Version %1").arg(QApplication::applicationVersion()));
 }
 
+#include <QUrlQuery>
 void MainWindow::requestLogin()
 {
     // TODO(guerra): move this part in separated class
-    QNetworkRequest request(DiscordAPI::login);
-    const auto reply = m_nam.get(request);
+    QUrl url(DiscordAPI::authorize);
+    QUrlQuery query;
+    query.addQueryItem("response_type", "code");
+    query.addQueryItem("client_id", DiscordAPI::clientId);
+    query.addQueryItem("scope", "identify%20email");
+    query.addQueryItem("redirect_uri", "http://localhost:8000");
+    url.setQuery(query);
+    QNetworkRequest req(url);
+    req.setHeader(QNetworkRequest::ContentTypeHeader,
+                  "application/x-www-form-urlencoded");
+    qDebug() << url;
+    const auto reply = m_nam.get(req);
     connect(reply, &QNetworkReply::readyRead, this, [&]() {
         const auto s = dynamic_cast<QNetworkReply *>(sender());
         s->deleteLater();
