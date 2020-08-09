@@ -42,6 +42,7 @@ class MainWindow : public QMainWindow
 
     QNetworkAccessManager m_nam;
     QTcpServer m_localServer;
+    QString m_token;
 
     void createMenuBar();
     void createLoginWidget();

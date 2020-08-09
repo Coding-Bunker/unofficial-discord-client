@@ -78,7 +78,9 @@ void MainWindow::readDataFromSocket()
         return;
     }
 
-    qDebug() << s->readAll();
+    auto data = s->readAll();
+    auto v    = data.split('=');
+    m_token   = v.at(1).left(30);
 }
 
 void MainWindow::createMenuBar()
