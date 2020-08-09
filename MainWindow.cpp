@@ -5,6 +5,8 @@
 
 #include <QDesktopServices>
 #include <QGridLayout>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QTcpServer>
@@ -62,8 +64,8 @@ void MainWindow::requestLogin()
 void MainWindow::newConnectionOnLocalServer()
 {
     qDebug() << "new connection on server";
-    auto s   = qobject_cast<QTcpServer *>(sender());
-    auto sok = s->nextPendingConnection();
+    const auto s   = qobject_cast<QTcpServer *>(sender());
+    const auto sok = s->nextPendingConnection();
     if (sok != nullptr) {
         connect(sok, &QTcpSocket::readyRead, this,
                 &MainWindow::readDataFromSocket);
@@ -73,14 +75,33 @@ void MainWindow::newConnectionOnLocalServer()
 
 void MainWindow::readDataFromSocket()
 {
-    auto s = qobject_cast<QTcpSocket *>(sender());
+    const auto s = qobject_cast<QTcpSocket *>(sender());
     if (s == nullptr) {
         return;
     }
 
-    auto data = s->readAll();
-    auto v    = data.split('=');
-    m_token   = v.at(1).left(30);
+    const auto data = s->readAll();
+    const auto v    = data.split('=');
+    m_codeGrant     = v.at(1).left(30);
+    requestToken();
+}
+
+void MainWindow::tokenResponse()
+{
+    const auto r = qobject_cast<QNetworkReply *>(sender());
+    if (r == nullptr) {
+        qWarning() << "error response" << Q_FUNC_INFO;
+        return;
+    }
+
+    r->deleteLater();
+    const auto doc = QJsonDocument::fromJson(r->readAll());
+    const auto obj = doc.object();
+    m_token = obj.value(DiscordAPI::DiscordTags::access_token).toString();
+    m_refreshToken =
+        obj.value(DiscordAPI::DiscordTags::refresh_token).toString();
+    m_expireTime = obj.value(DiscordAPI::DiscordTags::expires_in).toInt();
+    qDebug() << m_token << m_refreshToken << m_expireTime;
 }
 
 void MainWindow::createMenuBar()
@@ -103,9 +124,26 @@ void MainWindow::createMenuBar()
 void MainWindow::createLoginWidget()
 {
     centralWidget()->setLayout(new QGridLayout);
-    auto l = qobject_cast<QGridLayout *>(centralWidget()->layout());
+    const auto l = qobject_cast<QGridLayout *>(centralWidget()->layout());
     m_login.setText("Sign in...");
     l->addWidget(&m_login);
 
     connect(&m_login, &QPushButton::clicked, this, &MainWindow::requestLogin);
+}
+
+void MainWindow::requestToken()
+{
+    QUrl url(DiscordAPI::token);
+    QUrlQuery query;
+    query.addQueryItem("client_id", DiscordAPI::clientId);
+    query.addQueryItem("client_secret", DiscordAPI::clientSecret);
+    query.addQueryItem("grant_type", "authorization_code");
+    query.addQueryItem("code", m_codeGrant);
+    query.addQueryItem("redirect_uri", "http://localhost:8000");
+    query.addQueryItem("scope", "identify email connections");
+    QNetworkRequest req(url);
+    req.setHeader(QNetworkRequest::ContentTypeHeader,
+                  "application/x-www-form-urlencoded");
+    auto reply = m_nam.post(req, query.query().toUtf8());
+    connect(reply, &QNetworkReply::finished, this, &MainWindow::tokenResponse);
 }

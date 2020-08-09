@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
     void requestLogin();
     void newConnectionOnLocalServer();
     void readDataFromSocket();
+    void tokenResponse();
 
   private:
     Ui::MainWindow *ui;
@@ -42,8 +43,12 @@ class MainWindow : public QMainWindow
 
     QNetworkAccessManager m_nam;
     QTcpServer m_localServer;
+    QString m_codeGrant;
     QString m_token;
+    QString m_refreshToken;
+    int m_expireTime;
 
     void createMenuBar();
     void createLoginWidget();
+    void requestToken();
 };
