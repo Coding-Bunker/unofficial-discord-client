@@ -6,6 +6,7 @@
 #include <QMenu>
 #include <QNetworkAccessManager>
 #include <QPushButton>
+#include <QTcpServer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -26,6 +27,8 @@ class MainWindow : public QMainWindow
     void quit();
     void aboutClicked();
     void requestLogin();
+    void newConnectionOnLocalServer();
+    void readDataFromSocket();
 
   private:
     Ui::MainWindow *ui;
@@ -42,6 +45,7 @@ class MainWindow : public QMainWindow
     QPushButton m_login;
 
     QNetworkAccessManager m_nam;
+    QTcpServer m_localServer;
 
     void createMenuBar();
     void createLoginWidget();

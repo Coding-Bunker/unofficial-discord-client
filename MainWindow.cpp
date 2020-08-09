@@ -22,14 +22,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createLoginWidget();
 
-    auto server = new QTcpServer(this);
-    server->listen(QHostAddress::LocalHost, 8000);
-    connect(server, &QTcpServer::newConnection, this,
-            [&]() { qDebug() << "new connection on server"; });
+    connect(&m_localServer, &QTcpServer::newConnection, this,
+            &MainWindow::newConnectionOnLocalServer);
+    m_localServer.listen(QHostAddress::LocalHost, 8000);
 }
 
 MainWindow::~MainWindow()
 {
+    m_localServer.close();
     delete ui;
 }
 
@@ -57,6 +57,28 @@ void MainWindow::requestLogin()
     query.addQueryItem("redirect_uri", "http://localhost:8000");
     url.setQuery(query);
     QDesktopServices::openUrl(url);
+}
+
+void MainWindow::newConnectionOnLocalServer()
+{
+    qDebug() << "new connection on server";
+    auto s   = qobject_cast<QTcpServer *>(sender());
+    auto sok = s->nextPendingConnection();
+    if (sok != nullptr) {
+        connect(sok, &QTcpSocket::readyRead, this,
+                &MainWindow::readDataFromSocket);
+        connect(sok, &QTcpSocket::disconnected, sok, &QTcpSocket::deleteLater);
+    }
+}
+
+void MainWindow::readDataFromSocket()
+{
+    auto s = qobject_cast<QTcpSocket *>(sender());
+    if (s == nullptr) {
+        return;
+    }
+
+    qDebug() << s->readAll();
 }
 
 void MainWindow::createMenuBar()
