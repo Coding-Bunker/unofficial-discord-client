@@ -100,17 +100,10 @@ void MainWindow::createMenuBar()
 
 void MainWindow::createLoginWidget()
 {
-    // TODO(guerra): move this widget in separated class
     centralWidget()->setLayout(new QGridLayout);
     auto l = qobject_cast<QGridLayout *>(centralWidget()->layout());
-    m_email.setText("Email:");
-    m_password.setText("Password:");
     m_login.setText("Sign in...");
-    l->addWidget(&m_email);
-    l->addWidget(&m_emailLe, 0, 1);
-    l->addWidget(&m_password);
-    l->addWidget(&m_passwordLe, 1, 1);
-    l->addWidget(&m_login, 2, 0, 1, 2);
+    l->addWidget(&m_login);
 
     connect(&m_login, &QPushButton::clicked, this, &MainWindow::requestLogin);
 }

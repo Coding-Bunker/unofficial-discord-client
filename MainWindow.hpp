@@ -38,10 +38,6 @@ class MainWindow : public QMainWindow
     QAction m_about;
     QAction m_quit;
 
-    QLabel m_email;
-    QLineEdit m_emailLe;
-    QLabel m_password;
-    QLineEdit m_passwordLe;
     QPushButton m_login;
 
     QNetworkAccessManager m_nam;
