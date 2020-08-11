@@ -100,8 +100,8 @@ void MainWindow::tokenResponse()
     m_token = obj.value(DiscordAPI::DiscordTags::access_token).toString();
     m_refreshToken =
         obj.value(DiscordAPI::DiscordTags::refresh_token).toString();
-    m_expireTime = obj.value(DiscordAPI::DiscordTags::expires_in).toInt();
-    qDebug() << m_token << m_refreshToken << m_expireTime;
+    m_expireSeconds = obj.value(DiscordAPI::DiscordTags::expires_in).toInt();
+    // TODO(guerra): make POST before this time elaps for refreshing token
 }
 
 void MainWindow::createMenuBar()
