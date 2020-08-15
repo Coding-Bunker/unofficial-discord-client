@@ -1,6 +1,7 @@
 #include "MainWindow.hpp"
 
-#include "DiscordAPI.hpp"
+#include "DiscordApi/DiscordAPI.hpp"
+
 #include "ui_MainWindow.h"
 
 #include <QDesktopServices>
