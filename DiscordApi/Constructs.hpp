@@ -1,11 +1,11 @@
 #pragma once
+
 #include <QString>
 
-
-namespace DiscordAPI{
-
-enum class AuditLogEvent{
-    GUILD_UPDATE = 1,
+namespace DiscordAPI
+{
+enum class AuditLogEvent {
+    GUILD_UPDATE   = 1,
     CHANNEL_CREATE = 10,
     CHANNEL_UPDATE,
     CHANNEL_DELETE,
@@ -40,17 +40,17 @@ enum class AuditLogEvent{
     INTEGRATION_UPDATE,
     INTEGRATION_DELETE
 };
-inline const QString baseURL = "https://discord.com/api";
-inline const QString authorize = baseURL + "/oauth2/authorize";
-inline const QString clientId = "740334165651882036";
+inline const QString baseURL      = "https://discord.com/api";
+inline const QString authorize    = baseURL + "/oauth2/authorize";
+inline const QString clientId     = "740334165651882036";
 inline const QString clientSecret = "og4kFEYYimJCaFn0v9R7mIPg45ciTRLL";
-inline const QString login = baseURL + "/auth/login";
-inline const QString token = baseURL + "/oauth2/token";
+inline const QString login        = baseURL + "/auth/login";
+inline const QString token        = baseURL + "/oauth2/token";
 
-
-namespace DiscordTags {
-inline const QString access_token = "access_token";
-inline const QString expires_in = "expires_in";
+namespace DiscordTags
+{
+inline const QString access_token  = "access_token";
+inline const QString expires_in    = "expires_in";
 inline const QString refresh_token = "refresh_token";
 } // namespace DiscordTags
-}
+} // namespace DiscordAPI

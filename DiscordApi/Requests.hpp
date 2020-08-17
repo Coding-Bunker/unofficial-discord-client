@@ -1,12 +1,15 @@
 #pragma once
+
 #include "Constructs.hpp"
 
+#include <QDesktopServices>
 #include <QUrl>
 #include <QUrlQuery>
-#include <QDesktopServices>
 
-namespace DiscordAPI{
-namespace Requests{
+namespace DiscordAPI
+{
+namespace Requests
+{
 inline void login()
 {
     QUrl url(DiscordAPI::authorize);
