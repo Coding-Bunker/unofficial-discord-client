@@ -16,6 +16,7 @@ find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
 add_executable(unofficial-discord-client
     main.cpp
     Overwrite.hpp
+    User.hpp
     Channel.hpp
     MainWindow.cpp  MainWindow.hpp   MainWindow.ui
     DiscordApi/DiscordAPI.hpp DiscordApi/Requests.hpp
