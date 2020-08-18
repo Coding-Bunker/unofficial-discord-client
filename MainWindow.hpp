@@ -46,7 +46,7 @@ class MainWindow : public QMainWindow
     QString m_codeGrant;
     QString m_token;
     QString m_refreshToken;
-    int m_expireTime;
+    int m_expireSeconds;
 
     void createMenuBar();
     void createLoginWidget();
