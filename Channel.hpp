@@ -1,8 +1,12 @@
 #ifndef CHANNEL_HPP
 #define CHANNEL_HPP
+#include "Overwrite.hpp"
+#include "User.hpp"
+
 #include <QJsonObject>
 #include <QTime>
 #include <QUuid>
+#include <QVector>
 #include <optional>
 
 struct Channel {
@@ -22,7 +26,7 @@ struct Channel {
     Type type;
     QUuid guild_id;
     int position;
-    // array of permissions overwrites
+    QVector<Overwrite> permission_overwrites;
     QString name;
     QString topic;
     bool nsfw = false;
@@ -30,7 +34,7 @@ struct Channel {
     int bitrate;
     unsigned int user_limit;
     unsigned int rate_limit_per_user;
-    // reciptions of user objects
+    QVector<User> recipients;
     QString icons; // hash
     QUuid owner_id;
     QUuid application_id;
