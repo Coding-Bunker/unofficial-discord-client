@@ -1,12 +1,10 @@
 #pragma once
 
-#include <QLabel>
-#include <QLineEdit>
+#include "Authenticator.hpp"
+
 #include <QMainWindow>
 #include <QMenu>
-#include <QNetworkAccessManager>
 #include <QPushButton>
-#include <QTcpServer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -26,10 +24,6 @@ class MainWindow : public QMainWindow
   private slots:
     void quit();
     void aboutClicked();
-    void requestLogin();
-    void newConnectionOnLocalServer();
-    void readDataFromSocket();
-    void tokenResponse();
 
   private:
     Ui::MainWindow *ui;
@@ -41,14 +35,8 @@ class MainWindow : public QMainWindow
 
     QPushButton m_login;
 
-    QNetworkAccessManager m_nam;
-    QTcpServer m_localServer;
-    QString m_codeGrant;
-    QString m_token;
-    QString m_refreshToken;
-    int m_expireSeconds;
+    Authenticator m_auth;
 
     void createMenuBar();
     void createLoginWidget();
-    void requestToken();
 };
