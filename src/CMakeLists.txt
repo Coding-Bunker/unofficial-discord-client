@@ -10,6 +10,8 @@ add_executable(unofficial-discord-client
     Authenticator.hpp
     Authenticator.cpp
 
+    Requester.hpp
+    Requester.cpp
     DiscordApi/DiscordAPI.hpp
 )
 

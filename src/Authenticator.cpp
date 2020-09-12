@@ -30,7 +30,7 @@ void Authenticator::requestLogin()
     QUrlQuery query;
     query.addQueryItem("response_type", "code");
     query.addQueryItem("client_id", DiscordAPI::clientId);
-    query.addQueryItem("scope", "identify%20email");
+    query.addQueryItem("scope", "identify%20email%20guilds");
     query.addQueryItem("redirect_uri", "http://localhost:8000");
     url.setQuery(query);
     QDesktopServices::openUrl(url);
@@ -94,6 +94,8 @@ void Authenticator::infoResponse()
 
     r->deleteLater();
     qDebug() << r->readAll();
+    m_localServer.close();
+    emit authenticationFinished(m_token);
 }
 
 void Authenticator::requestToken()
