@@ -14,7 +14,8 @@ class Authenticator : public QObject
     Q_INVOKABLE void requestLogin();
 
   signals:
-    void authenticationFinished(const QString &token);
+    void authenticationFinished(const QString &token,
+                                const QJsonObject &meInfo);
 
   private slots:
     void newConnectionOnLocalServer();

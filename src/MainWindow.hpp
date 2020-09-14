@@ -2,6 +2,7 @@
 
 #include "Authenticator.hpp"
 #include "Requester.hpp"
+#include "User.hpp"
 
 #include <QMainWindow>
 #include <QMenu>
@@ -25,7 +26,8 @@ class MainWindow : public QMainWindow
   private slots:
     void quit();
     void aboutClicked();
-    void retrievePersonalInfo(const QString token);
+    void retrievePersonalInfo(const QString token, const QJsonObject &meInfo);
+    void guildsReady(const QJsonArray &array);
 
   private:
     Ui::MainWindow *ui;
@@ -39,6 +41,7 @@ class MainWindow : public QMainWindow
 
     Authenticator m_auth;
     Requester m_req;
+    User m_userLogged;
 
     void createMenuBar();
     void createLoginWidget();

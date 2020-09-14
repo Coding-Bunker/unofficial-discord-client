@@ -15,7 +15,7 @@ class Requester : public QObject
     void requestGuilds();
 
   signals:
-    void finished(const QString response);
+    void guildsFinished(const QJsonArray &array);
 
   private slots:
     void response();

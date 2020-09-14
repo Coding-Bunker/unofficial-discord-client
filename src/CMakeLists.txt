@@ -13,6 +13,11 @@ add_executable(unofficial-discord-client
     Requester.hpp
     Requester.cpp
     DiscordApi/DiscordAPI.hpp
+
+    User.hpp
+    User.cpp
+    Guild.hpp
+    Guild.cpp
 )
 
 target_link_libraries(unofficial-discord-client PRIVATE Qt5::Quick Qt5::Network)

@@ -2,6 +2,7 @@
 
 #include "DiscordApi/DiscordAPI.hpp"
 
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QNetworkReply>
 #include <QNetworkRequest>
@@ -28,7 +29,7 @@ void Requester::response()
     }
 
     r->deleteLater();
-    qDebug() << r->readAll();
+    emit guildsFinished(QJsonDocument::fromJson(r->readAll()).array());
 }
 
 void Requester::request(const QString &api)

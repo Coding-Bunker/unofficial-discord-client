@@ -38,10 +38,18 @@ void MainWindow::aboutClicked()
         QString("Version %1").arg(QApplication::applicationVersion()));
 }
 
-void MainWindow::retrievePersonalInfo(const QString token)
+void MainWindow::retrievePersonalInfo(const QString token,
+                                      const QJsonObject &meInfo)
 {
+    m_userLogged.populate(meInfo);
     m_req.setToken(token);
+    connect(&m_req, &Requester::guildsFinished, this, &MainWindow::guildsReady);
     m_req.requestGuilds();
+}
+
+void MainWindow::guildsReady(const QJsonArray &array)
+{
+    m_userLogged.setGuilds(array);
 }
 
 void MainWindow::createMenuBar()
