@@ -42,6 +42,7 @@ void MainWindow::retrievePersonalInfo(const QString token,
                                       const QJsonObject &meInfo)
 {
     m_userLogged.populate(meInfo);
+    qDebug() << m_userLogged;
     m_req.setToken(token);
     connect(&m_req, &Requester::guildsFinished, this, &MainWindow::guildsReady);
     m_req.requestGuilds();
@@ -50,6 +51,13 @@ void MainWindow::retrievePersonalInfo(const QString token,
 void MainWindow::guildsReady(const QJsonArray &array)
 {
     m_userLogged.setGuilds(array);
+    qDebug() << m_userLogged.guilds();
+    m_guildsModel = std::make_unique<GuildsModel>(m_userLogged.guilds());
+    m_guildsView.setModel(m_guildsModel.get());
+    qDebug() << m_stack.count();
+    m_stack.addWidget(&m_guildsView);
+    m_stack.setCurrentIndex(1);
+    qDebug() << m_stack.count();
 }
 
 void MainWindow::createMenuBar()
@@ -71,10 +79,13 @@ void MainWindow::createMenuBar()
 
 void MainWindow::createLoginWidget()
 {
+    m_login.setText("Sign in...");
+
     centralWidget()->setLayout(new QGridLayout);
     const auto l = qobject_cast<QGridLayout *>(centralWidget()->layout());
-    m_login.setText("Sign in...");
-    l->addWidget(&m_login);
+
+    m_stack.addWidget(&m_login);
+    l->addWidget(&m_stack);
 
     connect(&m_login, &QPushButton::clicked, &m_auth,
             &Authenticator::requestLogin);
