@@ -1,12 +1,15 @@
 #pragma once
 
 #include "Authenticator.hpp"
+#include "GuildsModel.hpp"
 #include "Requester.hpp"
 #include "User.hpp"
 
+#include <QListView>
 #include <QMainWindow>
 #include <QMenu>
 #include <QPushButton>
+#include <QStackedWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -38,6 +41,10 @@ class MainWindow : public QMainWindow
     QAction m_quit;
 
     QPushButton m_login;
+    QStackedWidget m_stack;
+
+    QListView m_guildsView;
+    std::unique_ptr<GuildsModel> m_guildsModel;
 
     Authenticator m_auth;
     Requester m_req;

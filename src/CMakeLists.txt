@@ -18,6 +18,9 @@ add_executable(unofficial-discord-client
     User.cpp
     Guild.hpp
     Guild.cpp
+
+    GuildsModel.hpp
+    GuildsModel.cpp
 )
 
 target_link_libraries(unofficial-discord-client PRIVATE Qt5::Quick Qt5::Network)
