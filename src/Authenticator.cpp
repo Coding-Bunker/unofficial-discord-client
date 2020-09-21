@@ -1,6 +1,6 @@
 #include "Authenticator.hpp"
 
-#include "DiscordApi/Constructs.hpp"
+#include "DiscordApi/DiscordAPI.hpp"
 
 #include <QDesktopServices>
 #include <QJsonDocument>
@@ -10,7 +10,7 @@
 #include <QTcpSocket>
 #include <QUrlQuery>
 
-Authenticator::Authenticator(QObject *parent)
+Authenticator::Authenticator(QObject *parent) : QObject(parent)
 {
     connect(&m_localServer, &QTcpServer::newConnection, this,
             &Authenticator::newConnectionOnLocalServer);
