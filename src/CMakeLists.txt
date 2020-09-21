@@ -1,11 +1,16 @@
-find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
+find_package(Qt5 COMPONENTS Quick Network REQUIRED)
 
 add_executable(unofficial-discord-client
     main.cpp
-    MainWindow.cpp MainWindow.hpp MainWindow.ui
+    qml/qml.qrc
+
+    Application.hpp
+    Application.cpp
+
+    Authenticator.hpp
+    Authenticator.cpp
+
     DiscordApi/DiscordAPI.hpp
-    DiscordApi/Constructs.hpp
-    Authenticator.cpp Authenticator.hpp
 )
 
-target_link_libraries(unofficial-discord-client PRIVATE Qt5::Widgets Qt5::Network)
+target_link_libraries(unofficial-discord-client PRIVATE Qt5::Quick Qt5::Network)

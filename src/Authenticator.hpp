@@ -11,8 +11,7 @@ class Authenticator : public QObject
     Authenticator(QObject *parent = nullptr);
     ~Authenticator() override;
 
-  public slots:
-    void requestLogin();
+    Q_INVOKABLE void requestLogin();
 
   private slots:
     void newConnectionOnLocalServer();
