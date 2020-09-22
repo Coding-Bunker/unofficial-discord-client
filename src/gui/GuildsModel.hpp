@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Guild.hpp"
+#include "core/Guild.hpp"
 
 #include <QAbstractListModel>
 

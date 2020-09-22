@@ -1,26 +1,26 @@
 find_package(Qt5 COMPONENTS Quick Network REQUIRED)
 
 add_executable(unofficial-discord-client
-    main.cpp
-    qml/qml.qrc
+    core/User.hpp
+    core/User.cpp
+    core/Guild.hpp
+    core/Guild.cpp
 
-    Application.hpp
-    Application.cpp
+    handlers/Authenticator.hpp
+    handlers/Authenticator.cpp
+    handlers/Requester.hpp
+    handlers/Requester.cpp
 
-    Authenticator.hpp
-    Authenticator.cpp
-
-    Requester.hpp
-    Requester.cpp
     DiscordApi/DiscordAPI.hpp
 
-    User.hpp
-    User.cpp
-    Guild.hpp
-    Guild.cpp
+    gui/GuildsModel.hpp
+    gui/GuildsModel.cpp
 
-    GuildsModel.hpp
-    GuildsModel.cpp
+    app/main.cpp
+    app/Application.hpp
+    app/Application.cpp
+
+    qml/qml.qrc
 )
 
 target_link_libraries(unofficial-discord-client PRIVATE Qt5::Quick Qt5::Network)
