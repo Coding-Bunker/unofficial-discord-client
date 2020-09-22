@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Authenticator.hpp"
+#include "handlers/Authenticator.hpp"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
