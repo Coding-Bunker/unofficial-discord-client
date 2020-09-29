@@ -8,7 +8,9 @@ ApplicationWindow {
     visible: true
     title: application.name
 
+    // TODO(guerra): move to other file
     Rectangle {
+        visible: user.logged
         anchors {
             top: parent.top
             left: parent.lef
@@ -28,6 +30,30 @@ ApplicationWindow {
 
             color: "gray"
             font.pixelSize: 20
+        }
+    }
+
+    // TODO(guerra): move to other file
+    Rectangle {
+        visible: user.logged
+        anchors {
+            top: parent.top
+            left: parent.left
+            bottom: parent.bottom
+        }
+
+        width: parent.width * 0.1
+        color: "black"
+
+        ListView {
+            anchors.fill: parent
+            model: hmi.guildsModel
+            delegate: Text {
+                width: parent.width * 0.9
+                height: width
+                text: nameRole
+                color: "gray"
+            }
         }
     }
 

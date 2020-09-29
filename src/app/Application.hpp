@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/User.hpp"
+#include "gui/GuildsModel.hpp"
 #include "handlers/Authenticator.hpp"
 #include "handlers/Requester.hpp"
 
@@ -8,12 +9,22 @@
 #include <QQmlApplicationEngine>
 #include <memory>
 
-class Application
+class Application : public QObject
 {
+    Q_OBJECT
+
+    Q_PROPERTY(
+        GuildsModel *guildsModel READ guildsModel NOTIFY guildsModelChanged)
+
   public:
     explicit Application(int &argc, char **argv);
 
     int run();
+
+    GuildsModel *guildsModel() const;
+
+  signals:
+    void guildsModelChanged();
 
   private:
     std::unique_ptr<QGuiApplication> m_application;
@@ -23,4 +34,6 @@ class Application
 
     Authenticator m_auth;
     Requester m_req;
+
+    std::unique_ptr<GuildsModel> m_guildsModel;
 };
