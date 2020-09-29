@@ -15,6 +15,10 @@ class GuildsModel : public QAbstractListModel
     QVariant data(const QModelIndex &index,
                   int role = Qt::DisplayRole) const override;
 
+    enum Role { Name = Qt::UserRole + 1 };
+
+    QHash<int, QByteArray> roleNames() const override;
+
   private:
     const QVector<Guild> &m_guilds;
 };
