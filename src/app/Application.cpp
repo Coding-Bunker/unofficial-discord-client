@@ -14,8 +14,15 @@ Application::Application(int &argc, char **argv) :
 
     rc->setContextProperty("qtVersion", QT_VERSION_STR);
     rc->setContextProperty("auth", &m_auth);
+    rc->setContextProperty("user", &m_user);
 
     m_engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
+    QObject::connect(&m_auth, &Authenticator::authenticationFinished,
+                     [&](const QString &token, const QJsonObject &meInfo) {
+                         m_req.setToken(token);
+                         m_user.populate(meInfo);
+                     });
 }
 
 int Application::run()

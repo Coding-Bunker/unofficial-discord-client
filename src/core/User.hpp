@@ -8,15 +8,24 @@
 class QJsonArray;
 class QJsonObject;
 
-class User
+class User : public QObject
 {
+    Q_OBJECT
+
+    Q_PROPERTY(QString username READ username NOTIFY usernameChanged())
+
   public:
     void populate(const QJsonObject &info);
-    void setGuilds(const QJsonArray &array);
 
+    QString username() const;
+
+    void setGuilds(const QJsonArray &array);
     const QVector<Guild> &guilds() const noexcept;
 
     friend QDebug operator<<(QDebug dbg, const User &u);
+
+  signals:
+    void usernameChanged();
 
   private:
     QString m_id;

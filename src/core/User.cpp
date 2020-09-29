@@ -9,6 +9,13 @@ void User::populate(const QJsonObject &info)
     m_username      = info.value("username").toString();
     m_avatar        = info.value("avatar").toString();
     m_discriminator = info.value("discriminator").toString();
+
+    emit usernameChanged();
+}
+
+QString User::username() const
+{
+    return m_username;
 }
 
 void User::setGuilds(const QJsonArray &array)
