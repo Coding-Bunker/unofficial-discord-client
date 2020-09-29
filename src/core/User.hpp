@@ -12,10 +12,13 @@ class User : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString username READ username NOTIFY usernameChanged())
+    Q_PROPERTY(bool logged READ logged NOTIFY loggedChanged)
+    Q_PROPERTY(QString username READ username NOTIFY loggedChanged)
 
   public:
     void populate(const QJsonObject &info);
+
+    bool logged() const;
 
     QString username() const;
 
@@ -25,9 +28,10 @@ class User : public QObject
     friend QDebug operator<<(QDebug dbg, const User &u);
 
   signals:
-    void usernameChanged();
+    void loggedChanged();
 
   private:
+    bool m_logged{ false };
     QString m_id;
     QString m_username;
     QString m_avatar;

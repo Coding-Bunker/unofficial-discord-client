@@ -37,5 +37,6 @@ ApplicationWindow {
         height: 100
         onClicked: auth.requestLogin()
         text: "Login..."
+        visible: !user.logged
     }
 }
