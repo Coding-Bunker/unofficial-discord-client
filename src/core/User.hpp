@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Guild.hpp"
+#include "Types.hpp"
 
 #include <QVector>
 #include <QtDebug>
@@ -32,7 +33,7 @@ class User : public QObject
 
   private:
     bool m_logged{ false };
-    QString m_id;
+    snowflake m_id;
     QString m_username;
     QString m_avatar;
     QString m_discriminator;

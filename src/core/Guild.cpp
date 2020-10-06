@@ -1,6 +1,6 @@
 #include "Guild.hpp"
 
-void Guild::setId(const QString &id)
+void Guild::setId(snowflake id)
 {
     m_id = id;
 }

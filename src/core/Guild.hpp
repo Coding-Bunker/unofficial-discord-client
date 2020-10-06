@@ -1,12 +1,14 @@
 #pragma once
 
+#include "Types.hpp"
+
 #include <QString>
 #include <QtDebug>
 
 class Guild
 {
   public:
-    void setId(const QString &id);
+    void setId(snowflake id);
     void setName(const QString &name);
 
     QString name() const noexcept;
@@ -14,7 +16,7 @@ class Guild
     friend QDebug operator<<(QDebug dbg, const Guild &u);
 
   private:
-    QString m_id;
+    snowflake m_id;
     QString m_name;
     QString m_icon;
 };
