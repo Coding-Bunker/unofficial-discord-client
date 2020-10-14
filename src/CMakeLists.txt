@@ -1,4 +1,7 @@
-find_package(Qt5 COMPONENTS Quick Network REQUIRED)
+find_package(
+  Qt5
+  COMPONENTS Quick Network
+  REQUIRED)
 
 add_executable(unofficial-discord-client
     core/Types.hpp
