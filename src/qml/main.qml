@@ -6,7 +6,6 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
-    title: application.name
 
     // TODO(guerra): move to other file
     Rectangle {

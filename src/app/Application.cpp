@@ -5,10 +5,10 @@
 Application::Application(int &argc, char **argv) :
     m_application{ std::make_unique<QGuiApplication>(argc, argv) }
 {
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication::setApplicationName("unofficial-discord-client");
-    QGuiApplication::setOrganizationName("Coding Bunker");
-    QGuiApplication::setApplicationVersion("0.0.1");
+    m_application->setAttribute(Qt::AA_EnableHighDpiScaling);
+    m_application->setApplicationName("unofficial-discord-client");
+    m_application->setOrganizationName("Coding Bunker");
+    m_application->setApplicationVersion("0.0.1");
 
     const auto rc = m_engine.rootContext();
 
