@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>UserInfoBar.qml</file>
+        <file>GuildsBar.qml</file>
     </qresource>
 </RCC>
