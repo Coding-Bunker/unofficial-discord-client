@@ -7,6 +7,12 @@ ApplicationWindow {
     height: 480
     visible: true
 
+    Shortcut {
+        sequence: StandardKey.Quit
+        context: Qt.ApplicationShortcut
+        onActivated: Qt.quit()
+    }
+
     // TODO(guerra): move to other file
     Rectangle {
         visible: user.logged
