@@ -96,6 +96,7 @@ void Authenticator::infoResponse()
     m_localServer.close();
     emit authenticationFinished(m_token,
                                 QJsonDocument::fromJson(r->readAll()).object());
+    m_localServer.close();
 }
 
 void Authenticator::requestToken()
