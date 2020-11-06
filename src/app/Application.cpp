@@ -29,7 +29,6 @@ Application::Application(int &argc, char **argv) :
 
     QObject::connect(
         &m_req, &Requester::guildsFinished, [&](const QJsonArray &array) {
-            qDebug() << Q_FUNC_INFO;
             m_user.setGuilds(array);
             m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds());
             emit guildsModelChanged();

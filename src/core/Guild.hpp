@@ -8,8 +8,7 @@
 class Guild
 {
   public:
-    void setId(snowflake id);
-    void setName(const QString &name);
+    void unmarshal(const QJsonObject &obj);
 
     QString name() const noexcept;
 

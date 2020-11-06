@@ -1,13 +1,11 @@
 #include "Guild.hpp"
 
-void Guild::setId(snowflake id)
-{
-    m_id = id;
-}
+#include <QJsonObject>
 
-void Guild::setName(const QString &name)
+void Guild::unmarshal(const QJsonObject &obj)
 {
-    m_name = name;
+    m_id   = obj.value("id").toString().toULongLong();
+    m_name = obj.value("name").toString();
 }
 
 QString Guild::name() const noexcept
