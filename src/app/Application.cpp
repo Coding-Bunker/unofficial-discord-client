@@ -19,20 +19,19 @@ Application::Application(int &argc, char **argv) :
 
     m_engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    QObject::connect(&m_auth, &Authenticator::authenticationFinished,
-                     [&](const QString &token, const QJsonObject &meInfo) {
-                         qDebug() << Q_FUNC_INFO;
-                         m_req.setToken(token);
-                         m_user.populate(meInfo);
-                         m_req.requestGuilds();
-                     });
+    connect(&m_auth, &Authenticator::authenticationFinished,
+            [&](const QString &token, const QJsonObject &meInfo) {
+                qDebug() << Q_FUNC_INFO;
+                m_req.setToken(token);
+                m_user.populate(meInfo);
+                m_req.requestGuilds();
+            });
 
-    QObject::connect(
-        &m_req, &Requester::guildsFinished, [&](const QJsonArray &array) {
-            m_user.setGuilds(array);
-            m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds());
-            emit guildsModelChanged();
-        });
+    connect(&m_req, &Requester::guildsFinished, [&](const QJsonArray &array) {
+        m_user.setGuilds(array);
+        m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds());
+        emit guildsModelChanged();
+    });
 }
 
 int Application::run()

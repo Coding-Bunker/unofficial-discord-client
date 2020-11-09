@@ -6,6 +6,10 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
+    background: Rectangle {
+        anchors.fill: parent
+        color: "darkgray"
+    }
 
     Shortcut {
         sequence: StandardKey.Quit
@@ -14,9 +18,8 @@ ApplicationWindow {
     }
 
     UserInfoBar {
-        id: userInfo
         anchors {
-            top: parent.top
+            bottom: parent.bottom
             left: parent.left
             right: parent.right
         }
@@ -24,9 +27,9 @@ ApplicationWindow {
 
     GuildsBar {
         anchors {
-            top: userInfo.bottom
+            top: parent.top
             left: parent.left
-            bottom: parent.bottom
+            right: parent.right
         }
     }
 

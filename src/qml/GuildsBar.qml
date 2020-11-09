@@ -2,19 +2,19 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    visible: user.logged
-
-    width: parent.width * 0.1
     color: "black"
+    height: parent.height * 0.1
+    visible: user.logged
 
     ListView {
         anchors.fill: parent
         model: hmi.guildsModel
-        contentItem.width: width * 0.9
-        contentItem.height: width
+        clip: true
+        boundsBehavior: ListView.StopAtBounds
         delegate: Text {
             text: nameRole
-            color: "gray"
+            font.pixelSize: 16
+            color: "white"
         }
     }
 }
