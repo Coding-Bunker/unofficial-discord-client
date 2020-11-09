@@ -18,11 +18,11 @@ class Requester : public QObject
     void guildsFinished(const QJsonArray &array);
 
   private slots:
-    void response();
+    void handleGuilds(QVariant dummy);
 
   private:
     QString m_token;
     QNetworkAccessManager m_nam;
 
-    void request(const QString &api);
+    template<typename T> void request(const QString &api, T callback);
 };

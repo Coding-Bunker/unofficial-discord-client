@@ -21,7 +21,6 @@ Application::Application(int &argc, char **argv) :
 
     connect(&m_auth, &Authenticator::authenticationFinished,
             [&](const QString &token, const QJsonObject &meInfo) {
-                qDebug() << Q_FUNC_INFO;
                 m_req.setToken(token);
                 m_user.populate(meInfo);
                 m_req.requestGuilds();

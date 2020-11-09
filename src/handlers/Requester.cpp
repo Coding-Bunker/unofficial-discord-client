@@ -17,11 +17,13 @@ void Requester::setToken(const QString &token)
 
 void Requester::requestGuilds()
 {
-    request(DiscordAPI::guilds);
+    request(DiscordAPI::guilds, [this] { handleGuilds({}); });
 }
 
-void Requester::response()
+void Requester::handleGuilds(QVariant dummy)
 {
+    Q_UNUSED(dummy)
+
     const auto r = qobject_cast<QNetworkReply *>(sender());
     if (r == nullptr) {
         qWarning() << Q_FUNC_INFO << "error response";
@@ -32,7 +34,7 @@ void Requester::response()
     emit guildsFinished(QJsonDocument::fromJson(r->readAll()).array());
 }
 
-void Requester::request(const QString &api)
+template<typename T> void Requester::request(const QString &api, T callback)
 {
     QUrl url(api);
     QNetworkRequest req(url);
@@ -41,5 +43,5 @@ void Requester::request(const QString &api)
     req.setHeader(QNetworkRequest::ContentTypeHeader,
                   "application/x-www-form-urlencoded");
     auto reply = m_nam.get(req);
-    connect(reply, &QNetworkReply::finished, this, &Requester::response);
+    connect(reply, &QNetworkReply::finished, this, callback);
 }
