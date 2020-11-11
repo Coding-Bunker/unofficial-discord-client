@@ -39,6 +39,15 @@ const QVector<Guild> &User::guilds() const noexcept
     return m_guilds;
 }
 
+QVector<snowflake> User::guildIDs() const noexcept
+{
+    QVector<snowflake> ret;
+    for (auto g : m_guilds) {
+        ret.push_back(g.id());
+    }
+    return ret;
+}
+
 QDebug operator<<(QDebug dbg, const User &u)
 {
     dbg.nospace() << u.m_id << u.m_username;

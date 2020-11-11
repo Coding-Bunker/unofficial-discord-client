@@ -12,6 +12,7 @@ const QString login        = baseURL + "/auth/login";
 const QString token        = baseURL + "/oauth2/token";
 const QString me           = baseURL + "/users/@me";
 const QString guilds       = me + "/guilds";
+const QString channels     = baseURL + "/guilds/%1/channels";
 
 namespace DiscordTags
 {

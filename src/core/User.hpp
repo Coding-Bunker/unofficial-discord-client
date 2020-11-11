@@ -25,6 +25,7 @@ class User : public QObject
 
     void setGuilds(const QJsonArray &array);
     const QVector<Guild> &guilds() const noexcept;
+    QVector<snowflake> guildIDs() const noexcept;
 
     friend QDebug operator<<(QDebug dbg, const User &u);
 

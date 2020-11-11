@@ -30,6 +30,7 @@ Application::Application(int &argc, char **argv) :
         m_user.setGuilds(array);
         m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds());
         emit guildsModelChanged();
+        m_req.requestChannels(m_user.guildIDs());
     });
 }
 

@@ -10,6 +10,7 @@ class Guild
   public:
     void unmarshal(const QJsonObject &obj);
 
+    snowflake id() const noexcept;
     QString name() const noexcept;
 
     friend QDebug operator<<(QDebug dbg, const Guild &u);

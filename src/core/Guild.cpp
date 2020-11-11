@@ -8,6 +8,11 @@ void Guild::unmarshal(const QJsonObject &obj)
     m_name = obj.value("name").toString();
 }
 
+snowflake Guild::id() const noexcept
+{
+    return m_id;
+}
+
 QString Guild::name() const noexcept
 {
     return m_name;

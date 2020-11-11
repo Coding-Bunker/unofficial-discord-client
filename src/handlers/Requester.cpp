@@ -20,6 +20,14 @@ void Requester::requestGuilds()
     request(DiscordAPI::guilds, [this] { handleGuilds({}); });
 }
 
+void Requester::requestChannels(const QVector<snowflake> &guildIDs)
+{
+    for (auto id : guildIDs) {
+        qDebug() << DiscordAPI::channels.arg(id);
+        request(DiscordAPI::channels.arg(id), [&] { handleChannels(id); });
+    }
+}
+
 void Requester::handleGuilds(QVariant dummy)
 {
     Q_UNUSED(dummy)
@@ -32,6 +40,19 @@ void Requester::handleGuilds(QVariant dummy)
 
     r->deleteLater();
     emit guildsFinished(QJsonDocument::fromJson(r->readAll()).array());
+}
+
+void Requester::handleChannels(QVariant id)
+{
+    const auto r = qobject_cast<QNetworkReply *>(sender());
+    if (r == nullptr) {
+        qWarning() << Q_FUNC_INFO << "error response";
+        return;
+    }
+
+    r->deleteLater();
+    qDebug() << r->readAll();
+    emit channelsListForGuild(id.toULongLong(), {});
 }
 
 template<typename T> void Requester::request(const QString &api, T callback)
