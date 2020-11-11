@@ -1,3 +1,3 @@
 #pragma once
 
-using snowflake = long long int;
+using snowflake = unsigned long long;
