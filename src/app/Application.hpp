@@ -11,10 +11,10 @@
 
 class Application : public QObject
 {
+    // clang-format off
     Q_OBJECT
-
-    Q_PROPERTY(
-        GuildsModel *guildsModel READ guildsModel NOTIFY guildsModelChanged)
+    Q_PROPERTY(GuildsModel *guildsModel READ guildsModel NOTIFY guildsModelChanged)
+    // clang-format on
 
   public:
     explicit Application(int &argc, char **argv);
