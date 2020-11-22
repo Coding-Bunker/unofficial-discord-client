@@ -33,12 +33,7 @@ ApplicationWindow {
         }
     }
 
-    Button {
+    Login {
         anchors.centerIn: parent
-        width: 100
-        height: 100
-        onClicked: auth.requestLogin()
-        text: "Login..."
-        visible: !user.logged
     }
 }

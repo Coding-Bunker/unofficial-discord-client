@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>UserInfoBar.qml</file>
         <file>GuildsBar.qml</file>
+        <file>Login.qml</file>
+        <file>UserInfoBar.qml</file>
+        <file>main.qml</file>
     </qresource>
 </RCC>
