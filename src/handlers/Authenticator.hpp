@@ -1,38 +1,22 @@
 #pragma once
 
 #include <QNetworkAccessManager>
-#include <QTcpServer>
 
 class Authenticator : public QObject
 {
     Q_OBJECT
 
   public:
-    Authenticator(QObject *parent = nullptr);
-    ~Authenticator() override;
-
-    Q_INVOKABLE void requestLogin();
+    Q_INVOKABLE void requestLogin(QString email, QString pass, QString twoFA);
 
   signals:
-    void authenticationFinished(const QString &token,
-                                const QJsonObject &meInfo);
-
-  private slots:
-    void newConnectionOnLocalServer();
-    void readDataFromSocket();
-    void tokenResponse();
-    void infoResponse();
+    void authenticationFinished(const QString &token, const QJsonDocument &doc);
 
   private:
-    void requestToken();
-    void requestMeInfo();
-
-  private:
-    QTcpServer m_localServer;
-    QString m_codeGrant;
-    QString m_token;
-    QString m_refreshToken;
-    int m_expireSeconds;
-
     QNetworkAccessManager m_nam;
+    QString m_token;
+
+    void handleLoginResponse(QString body, QString twoFA);
+    void request2FA(QString ticket, QString mfa);
+    void handlePersonInfo();
 };

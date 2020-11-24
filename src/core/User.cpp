@@ -1,10 +1,13 @@
 #include "User.hpp"
 
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
 
-void User::populate(const QJsonObject &info)
+void User::populate(const QJsonDocument &doc)
 {
+    const auto info = doc.object();
+
     m_logged        = true;
     m_id            = info.value("id").toString().toULongLong();
     m_username      = info.value("username").toString();
@@ -24,8 +27,9 @@ QString User::username() const
     return m_username;
 }
 
-void User::setGuilds(const QJsonArray &array)
+void User::setGuilds(const QByteArray &data)
 {
+    const auto array = QJsonDocument::fromJson(data).array();
     for (const auto &a : array) {
         const auto obj = a.toObject();
         Guild g;
@@ -46,6 +50,14 @@ QVector<snowflake> User::guildIDs() const noexcept
         ret.push_back(g.id());
     }
     return ret;
+}
+
+void User::setChannelsForGuild(const QByteArray &data)
+{
+    const auto obj = QJsonDocument::fromJson(data).array();
+    // TODO: implement it
+    qDebug() << obj;
+    qDebug();
 }
 
 QDebug operator<<(QDebug dbg, const User &u)

@@ -18,16 +18,12 @@ class Requester : public QObject
     void requestChannels(const QVector<snowflake> &guildIDs);
 
   signals:
-    void guildsFinished(const QJsonArray &array);
-    void channelsListForGuild(snowflake guildID, QStringList channels);
-
-  private slots:
-    void handleGuilds(QVariant dummy);
-    void handleChannels(QVariant id);
+    void guildsFinished(QByteArray data);
+    void channelFinished(QByteArray data);
 
   private:
     QString m_token;
     QNetworkAccessManager m_nam;
 
-    template<typename T> void request(const QString &api, T callback);
+    QNetworkReply *request(const QString &api);
 };

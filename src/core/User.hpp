@@ -7,7 +7,6 @@
 #include <QtDebug>
 
 class QJsonArray;
-class QJsonObject;
 
 class User : public QObject
 {
@@ -17,15 +16,17 @@ class User : public QObject
     Q_PROPERTY(QString username READ username NOTIFY loggedChanged)
 
   public:
-    void populate(const QJsonObject &info);
+    void populate(const QJsonDocument &doc);
 
     bool logged() const;
 
     QString username() const;
 
-    void setGuilds(const QJsonArray &array);
+    void setGuilds(const QByteArray &data);
     const QVector<Guild> &guilds() const noexcept;
     QVector<snowflake> guildIDs() const noexcept;
+
+    void setChannelsForGuild(const QByteArray &data);
 
     friend QDebug operator<<(QDebug dbg, const User &u);
 
