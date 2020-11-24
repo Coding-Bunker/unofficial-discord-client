@@ -4,15 +4,22 @@
 
 namespace DiscordAPI
 {
-const QString baseURL      = "https://discord.com/api";
-const QString authorize    = baseURL + "/oauth2/authorize";
 const QString clientId     = "740334165651882036";
 const QString clientSecret = "og4kFEYYimJCaFn0v9R7mIPg45ciTRLL";
-const QString login        = baseURL + "/auth/login";
-const QString token        = baseURL + "/oauth2/token";
-const QString me           = baseURL + "/users/@me";
-const QString guilds       = me + "/guilds";
-const QString channels     = baseURL + "/guilds/%1/channels";
+
+const QByteArray fakeBrowserUserAgent =
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; "
+    "rv:82.0) Gecko/20100101 Firefox/82.0";
+
+const QString baseURL = "https://discord.com/api/v6";
+
+const QString auth  = baseURL + "/auth";
+const QString login = auth + "/login";
+const QString mfa   = auth + "/mfa/totp";
+
+const QString me       = baseURL + "/users/@me";
+const QString guilds   = me + "/guilds";
+const QString channels = baseURL + "/guilds/%1/channels";
 
 namespace DiscordTags
 {
