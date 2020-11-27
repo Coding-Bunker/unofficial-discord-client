@@ -18,8 +18,8 @@ QString Guild::name() const noexcept
     return m_name;
 }
 
-QDebug operator<<(QDebug dbg, const Guild &g)
+void Guild::addChannel(Channel &&c)
 {
-    dbg.nospace() << g.m_id << g.m_name;
-    return dbg.maybeSpace();
+    qDebug() << "add channel " << c.name();
+    // TODO: implement it
 }

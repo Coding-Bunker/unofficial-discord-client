@@ -1,9 +1,6 @@
 #pragma once
 
-#include "Types.hpp"
-
-#include <QString>
-#include <QtDebug>
+#include "Channel.hpp"
 
 class Guild
 {
@@ -13,10 +10,12 @@ class Guild
     snowflake id() const noexcept;
     QString name() const noexcept;
 
-    friend QDebug operator<<(QDebug dbg, const Guild &u);
+    void addChannel(Channel &&c);
 
   private:
     snowflake m_id;
     QString m_name;
     QString m_icon;
+
+    QVector<Channel> m_channels;
 };

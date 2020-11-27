@@ -55,9 +55,21 @@ QVector<snowflake> User::guildIDs() const noexcept
 void User::setChannelsForGuild(const QByteArray &data)
 {
     const auto obj = QJsonDocument::fromJson(data).array();
-    // TODO: implement it
-    qDebug() << obj;
-    qDebug();
+    for (auto o : obj) {
+        const auto ch = o.toObject();
+        Channel c;
+        c.unmarshal(ch);
+        auto it =
+            std::find_if(m_guilds.begin(), m_guilds.end(),
+                         [&](const Guild &g) { return c.guildId() == g.id(); });
+        if (it == m_guilds.end()) {
+            qWarning() << "guild id not found for channel " << c.name();
+            continue;
+        }
+
+        const auto pos = std::distance(m_guilds.begin(), it);
+        m_guilds[pos].addChannel(std::move(c));
+    }
 }
 
 QDebug operator<<(QDebug dbg, const User &u)
