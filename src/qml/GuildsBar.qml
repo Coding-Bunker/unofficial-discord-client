@@ -14,7 +14,12 @@ Rectangle {
         delegate: Text {
             text: nameRole
             font.pixelSize: 16
-            color: "white"
+            color: hmi.guildsModel.selected === index ? "white" : "green"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: hmi.guildsModel.select(index)
+            }
         }
     }
 }

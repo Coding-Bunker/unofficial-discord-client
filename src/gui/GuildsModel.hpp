@@ -6,7 +6,10 @@
 
 class GuildsModel : public QAbstractListModel
 {
+    // clang-format off
     Q_OBJECT
+    Q_PROPERTY(int selected READ selected NOTIFY selectedChanged)
+    // clang-format on
 
   public:
     explicit GuildsModel(const QVector<Guild> &g, QObject *parent = nullptr);
@@ -19,6 +22,14 @@ class GuildsModel : public QAbstractListModel
 
     QHash<int, QByteArray> roleNames() const override;
 
+    Q_INVOKABLE void select(int index);
+
+    int selected() const;
+
+  signals:
+    void selectedChanged();
+
   private:
     const QVector<Guild> &m_guilds;
+    int m_selected;
 };

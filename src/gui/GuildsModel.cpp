@@ -28,3 +28,14 @@ QHash<int, QByteArray> GuildsModel::roleNames() const
 {
     return { { Role::Name, "nameRole" } };
 }
+
+void GuildsModel::select(int index)
+{
+    m_selected = index;
+    emit selectedChanged();
+}
+
+int GuildsModel::selected() const
+{
+    return m_selected;
+}
