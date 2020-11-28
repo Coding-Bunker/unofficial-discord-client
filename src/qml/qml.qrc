@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>ChannelsBar.qml</file>
         <file>GuildsBar.qml</file>
         <file>Login.qml</file>
         <file>UserInfoBar.qml</file>

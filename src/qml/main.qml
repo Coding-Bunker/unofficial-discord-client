@@ -33,6 +33,14 @@ ApplicationWindow {
         }
     }
 
+    ChannelsBar {
+        anchors {
+            left: parent.left
+            top: guildsBar.bottom
+            bottom: userInfo.top
+        }
+    }
+
     Login {
         anchors.centerIn: parent
     }
