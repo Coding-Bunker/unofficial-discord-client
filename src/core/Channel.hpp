@@ -13,14 +13,6 @@ class Channel
 
     snowflake guildId() const;
 
-  private:
-    snowflake m_id;
-    QString m_name;
-    bool m_nfsw;
-    snowflake m_guildId;
-    snowflake m_parentId;
-    int m_position;
-
     enum Type {
         GUILD_TEXT,     // a text channel within a server
         DM,             // a direct message between users
@@ -34,5 +26,16 @@ class Channel
                      // on Discord
     };
 
+    Type type() const;
+
+    int position() const;
+
+  private:
+    snowflake m_id;
+    QString m_name;
+    bool m_nfsw;
+    snowflake m_guildId;
+    snowflake m_parentId;
+    int m_position;
     Type m_type;
 };

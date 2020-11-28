@@ -20,6 +20,15 @@ QString Guild::name() const noexcept
 
 void Guild::addChannel(Channel &&c)
 {
-    qDebug() << "add channel " << c.name();
-    // TODO: implement it
+    // FIXME: for now I just add text channel, should handle categories and
+    // voice
+
+    if (c.type() == Channel::GUILD_TEXT) {
+        m_channels.push_back(c);
+    }
+
+    std::sort(m_channels.begin(), m_channels.end(),
+              [](const Channel &lh, const Channel &rh) {
+                  return lh.position() < rh.position();
+              });
 }

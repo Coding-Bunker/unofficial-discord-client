@@ -20,3 +20,13 @@ snowflake Channel::guildId() const
 {
     return m_guildId;
 }
+
+Channel::Type Channel::type() const
+{
+    return m_type;
+}
+
+int Channel::position() const
+{
+    return m_position;
+}
