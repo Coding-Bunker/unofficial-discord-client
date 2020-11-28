@@ -1,24 +1,32 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 
 Rectangle {
-    color: "black"
-    height: parent.height * 0.1
+    color: Material.backgroundColor
     visible: user.logged
+    height: parent.height * 0.1
 
-    ListView {
-        anchors.fill: parent
-        model: hmi.guildsModel
-        clip: true
-        boundsBehavior: ListView.StopAtBounds
-        delegate: Text {
-            text: nameRole
-            font.pixelSize: 16
-            color: hmi.guildsModel.selected === index ? "white" : "green"
+    Rectangle {
+        color: Material.primaryColor
+        anchors.centerIn: parent
+        height: parent.height - 10
+        width: parent.width - 10
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: hmi.guildsModel.select(index)
+        ListView {
+            anchors.fill: parent
+            model: hmi.guildsModel
+            clip: true
+            boundsBehavior: ListView.StopAtBounds
+            delegate: Text {
+                text: nameRole
+                font.pixelSize: 16
+                color: hmi.guildsModel.selected
+                       === index ? Material.accentColor : Material.foreground
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: hmi.guildsModel.select(index)
+                }
             }
         }
     }

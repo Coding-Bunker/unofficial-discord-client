@@ -4,5 +4,6 @@
         <file>Login.qml</file>
         <file>UserInfoBar.qml</file>
         <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

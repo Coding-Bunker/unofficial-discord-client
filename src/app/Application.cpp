@@ -1,6 +1,7 @@
 #include "Application.hpp"
 
 #include <QQmlContext>
+#include <QQuickStyle>
 
 Application::Application(int &argc, char **argv) :
     m_application{ std::make_unique<QGuiApplication>(argc, argv) }
@@ -9,6 +10,8 @@ Application::Application(int &argc, char **argv) :
     m_application->setApplicationName("unofficial-discord-client");
     m_application->setOrganizationName("Coding Bunker");
     m_application->setApplicationVersion("0.0.1");
+
+    QQuickStyle::setStyle("Material");
 
     const auto rc = m_engine.rootContext();
 
