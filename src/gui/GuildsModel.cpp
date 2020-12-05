@@ -1,6 +1,6 @@
 #include "GuildsModel.hpp"
 
-GuildsModel::GuildsModel(const QVector<Guild> &g, QObject *parent) :
+GuildsModel::GuildsModel(const QList<Guild> &g, QObject *parent) :
     QAbstractListModel(parent), m_guilds{ g }
 {
 }
