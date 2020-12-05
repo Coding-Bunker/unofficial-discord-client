@@ -19,6 +19,8 @@ add_executable(
   DiscordApi/DiscordAPI.hpp
   gui/GuildsModel.hpp
   gui/GuildsModel.cpp
+  gui/ChannelsModel.hpp
+  gui/ChannelsModel.cpp
   app/main.cpp
   app/Application.hpp
   app/Application.cpp
