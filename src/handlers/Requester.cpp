@@ -22,7 +22,7 @@ void Requester::requestGuilds()
     });
 }
 
-void Requester::requestChannels(const QVector<snowflake> &guildIDs)
+void Requester::requestChannels(const QList<snowflake> &guildIDs)
 {
     for (auto id : guildIDs) {
         const auto reply = request(DiscordAPI::channels.arg(id));

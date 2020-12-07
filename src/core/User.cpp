@@ -38,14 +38,14 @@ void User::setGuilds(const QByteArray &data)
     }
 }
 
-const QVector<Guild> &User::guilds() const noexcept
+const QList<Guild> &User::guilds() const noexcept
 {
     return m_guilds;
 }
 
-QVector<snowflake> User::guildIDs() const noexcept
+QList<snowflake> User::guildIDs() const noexcept
 {
-    QVector<snowflake> ret;
+    QList<snowflake> ret;
     for (auto g : m_guilds) {
         ret.push_back(g.id());
     }

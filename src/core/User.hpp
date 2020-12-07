@@ -23,8 +23,8 @@ class User : public QObject
     QString username() const;
 
     void setGuilds(const QByteArray &data);
-    const QVector<Guild> &guilds() const noexcept;
-    QVector<snowflake> guildIDs() const noexcept;
+    const QList<Guild> &guilds() const noexcept;
+    QList<snowflake> guildIDs() const noexcept;
 
     void setChannelsForGuild(const QByteArray &data);
 
@@ -39,5 +39,5 @@ class User : public QObject
     QString m_username;
     QString m_avatar;
     QString m_discriminator;
-    QVector<Guild> m_guilds;
+    QList<Guild> m_guilds;
 };

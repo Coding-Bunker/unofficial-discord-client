@@ -15,7 +15,7 @@ class Requester : public QObject
 
   public:
     void requestGuilds();
-    void requestChannels(const QVector<snowflake> &guildIDs);
+    void requestChannels(const QList<snowflake> &guildIDs);
 
   signals:
     void guildsFinished(QByteArray data);
