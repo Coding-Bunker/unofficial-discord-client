@@ -12,10 +12,12 @@ class Guild
 
     void addChannel(Channel &&c);
 
+    const QList<Channel> &channels() const noexcept;
+
   private:
     snowflake m_id;
     QString m_name;
     QString m_icon;
 
-    QVector<Channel> m_channels;
+    QList<Channel> m_channels;
 };

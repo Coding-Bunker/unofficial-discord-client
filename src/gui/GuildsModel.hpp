@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ChannelsModel.hpp"
 #include "core/Guild.hpp"
 
 #include <QAbstractListModel>
@@ -9,6 +10,7 @@ class GuildsModel : public QAbstractListModel
     // clang-format off
     Q_OBJECT
     Q_PROPERTY(int selected READ selected NOTIFY selectedChanged)
+    Q_PROPERTY(QAbstractListModel *channelsModel READ channelsModel NOTIFY channelsModelChanged)
     // clang-format on
 
   public:
@@ -26,10 +28,16 @@ class GuildsModel : public QAbstractListModel
 
     int selected() const;
 
+    QAbstractListModel *channelsModel();
+
   signals:
     void selectedChanged();
+    void channelsModelChanged();
 
   private:
     const QList<Guild> &m_guilds;
-    int m_selected;
+    int m_selected{ -1 };
+    std::unique_ptr<ChannelsModel> m_channelsModel;
+
+    void createChannelModel();
 };

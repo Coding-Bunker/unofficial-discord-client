@@ -31,5 +31,5 @@ class ChannelsModel : public QAbstractListModel
 
   private:
     const QList<Channel> &m_channels;
-    int m_selected;
+    int m_selected{ -1 };
 };

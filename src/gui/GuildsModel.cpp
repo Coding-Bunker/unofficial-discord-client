@@ -33,9 +33,22 @@ void GuildsModel::select(int index)
 {
     m_selected = index;
     emit selectedChanged();
+    createChannelModel();
 }
 
 int GuildsModel::selected() const
 {
     return m_selected;
+}
+
+QAbstractListModel *GuildsModel::channelsModel()
+{
+    return m_channelsModel.get();
+}
+
+void GuildsModel::createChannelModel()
+{
+    m_channelsModel =
+        std::make_unique<ChannelsModel>(m_guilds.at(selected()).channels());
+    emit channelsModelChanged();
 }

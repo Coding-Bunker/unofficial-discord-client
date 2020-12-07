@@ -32,3 +32,8 @@ void Guild::addChannel(Channel &&c)
                   return lh.position() < rh.position();
               });
 }
+
+const QList<Channel> &Guild::channels() const noexcept
+{
+    return m_channels;
+}

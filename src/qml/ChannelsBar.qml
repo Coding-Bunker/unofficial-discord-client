@@ -15,11 +15,11 @@ Rectangle {
 
         ListView {
             anchors.fill: parent
-            model: 20
+            model: hmi.guildsModel.channelsModel
             clip: true
             boundsBehavior: ListView.StopAtBounds
             delegate: Text {
-                text: "this is a channel " + index
+                text: nameRole
                 color: Material.foreground
 
                 MouseArea {
