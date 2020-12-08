@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         qt_version: [5.15.1]
-        platform: [ubuntu-18.04, ubuntu-20.04, ubuntu-latest, windows-latest, macos-latest]
+        platform: [ubuntu-18.04, ubuntu-20.04, windows-latest, macos-latest]
         arch: [x64]
       fail-fast: false
     runs-on: ${{ matrix.platform }}
