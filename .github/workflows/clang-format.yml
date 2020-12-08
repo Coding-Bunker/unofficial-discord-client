@@ -1,0 +1,47 @@
+name: Clang Format
+
+on: [push]
+
+jobs:
+  clang-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: DoozyX/clang-format-lint-action@v0.11
+        name: "Run clang-format"
+        with:
+          source: './src'
+          extensions: 'hpp,cpp'
+          clangFormatVersion: 11
+          inplace: True
+          
+      - uses: EndBug/add-and-commit@v4
+        name: "Commit clang-format Change"
+        with:
+          message: 'Run clang-format'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  js-beautify:
+    needs: clang-format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Install js-beautify"
+        run: sudo npm -g install js-beautify
+
+      - name: "🎨 Run js-beautify"
+        run: find . -regex '.*\.\(qml\|js\)' -exec js-beautify -r {} \;
+
+      - uses: EndBug/add-and-commit@v4
+        name: "Commit js-beautify Change"
+        with:
+          message: 'Run js-beautify'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
