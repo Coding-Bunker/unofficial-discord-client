@@ -39,3 +39,9 @@ int ChannelsModel::selected() const
 {
     return m_selected;
 }
+
+void ChannelsModel::resetSelected()
+{
+    m_selected = -1;
+    emit selectedChanged();
+}

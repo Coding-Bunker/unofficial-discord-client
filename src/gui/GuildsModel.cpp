@@ -34,6 +34,7 @@ void GuildsModel::select(int index)
     m_selected = index;
     emit selectedChanged();
     createChannelModel();
+    m_channelsModel->resetSelected();
 }
 
 int GuildsModel::selected() const

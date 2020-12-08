@@ -25,6 +25,7 @@ class ChannelsModel : public QAbstractListModel
     Q_INVOKABLE void select(int index);
 
     int selected() const;
+    void resetSelected();
 
   signals:
     void selectedChanged();
