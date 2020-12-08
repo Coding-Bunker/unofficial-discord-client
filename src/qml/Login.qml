@@ -90,7 +90,7 @@ Rectangle {
             width: row.width
             text: qsTr("Login")
             onClicked: auth.requestLogin(txtEmail.text, txtPass.text,
-                                         txt2FA.text)
+                txt2FA.text)
         }
     }
 }

@@ -19,8 +19,8 @@ Rectangle {
             boundsBehavior: ListView.StopAtBounds
             delegate: Text {
                 text: nameRole
-                color: hmi.guildsModel.selected
-                       === index ? Material.accentColor : Material.foreground
+                color: hmi.guildsModel.selected ===
+                    index ? Material.accentColor : Material.foreground
                 MouseArea {
                     anchors.fill: parent
                     onClicked: hmi.guildsModel.select(index)
