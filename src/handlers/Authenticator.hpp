@@ -10,7 +10,7 @@ class Authenticator : public QObject
     Q_INVOKABLE void requestLogin(QString email, QString pass, QString twoFA);
 
   signals:
-    void authenticationFinished(const QString &token, const QJsonDocument &doc);
+    void authenticationSuccess(const QString &token, const QJsonDocument &doc);
 
   private:
     QNetworkAccessManager m_nam;

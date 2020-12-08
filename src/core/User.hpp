@@ -10,15 +10,13 @@ class QJsonArray;
 
 class User : public QObject
 {
+    // clang-format off
     Q_OBJECT
-
-    Q_PROPERTY(bool logged READ logged NOTIFY loggedChanged)
-    Q_PROPERTY(QString username READ username NOTIFY loggedChanged)
+    Q_PROPERTY(QString username READ username NOTIFY usernameChanged)
+    // clang-format on
 
   public:
     void populate(const QJsonDocument &doc);
-
-    bool logged() const;
 
     QString username() const;
 
@@ -31,10 +29,9 @@ class User : public QObject
     friend QDebug operator<<(QDebug dbg, const User &u);
 
   signals:
-    void loggedChanged();
+    void usernameChanged();
 
   private:
-    bool m_logged{ false };
     snowflake m_id;
     QString m_username;
     QString m_avatar;

@@ -24,6 +24,7 @@ class Application : public QObject
     GuildsModel *guildsModel() const;
 
   signals:
+    void loginSuccess();
     void guildsModelChanged();
 
   private:

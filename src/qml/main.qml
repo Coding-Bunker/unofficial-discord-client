@@ -13,35 +13,30 @@ ApplicationWindow {
         onActivated: Qt.quit()
     }
 
-    UserInfoBar {
-        id: userInfo
+    StackView {
+        id: stackview
 
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+        anchors.fill: parent
+
+        Component {
+            id: login
+
+            Login {}
         }
+
+        Component {
+            id: chat
+
+            Chat {}
+        }
+
+        initialItem: login
     }
 
-    GuildsBar {
-        id: guildsBar
-
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
+    Connections {
+        target: hmi
+        function onLoginSuccess() {
+            stackview.push(chat)
         }
-    }
-
-    ChannelsBar {
-        anchors {
-            left: parent.left
-            top: guildsBar.bottom
-            bottom: userInfo.top
-        }
-    }
-
-    Login {
-        anchors.centerIn: parent
     }
 }

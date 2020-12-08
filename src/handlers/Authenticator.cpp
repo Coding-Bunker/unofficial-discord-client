@@ -21,6 +21,9 @@ void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
     connect(reply, &QNetworkReply::finished, this, [&]() {
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
+
+        // TODO: check error before proceding
+
         handleLoginResponse(r->readAll(), twoFA);
     });
 }
@@ -80,7 +83,7 @@ void Authenticator::handlePersonInfo()
     connect(reply, &QNetworkReply::finished, this, [&]() {
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
-        emit authenticationFinished(m_token,
-                                    QJsonDocument::fromJson(r->readAll()));
+        emit authenticationSuccess(m_token,
+                                   QJsonDocument::fromJson(r->readAll()));
     });
 }

@@ -22,8 +22,9 @@ Application::Application(int &argc, char **argv) :
 
     m_engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    connect(&m_auth, &Authenticator::authenticationFinished,
+    connect(&m_auth, &Authenticator::authenticationSuccess,
             [&](const QString &token, const QJsonDocument &meInfo) {
+                emit loginSuccess();
                 m_req.setToken(token);
                 m_user.populate(meInfo);
                 m_req.requestGuilds();

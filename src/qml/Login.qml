@@ -3,87 +3,94 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
 
 Rectangle {
-    visible: !user.logged
 
-    height: parent.height / 2
-    width: height
-    radius: height / 2
+    color: Material.backgroundColor
 
-    border.color: Material.primaryColor
-    border.width: 10
+    Rectangle {
+        id: circle
 
-    readonly property int itemHeight: 17
-    readonly property int itemWidth: 250
-
-    Row {
-        id: row
-        spacing: 10
         anchors.centerIn: parent
+        height: parent.height / 2
+        width: height
+        radius: height / 2
+        color: "#fdfff5"
+        border.color: Material.primaryColor
+        border.width: 10
 
-        Column {
+        readonly property int itemHeight: 17
+        readonly property int itemWidth: 250
+
+        Row {
+            id: row
             spacing: 10
+            anchors.centerIn: parent
 
-            Text {
-                text: qsTr("Email:")
-            }
+            Column {
+                spacing: 10
 
-            Text {
-                text: qsTr("Password:")
-            }
+                Text {
+                    text: qsTr("Email:")
+                }
 
-            Text {
-                text: qsTr("2FA code (only if you have):")
-            }
-        }
+                Text {
+                    text: qsTr("Password:")
+                }
 
-        Column {
-            spacing: 10
-
-            Rectangle {
-                border.color: Material.backgroundColor
-                width: itemWidth
-                height: itemHeight
-
-                TextInput {
-                    id: txtEmail
-                    anchors.fill: parent
+                Text {
+                    text: qsTr("2FA code (only if you have):")
                 }
             }
 
-            Rectangle {
-                border.color: Material.backgroundColor
-                width: itemWidth
-                height: itemHeight
+            Column {
+                spacing: 10
 
-                TextInput {
-                    id: txtPass
-                    anchors.fill: parent
-                    echoMode: TextInput.Password
+                Rectangle {
+                    border.color: Material.backgroundColor
+                    width: circle.itemWidth
+                    height: circle.itemHeight
+
+                    TextInput {
+                        id: txtEmail
+                        anchors.fill: parent
+                    }
                 }
-            }
 
-            Rectangle {
-                border.color: Material.backgroundColor
-                width: itemWidth
-                height: itemHeight
+                Rectangle {
+                    border.color: Material.backgroundColor
+                    width: circle.itemWidth
+                    height: circle.itemHeight
 
-                TextInput {
-                    id: txt2FA
-                    anchors.fill: parent
+                    TextInput {
+                        id: txtPass
+                        anchors.fill: parent
+                        echoMode: TextInput.Password
+                    }
+                }
+
+                Rectangle {
+                    border.color: Material.backgroundColor
+                    width: circle.itemWidth
+                    height: circle.itemHeight
+
+                    TextInput {
+                        id: txt2FA
+                        anchors.fill: parent
+                    }
                 }
             }
         }
-    }
 
-    Button {
-        anchors {
-            top: row.bottom
-            topMargin: 10
-            horizontalCenter: row.horizontalCenter
+        Button {
+            anchors {
+                top: row.bottom
+                topMargin: 10
+                horizontalCenter: row.horizontalCenter
+            }
+
+            width: row.width
+            text: qsTr("Login")
+            onClicked: auth.requestLogin(txtEmail.text, txtPass.text,
+                                         txt2FA.text)
         }
-
-        width: row.width
-        text: qsTr("Login")
-        onClicked: auth.requestLogin(txtEmail.text, txtPass.text, txt2FA.text)
     }
 }

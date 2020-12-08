@@ -8,18 +8,12 @@ void User::populate(const QJsonDocument &doc)
 {
     const auto info = doc.object();
 
-    m_logged        = true;
     m_id            = info.value("id").toString().toULongLong();
     m_username      = info.value("username").toString();
     m_avatar        = info.value("avatar").toString();
     m_discriminator = info.value("discriminator").toString();
 
-    emit loggedChanged();
-}
-
-bool User::logged() const
-{
-    return m_logged;
+    emit usernameChanged();
 }
 
 QString User::username() const

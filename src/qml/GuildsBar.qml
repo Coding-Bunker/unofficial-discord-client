@@ -4,7 +4,6 @@ import QtQuick.Controls.Material 2.15
 
 Rectangle {
     color: Material.backgroundColor
-    visible: user.logged
     height: parent.height * 0.1
 
     Rectangle {

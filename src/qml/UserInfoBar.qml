@@ -4,15 +4,14 @@ import QtQuick.Controls.Material 2.15
 
 Rectangle {
     color: Material.backgroundColor
-    visible: user.logged
     height: parent.height * 0.03
     width: parent.width
 
     Rectangle {
         color: Material.primaryColor
         anchors.centerIn: parent
-        height: parent.height -10
-        width: parent.width -10
+        height: parent.height - 10
+        width: parent.width - 10
 
         Text {
             text: user.username
