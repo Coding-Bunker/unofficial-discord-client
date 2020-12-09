@@ -27,6 +27,10 @@ class Application : public QObject
     void loginSuccess();
     void guildsModelChanged();
 
+  private slots:
+    void handleLoginSuccess(const QString &token, const QJsonDocument &meInfo);
+    void handleGuildsFinished(const QByteArray &data);
+
   private:
     std::unique_ptr<QGuiApplication> m_application;
     QQmlApplicationEngine m_engine;

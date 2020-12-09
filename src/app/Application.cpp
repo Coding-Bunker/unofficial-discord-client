@@ -22,20 +22,11 @@ Application::Application(int &argc, char **argv) :
 
     m_engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    connect(&m_auth, &Authenticator::authenticationSuccess,
-            [&](const QString &token, const QJsonDocument &meInfo) {
-                emit loginSuccess();
-                m_req.setToken(token);
-                m_user.populate(meInfo);
-                m_req.requestGuilds();
-            });
+    connect(&m_auth, &Authenticator::authenticationSuccess, this,
+            &Application::handleLoginSuccess);
 
-    connect(&m_req, &Requester::guildsFinished, [&](const QByteArray &data) {
-        m_user.setGuilds(data);
-        m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds());
-        emit guildsModelChanged();
-        m_req.requestChannels(m_user.guildIDs());
-    });
+    connect(&m_req, &Requester::guildsFinished, this,
+            &Application::handleGuildsFinished);
 
     connect(&m_req, &Requester::channelFinished,
             [&](const QByteArray &data) { m_user.setChannelsForGuild(data); });
@@ -49,4 +40,24 @@ int Application::run()
 GuildsModel *Application::guildsModel() const
 {
     return m_guildsModel.get();
+}
+
+void Application::handleLoginSuccess(const QString &token,
+                                     const QJsonDocument &meInfo)
+{
+    emit loginSuccess();
+    m_req.setToken(token);
+    m_user.populate(meInfo);
+    m_req.requestGuilds();
+}
+
+void Application::handleGuildsFinished(const QByteArray &data)
+{
+    m_user.setGuilds(data);
+    m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds());
+    emit guildsModelChanged();
+    m_req.requestChannels(m_user.guildIDs());
+
+    connect(m_guildsModel->channelsModel(), &ChannelsModel::requestMessages,
+            &m_req, &Requester::requestMessages);
 }

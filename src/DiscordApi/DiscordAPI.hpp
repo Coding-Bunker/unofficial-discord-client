@@ -21,6 +21,8 @@ const QString me       = baseURL + "/users/@me";
 const QString guilds   = me + "/guilds";
 const QString channels = baseURL + "/guilds/%1/channels";
 
+const QString messages = baseURL + "/channels/%1/messages";
+
 namespace DiscordTags
 {
 const QString access_token  = "access_token";

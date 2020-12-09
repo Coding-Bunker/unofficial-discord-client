@@ -17,6 +17,9 @@ class Requester : public QObject
     void requestGuilds();
     void requestChannels(const QList<snowflake> &guildIDs);
 
+  public slots:
+    void requestMessages(snowflake channelID);
+
   signals:
     void guildsFinished(QByteArray data);
     void channelFinished(QByteArray data);

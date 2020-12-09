@@ -34,6 +34,16 @@ void Requester::requestChannels(const QList<snowflake> &guildIDs)
     }
 }
 
+void Requester::requestMessages(snowflake channelID)
+{
+    const auto reply = request(DiscordAPI::messages.arg(channelID));
+    connect(reply, &QNetworkReply::finished, this, [&]() {
+        const auto r = qobject_cast<QNetworkReply *>(sender());
+        r->deleteLater();
+        qDebug() << r->readAll();
+    });
+}
+
 QNetworkReply *Requester::request(const QString &api)
 {
     QUrl url(api);
