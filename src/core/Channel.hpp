@@ -9,9 +9,11 @@ class Channel
   public:
     void unmarshal(const QJsonObject &obj);
 
+    snowflake id() const;
     QString name() const;
 
     snowflake guildId() const;
+    int position() const;
 
     enum Type {
         GUILD_TEXT,     // a text channel within a server
@@ -27,8 +29,6 @@ class Channel
     };
 
     Type type() const;
-
-    int position() const;
 
   private:
     snowflake m_id;

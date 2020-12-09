@@ -11,6 +11,11 @@ void Channel::unmarshal(const QJsonObject &obj)
     m_type     = static_cast<Type>(obj.value("type").toInt());
 }
 
+snowflake Channel::id() const
+{
+    return m_id;
+}
+
 QString Channel::name() const
 {
     return m_name;
@@ -21,12 +26,12 @@ snowflake Channel::guildId() const
     return m_guildId;
 }
 
-Channel::Type Channel::type() const
-{
-    return m_type;
-}
-
 int Channel::position() const
 {
     return m_position;
+}
+
+Channel::Type Channel::type() const
+{
+    return m_type;
 }

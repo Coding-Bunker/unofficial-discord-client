@@ -12,7 +12,9 @@ class ChannelsModel : public QAbstractListModel
     // clang-format on
 
   public:
-    explicit ChannelsModel(const QList<Channel> &c, QObject *parent = nullptr);
+    explicit ChannelsModel(QObject *parent = nullptr);
+
+    void setChannels(const QList<Channel> &c);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index,
@@ -25,12 +27,14 @@ class ChannelsModel : public QAbstractListModel
     Q_INVOKABLE void select(int index);
 
     int selected() const;
-    void resetSelected();
 
   signals:
     void selectedChanged();
+    void requestMessages(snowflake channelID);
 
   private:
-    const QList<Channel> &m_channels;
+    QList<Channel> m_channels;
     int m_selected{ -1 };
+
+    void resetSelected();
 };
