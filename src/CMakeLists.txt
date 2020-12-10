@@ -12,6 +12,8 @@ add_executable(
   core/Guild.cpp
   core/Channel.hpp
   core/Channel.cpp
+  core/Message.hpp
+  core/Message.cpp
   handlers/Authenticator.hpp
   handlers/Authenticator.cpp
   handlers/Requester.hpp
