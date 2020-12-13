@@ -35,3 +35,8 @@ Channel::Type Channel::type() const
 {
     return m_type;
 }
+
+void Channel::addMessage(Message &&m)
+{
+    m_messages.push_back(std::move(m));
+}

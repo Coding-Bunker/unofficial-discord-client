@@ -30,6 +30,10 @@ Application::Application(int &argc, char **argv) :
 
     connect(&m_req, &Requester::channelFinished,
             [&](const QByteArray &data) { m_user.setChannelsForGuild(data); });
+
+    connect(&m_req, &Requester::messagesFinished, this, [&](QByteArray data) {
+        m_user.setMessagesForChannel(m_guildsModel->selectedID(), data);
+    });
 }
 
 int Application::run()

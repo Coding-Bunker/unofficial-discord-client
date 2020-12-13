@@ -12,6 +12,8 @@ class Guild
 
     void addChannel(Channel &&c);
 
+    void addMessageToChannel(Message &&m);
+
     const QList<Channel> &channels() const noexcept;
 
   private:
