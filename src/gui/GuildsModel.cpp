@@ -42,6 +42,11 @@ int GuildsModel::selected() const
     return m_selected;
 }
 
+snowflake GuildsModel::selectedID() const
+{
+    return m_guilds.at(selected()).id();
+}
+
 ChannelsModel *GuildsModel::channelsModel()
 {
     return &m_channelsModel;

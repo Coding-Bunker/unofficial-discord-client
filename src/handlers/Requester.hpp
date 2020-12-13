@@ -23,6 +23,7 @@ class Requester : public QObject
   signals:
     void guildsFinished(QByteArray data);
     void channelFinished(QByteArray data);
+    void messagesFinished(QByteArray data);
 
   private:
     QString m_token;

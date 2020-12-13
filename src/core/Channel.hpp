@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Message.hpp"
 #include "Types.hpp"
 
 #include <QJsonObject>
@@ -30,6 +31,8 @@ class Channel
 
     Type type() const;
 
+    void addMessage(Message &&m);
+
   private:
     snowflake m_id;
     QString m_name;
@@ -38,4 +41,6 @@ class Channel
     snowflake m_parentId;
     int m_position;
     Type m_type;
+
+    QList<Message> m_messages;
 };

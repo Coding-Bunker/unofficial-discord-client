@@ -66,6 +66,30 @@ void User::setChannelsForGuild(const QByteArray &data)
     }
 }
 
+void User::setMessagesForChannel(snowflake guildID, const QByteArray &data)
+{
+    const auto obj = QJsonDocument::fromJson(data).array();
+    for (auto o : obj) {
+        const auto msg = o.toObject();
+        Message m;
+        m.unmarshal(msg);
+        addMessageToGuild(guildID, std::move(m));
+    }
+}
+
+void User::addMessageToGuild(snowflake guildID, Message &&m)
+{
+    const auto it =
+        std::find_if(m_guilds.begin(), m_guilds.end(),
+                     [&](const Guild &g) { return g.id() == guildID; });
+    if (it == m_guilds.end()) {
+        qWarning() << "guildID not found for message";
+        return;
+    }
+
+    it->addMessageToChannel(std::move(m));
+}
+
 QDebug operator<<(QDebug dbg, const User &u)
 {
     dbg.nospace() << u.m_id << u.m_username;

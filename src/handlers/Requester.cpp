@@ -40,7 +40,7 @@ void Requester::requestMessages(snowflake channelID)
     connect(reply, &QNetworkReply::finished, this, [&]() {
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
-        qDebug() << r->readAll();
+        emit messagesFinished(r->readAll());
     });
 }
 

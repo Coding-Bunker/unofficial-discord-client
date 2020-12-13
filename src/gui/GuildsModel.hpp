@@ -27,6 +27,7 @@ class GuildsModel : public QAbstractListModel
     Q_INVOKABLE void select(int index);
 
     int selected() const;
+    snowflake selectedID() const;
 
     ChannelsModel *channelsModel();
 

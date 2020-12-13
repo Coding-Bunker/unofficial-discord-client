@@ -3,10 +3,13 @@
 #include "Types.hpp"
 
 #include <QDateTime>
-#include <QString>
+#include <QJsonObject>
 
 class Message
 {
+  public:
+    void unmarshal(const QJsonObject &obj);
+
     enum Type {
         DEFAULT                                = 0,
         RECIPIENT_ADD                          = 1,
@@ -26,8 +29,18 @@ class Message
         REPLY                                  = 19,
     };
 
+    snowflake guildID() const;
+
+    snowflake channelID() const;
+
+    QDateTime timestamp() const;
+
+    QString content() const;
+
   private:
     snowflake m_id;
+    snowflake m_channelID;
+    snowflake m_guildID;
     QString m_author;
     QString m_content;
     QDateTime m_timestamp;
