@@ -23,6 +23,8 @@ add_executable(
   gui/GuildsModel.cpp
   gui/ChannelsModel.hpp
   gui/ChannelsModel.cpp
+  gui/MessagesModel.hpp
+  gui/MessagesModel.cpp
   app/main.cpp
   app/Application.hpp
   app/Application.cpp

@@ -30,3 +30,8 @@ QString Message::content() const
 {
     return m_content;
 }
+
+QString Message::author() const
+{
+    return m_author;
+}

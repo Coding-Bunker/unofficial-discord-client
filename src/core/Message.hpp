@@ -37,6 +37,8 @@ class Message
 
     QString content() const;
 
+    QString author() const;
+
   private:
     snowflake m_id;
     snowflake m_channelID;
