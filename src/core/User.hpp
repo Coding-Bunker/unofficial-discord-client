@@ -21,13 +21,14 @@ class User : public QObject
     QString username() const;
 
     void setGuilds(const QByteArray &data);
-    const QList<Guild> &guilds() const noexcept;
     QList<snowflake> guildIDs() const noexcept;
 
     void setChannelsForGuild(const QByteArray &data);
     void setMessagesForChannel(snowflake guildID, const QByteArray &data);
 
     friend QDebug operator<<(QDebug dbg, const User &u);
+
+    QList<Guild> guilds;
 
   signals:
     void usernameChanged();
@@ -37,7 +38,6 @@ class User : public QObject
     QString m_username;
     QString m_avatar;
     QString m_discriminator;
-    QList<Guild> m_guilds;
 
     void addMessageToGuild(snowflake guildID, Message &&m);
 };

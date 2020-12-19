@@ -28,19 +28,14 @@ void User::setGuilds(const QByteArray &data)
         const auto obj = a.toObject();
         Guild g;
         g.unmarshal(obj);
-        m_guilds.push_back(g);
+        guilds.push_back(g);
     }
-}
-
-const QList<Guild> &User::guilds() const noexcept
-{
-    return m_guilds;
 }
 
 QList<snowflake> User::guildIDs() const noexcept
 {
     QList<snowflake> ret;
-    for (auto g : m_guilds) {
+    for (auto g : guilds) {
         ret.push_back(g.id());
     }
     return ret;
@@ -54,15 +49,15 @@ void User::setChannelsForGuild(const QByteArray &data)
         Channel c;
         c.unmarshal(ch);
         auto it =
-            std::find_if(m_guilds.begin(), m_guilds.end(),
+            std::find_if(guilds.begin(), guilds.end(),
                          [&](const Guild &g) { return c.guildId() == g.id(); });
-        if (it == m_guilds.end()) {
+        if (it == guilds.end()) {
             qWarning() << "guild id not found for channel " << c.name();
             continue;
         }
 
-        const auto pos = std::distance(m_guilds.begin(), it);
-        m_guilds[pos].addChannel(std::move(c));
+        const auto pos = std::distance(guilds.begin(), it);
+        guilds[pos].addChannel(std::move(c));
     }
 }
 
@@ -80,9 +75,9 @@ void User::setMessagesForChannel(snowflake guildID, const QByteArray &data)
 void User::addMessageToGuild(snowflake guildID, Message &&m)
 {
     const auto it =
-        std::find_if(m_guilds.begin(), m_guilds.end(),
+        std::find_if(guilds.begin(), guilds.end(),
                      [&](const Guild &g) { return g.id() == guildID; });
-    if (it == m_guilds.end()) {
+    if (it == guilds.end()) {
         qWarning() << "guildID not found for message";
         return;
     }

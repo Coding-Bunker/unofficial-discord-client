@@ -1,6 +1,6 @@
 #include "GuildsModel.hpp"
 
-GuildsModel::GuildsModel(const QList<Guild> &g, QObject *parent) :
+GuildsModel::GuildsModel(QList<Guild> &g, QObject *parent) :
     QAbstractListModel(parent), m_guilds{ g }
 {
 }
@@ -34,7 +34,7 @@ void GuildsModel::select(int index)
     m_selected = index;
     emit selectedChanged();
 
-    m_channelsModel.setChannels(m_guilds[m_selected].channels());
+    m_channelsModel.setChannels(m_guilds[m_selected].channels);
 }
 
 int GuildsModel::selected() const

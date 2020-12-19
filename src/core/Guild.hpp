@@ -14,12 +14,10 @@ class Guild
 
     void addMessageToChannel(Message &&m);
 
-    const QList<Channel> &channels() const noexcept;
+    QList<Channel> channels;
 
   private:
     snowflake m_id;
     QString m_name;
     QString m_icon;
-
-    QList<Channel> m_channels;
 };
