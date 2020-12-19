@@ -18,7 +18,7 @@ Rectangle {
             clip: true
             boundsBehavior: ListView.StopAtBounds
             delegate: Text {
-                text: authorRole+":"+ " " + contentRole
+                text: authorRole + ":" + " " + contentRole
                 color: Material.foreground
             }
         }
