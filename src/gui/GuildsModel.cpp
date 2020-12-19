@@ -1,6 +1,6 @@
 #include "GuildsModel.hpp"
 
-GuildsModel::GuildsModel(QList<Guild> &g, QObject *parent) :
+GuildsModel::GuildsModel(QList<Guild> *g, QObject *parent) :
     QAbstractListModel(parent), m_guilds{ g }
 {
 }
@@ -8,17 +8,22 @@ GuildsModel::GuildsModel(QList<Guild> &g, QObject *parent) :
 int GuildsModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return m_guilds.size();
+
+    if (m_guilds == nullptr) {
+        return 0;
+    }
+
+    return m_guilds->size();
 }
 
 QVariant GuildsModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) {
+    if (!index.isValid() || m_guilds == nullptr) {
         return {};
     }
 
     if (role == Role::Name) {
-        return m_guilds.at(index.row()).name();
+        return m_guilds->at(index.row()).name();
     }
 
     return {};
@@ -34,7 +39,7 @@ void GuildsModel::select(int index)
     m_selected = index;
     emit selectedChanged();
 
-    m_channelsModel.setChannels(m_guilds[m_selected].channels);
+    m_channelsModel.setChannels(&(*m_guilds)[m_selected].channels);
 }
 
 int GuildsModel::selected() const
@@ -44,10 +49,15 @@ int GuildsModel::selected() const
 
 snowflake GuildsModel::selectedID() const
 {
-    return m_guilds.at(selected()).id();
+    return m_guilds->at(selected()).id();
 }
 
 ChannelsModel *GuildsModel::channelsModel()
 {
     return &m_channelsModel;
+}
+
+void GuildsModel::updateMessages()
+{
+    m_channelsModel.updateMessages();
 }

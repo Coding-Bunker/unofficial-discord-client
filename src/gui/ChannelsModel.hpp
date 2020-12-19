@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/Channel.hpp"
+#include "gui/MessagesModel.hpp"
 
 #include <QAbstractListModel>
 
@@ -9,12 +10,13 @@ class ChannelsModel : public QAbstractListModel
     // clang-format off
     Q_OBJECT
     Q_PROPERTY(int selected READ selected NOTIFY selectedChanged)
+    Q_PROPERTY(MessagesModel* msgModel READ msgModel NOTIFY msgModelChanged)
     // clang-format on
 
   public:
     explicit ChannelsModel(QObject *parent = nullptr);
 
-    void setChannels(const QList<Channel> &c);
+    void setChannels(QList<Channel> *c);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index,
@@ -27,14 +29,19 @@ class ChannelsModel : public QAbstractListModel
     Q_INVOKABLE void select(int index);
 
     int selected() const;
+    MessagesModel *msgModel();
+
+    void updateMessages();
 
   signals:
     void selectedChanged();
     void requestMessages(snowflake channelID);
+    void msgModelChanged();
 
   private:
-    QList<Channel> m_channels;
+    QList<Channel> *m_channels{ nullptr };
     int m_selected{ -1 };
+    MessagesModel m_msgModel;
 
     void resetSelected();
 };

@@ -2,7 +2,7 @@
 
 ChannelsModel::ChannelsModel(QObject *parent) : QAbstractListModel(parent) {}
 
-void ChannelsModel::setChannels(const QList<Channel> &c)
+void ChannelsModel::setChannels(QList<Channel> *c)
 {
     beginResetModel();
     m_channels = c;
@@ -13,17 +13,22 @@ void ChannelsModel::setChannels(const QList<Channel> &c)
 int ChannelsModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return m_channels.size();
+
+    if (m_channels == nullptr) {
+        return 0;
+    }
+
+    return m_channels->size();
 }
 
 QVariant ChannelsModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) {
+    if (!index.isValid() || m_channels == nullptr) {
         return {};
     }
 
     if (role == Role::Name) {
-        return m_channels.at(index.row()).name();
+        return m_channels->at(index.row()).name();
     }
 
     return {};
@@ -40,21 +45,31 @@ void ChannelsModel::select(int index)
     emit selectedChanged();
 
     const auto pos = std::find_if(
-        m_channels.begin(), m_channels.end(),
+        m_channels->begin(), m_channels->end(),
         [&](const Channel &c) { return c.position() == m_selected; });
 
-    if (pos == m_channels.end()) {
+    if (pos == m_channels->end()) {
         qWarning() << Q_FUNC_INFO << "can't request messages for this channel";
         return;
     }
 
-    const auto idx = std::distance(m_channels.begin(), pos);
-    emit requestMessages(m_channels[idx].id());
+    const auto idx = std::distance(m_channels->begin(), pos);
+    emit requestMessages(m_channels->at(idx).id());
 }
 
 int ChannelsModel::selected() const
 {
     return m_selected;
+}
+
+MessagesModel *ChannelsModel::msgModel()
+{
+    return &m_msgModel;
+}
+
+void ChannelsModel::updateMessages()
+{
+    m_msgModel.setMessages(&(*m_channels)[m_selected].messages);
 }
 
 void ChannelsModel::resetSelected()

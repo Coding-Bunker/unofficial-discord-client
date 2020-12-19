@@ -14,11 +14,11 @@ Rectangle {
 
         ListView {
             anchors.fill: parent
-            model: 10
+            model: hmi.guildsModel.channelsModel.msgModel
             clip: true
             boundsBehavior: ListView.StopAtBounds
             delegate: Text {
-                text: index
+                text: authorRole+":"+ " " + contentRole
                 color: Material.foreground
             }
         }

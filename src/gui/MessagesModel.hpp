@@ -13,14 +13,16 @@ class MessagesModel : public QAbstractListModel
   public:
     explicit MessagesModel(QObject *parent = nullptr);
 
+    void setMessages(QList<Message> *msg);
+
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index,
                   int role = Qt::DisplayRole) const override;
 
-    enum Role { Author = Qt::UserRole + 1 };
+    enum Role { Author = Qt::UserRole + 1, Content };
 
     QHash<int, QByteArray> roleNames() const override;
 
   private:
-    QList<Message> *m_messages;
+    QList<Message> *m_messages{ nullptr };
 };

@@ -31,7 +31,7 @@ class Channel
 
     Type type() const;
 
-    void addMessage(Message &&m);
+    QList<Message> messages;
 
   private:
     snowflake m_id;
@@ -41,6 +41,4 @@ class Channel
     snowflake m_parentId;
     int m_position;
     Type m_type;
-
-    QList<Message> m_messages;
 };
