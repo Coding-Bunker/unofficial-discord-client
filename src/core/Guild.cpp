@@ -24,10 +24,10 @@ void Guild::addChannel(Channel &&c)
     // voice
 
     if (c.type() == Channel::GUILD_TEXT) {
-        m_channels.push_back(c);
+        channels.push_back(c);
     }
 
-    std::sort(m_channels.begin(), m_channels.end(),
+    std::sort(channels.begin(), channels.end(),
               [](const Channel &lh, const Channel &rh) {
                   return lh.position() < rh.position();
               });
@@ -36,19 +36,14 @@ void Guild::addChannel(Channel &&c)
 void Guild::addMessageToChannel(Message &&m)
 {
     const auto it =
-        std::find_if(m_channels.begin(), m_channels.end(),
+        std::find_if(channels.begin(), channels.end(),
                      [&](const Channel &c) { return c.id() == m.channelID(); });
 
-    if (it == m_channels.end()) {
+    if (it == channels.end()) {
         qWarning() << "channelID not found for message";
         return;
     }
 
-    const auto pos = std::distance(m_channels.begin(), it);
-    m_channels[pos].addMessage(std::move(m));
-}
-
-const QList<Channel> &Guild::channels() const noexcept
-{
-    return m_channels;
+    const auto pos = std::distance(channels.begin(), it);
+    channels[pos].addMessage(std::move(m));
 }

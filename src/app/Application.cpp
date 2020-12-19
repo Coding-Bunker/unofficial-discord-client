@@ -58,7 +58,7 @@ void Application::handleLoginSuccess(const QString &token,
 void Application::handleGuildsFinished(const QByteArray &data)
 {
     m_user.setGuilds(data);
-    m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds());
+    m_guildsModel = std::make_unique<GuildsModel>(m_user.guilds);
     emit guildsModelChanged();
     m_req.requestChannels(m_user.guildIDs());
 
