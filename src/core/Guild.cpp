@@ -45,5 +45,5 @@ void Guild::addMessageToChannel(Message &&m)
     }
 
     const auto pos = std::distance(channels.begin(), it);
-    channels[pos].addMessage(std::move(m));
+    channels[pos].messages.push_back(std::move(m));
 }

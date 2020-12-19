@@ -32,6 +32,7 @@ class User : public QObject
 
   signals:
     void usernameChanged();
+    void messagesUpdated();
 
   private:
     snowflake m_id;

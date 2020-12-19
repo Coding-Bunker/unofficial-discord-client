@@ -70,6 +70,8 @@ void User::setMessagesForChannel(snowflake guildID, const QByteArray &data)
         m.unmarshal(msg);
         addMessageToGuild(guildID, std::move(m));
     }
+
+    emit messagesUpdated();
 }
 
 void User::addMessageToGuild(snowflake guildID, Message &&m)

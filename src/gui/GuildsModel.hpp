@@ -14,7 +14,7 @@ class GuildsModel : public QAbstractListModel
     // clang-format on
 
   public:
-    explicit GuildsModel(QList<Guild> &g, QObject *parent = nullptr);
+    explicit GuildsModel(QList<Guild> *g, QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index,
@@ -34,10 +34,11 @@ class GuildsModel : public QAbstractListModel
   signals:
     void selectedChanged();
 
+  public slots:
+    void updateMessages();
+
   private:
-    QList<Guild> &m_guilds;
+    QList<Guild> *m_guilds;
     int m_selected{ -1 };
     ChannelsModel m_channelsModel;
-
-    void createChannelModel(const QList<Channel> &c);
 };
