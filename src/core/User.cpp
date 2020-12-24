@@ -35,7 +35,7 @@ void User::setGuilds(const QByteArray &data)
 QList<snowflake> User::guildIDs() const noexcept
 {
     QList<snowflake> ret;
-    for (auto g : guilds) {
+    for (const auto &g : guilds) {
         ret.push_back(g.id());
     }
     return ret;
@@ -44,7 +44,7 @@ QList<snowflake> User::guildIDs() const noexcept
 void User::setChannelsForGuild(const QByteArray &data)
 {
     const auto obj = QJsonDocument::fromJson(data).array();
-    for (auto o : obj) {
+    for (const auto &o : obj) {
         const auto ch = o.toObject();
         Channel c;
         c.unmarshal(ch);
@@ -64,7 +64,7 @@ void User::setChannelsForGuild(const QByteArray &data)
 void User::setMessagesForChannel(snowflake guildID, const QByteArray &data)
 {
     const auto obj = QJsonDocument::fromJson(data).array();
-    for (auto o : obj) {
+    for (const auto &o : obj) {
         const auto msg = o.toObject();
         Message m;
         m.unmarshal(msg);
