@@ -15,11 +15,20 @@ Rectangle {
         ListView {
             anchors.fill: parent
             model: hmi.guildsModel.channelsModel.msgModel
-            clip: true
-            boundsBehavior: ListView.StopAtBounds
-            delegate: Text {
-                text: authorRole + ":" + " " + contentRole
-                color: Material.foreground
+            delegate: Row {
+
+                spacing: 5
+
+                Text {
+                    text: authorRole + ":"
+                    color: Material.foreground
+                    font.bold: true
+                }
+
+                Text {
+                    text: contentRole
+                    color: Material.foreground
+                }
             }
         }
     }
