@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkReply>
+#include <QSettings>
 
 void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
 {
@@ -83,7 +84,18 @@ void Authenticator::handlePersonInfo()
     connect(reply, &QNetworkReply::finished, this, [&]() {
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
-        emit authenticationSuccess(m_token,
-                                   QJsonDocument::fromJson(r->readAll()));
+        const auto info = QJsonDocument::fromJson(r->readAll());
+        saveSettings(info);
+        emit authenticationSuccess(m_token, info);
     });
+}
+
+void Authenticator::saveSettings(const QJsonDocument &info)
+{
+    QSettings settings(QSettings::Format::NativeFormat,
+                       QSettings::Scope::UserScope,
+                       "unofficial-discord-client");
+    settings.setValue("auth/token", m_token);
+    settings.setValue("auth/meInfo", info.toJson());
+    settings.sync();
 }

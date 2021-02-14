@@ -1,7 +1,9 @@
 #include "Application.hpp"
 
+#include <QJsonDocument>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QSettings>
 
 Application::Application(int &argc, char **argv) :
     m_application{ std::make_unique<QGuiApplication>(argc, argv) }
@@ -34,6 +36,8 @@ Application::Application(int &argc, char **argv) :
     connect(&m_req, &Requester::messagesFinished, this, [&](QByteArray data) {
         m_user.setMessagesForChannel(m_guildsModel->selectedID(), data);
     });
+
+    loadSettings();
 }
 
 int Application::run()
@@ -67,4 +71,19 @@ void Application::handleGuildsFinished(const QByteArray &data)
 
     connect(&m_user, &User::messagesUpdated, m_guildsModel.get(),
             &GuildsModel::updateMessages);
+}
+
+void Application::loadSettings()
+{
+    QSettings settings(QSettings::Format::NativeFormat,
+                       QSettings::Scope::UserScope,
+                       "unofficial-discord-client");
+    const auto token = settings.value("auth/token");
+    if (!token.isValid() || token.isNull()) {
+        return;
+    }
+
+    const auto info = settings.value("auth/meInfo").toByteArray();
+    auto d          = QJsonDocument::fromJson(info);
+    handleLoginSuccess(token.toString(), d);
 }

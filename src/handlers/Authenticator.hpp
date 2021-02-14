@@ -19,4 +19,6 @@ class Authenticator : public QObject
     void handleLoginResponse(QString body, QString twoFA);
     void request2FA(QString ticket, QString mfa);
     void handlePersonInfo();
+
+    void saveSettings(const QJsonDocument &info);
 };

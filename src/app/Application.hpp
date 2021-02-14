@@ -41,4 +41,6 @@ class Application : public QObject
     Requester m_req;
 
     std::unique_ptr<GuildsModel> m_guildsModel;
+
+    void loadSettings();
 };
