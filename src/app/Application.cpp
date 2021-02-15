@@ -2,27 +2,14 @@
 
 #include <QJsonDocument>
 #include <QQmlContext>
-#include <QQuickStyle>
 #include <QSettings>
 
-Application::Application(int &argc, char **argv) :
-    m_application{ std::make_unique<QGuiApplication>(argc, argv) }
+Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
 {
-    m_application->setAttribute(Qt::AA_EnableHighDpiScaling);
-    m_application->setApplicationName("unofficial-discord-client");
-    m_application->setOrganizationName("Coding Bunker");
-    m_application->setApplicationVersion("0.0.1");
-
-    QQuickStyle::setStyle("Material");
-
-    const auto rc = m_engine.rootContext();
-
-    rc->setContextProperty("qtVersion", QT_VERSION_STR);
-    rc->setContextProperty("hmi", this);
-    rc->setContextProperty("auth", &m_auth);
-    rc->setContextProperty("user", &m_user);
-
-    m_engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    ctx->setContextProperty("qtVersion", QT_VERSION_STR);
+    ctx->setContextProperty("hmi", this);
+    ctx->setContextProperty("auth", &m_auth);
+    ctx->setContextProperty("user", &m_user);
 
     connect(&m_auth, &Authenticator::authenticationSuccess, this,
             &Application::handleLoginSuccess);
@@ -40,37 +27,14 @@ Application::Application(int &argc, char **argv) :
     loadSettings();
 }
 
-int Application::run()
+bool Application::guildModelVisible() const
 {
-    return m_application->exec();
+    return m_guildModelVisible;
 }
 
 GuildsModel *Application::guildsModel() const
 {
     return m_guildsModel.get();
-}
-
-void Application::handleLoginSuccess(const QString &token,
-                                     const QJsonDocument &meInfo)
-{
-    emit loginSuccess();
-    m_req.setToken(token);
-    m_user.populate(meInfo);
-    m_req.requestGuilds();
-}
-
-void Application::handleGuildsFinished(const QByteArray &data)
-{
-    m_user.setGuilds(data);
-    m_guildsModel = std::make_unique<GuildsModel>(&m_user.guilds);
-    emit guildsModelChanged();
-    m_req.requestChannels(m_user.guildIDs());
-
-    connect(m_guildsModel->channelsModel(), &ChannelsModel::requestMessages,
-            &m_req, &Requester::requestMessages);
-
-    connect(&m_user, &User::messagesUpdated, m_guildsModel.get(),
-            &GuildsModel::updateMessages);
 }
 
 void Application::loadSettings()
@@ -86,4 +50,28 @@ void Application::loadSettings()
     const auto info = settings.value("auth/meInfo").toByteArray();
     auto d          = QJsonDocument::fromJson(info);
     handleLoginSuccess(token.toString(), d);
+}
+
+void Application::handleLoginSuccess(const QString &token,
+                                     const QJsonDocument &meInfo)
+{
+    emit loginSuccess();
+    m_req.setToken(token);
+    m_user.populate(meInfo);
+    m_req.requestGuilds();
+}
+
+void Application::handleGuildsFinished(const QByteArray &data)
+{
+    m_user.setGuilds(data);
+    m_guildsModel       = std::make_unique<GuildsModel>(&m_user.guilds);
+    m_guildModelVisible = true;
+    emit guildsModelChanged();
+    m_req.requestChannels(m_user.guildIDs());
+
+    connect(m_guildsModel->channelsModel(), &ChannelsModel::requestMessages,
+            &m_req, &Requester::requestMessages);
+
+    connect(&m_user, &User::messagesUpdated, m_guildsModel.get(),
+            &GuildsModel::updateMessages);
 }

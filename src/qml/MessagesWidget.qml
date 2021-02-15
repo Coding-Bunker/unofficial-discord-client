@@ -15,6 +15,7 @@ Rectangle {
         ListView {
             anchors.fill: parent
             model: hmi.guildsModel.channelsModel.msgModel
+            visible: hmi.guildModelVisible && hmi.guildsModel.selected !== -1
             delegate: Row {
 
                 spacing: 5

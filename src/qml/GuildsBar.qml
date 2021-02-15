@@ -15,6 +15,7 @@ Rectangle {
         ListView {
             anchors.fill: parent
             model: hmi.guildsModel
+            visible: hmi.guildModelVisible
             clip: true
             boundsBehavior: ListView.StopAtBounds
             delegate: Text {
