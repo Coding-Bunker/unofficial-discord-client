@@ -9,8 +9,8 @@ The main purpose of this client is to be a desktop application fast and simple t
 
 ## Build
 
-- Qt min version 5.15.1
-- CMake min version 3.5
+- Qt min version 6.0.0
+- CMake min version 3.16.3
 
 ```
 mkdir build
