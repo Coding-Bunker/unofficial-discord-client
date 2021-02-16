@@ -1,5 +1,5 @@
 find_package(
-  Qt5
+  Qt6
   COMPONENTS Quick QuickControls2 Network
   REQUIRED)
 
@@ -31,4 +31,4 @@ add_executable(
   qml/qml.qrc)
 
 target_link_libraries(unofficial-discord-client
-                      PRIVATE Qt5::Quick Qt5::QuickControls2 Qt5::Network)
+                      PRIVATE Qt6::Quick Qt6::QuickControls2 Qt6::Network)
