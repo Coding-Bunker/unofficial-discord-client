@@ -6,7 +6,6 @@
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setApplicationName("unofficial-discord-client");
     QGuiApplication::setOrganizationName("Coding Bunker");
     QGuiApplication::setApplicationVersion("0.0.1");
