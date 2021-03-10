@@ -12,9 +12,13 @@ The main purpose of this client is to be a desktop application fast and simple t
 - Qt min version 6.0.0
 - CMake min version 3.16.3
 
+```bash
+cmake -S . -B build
+cmake --build build 
 ```
-mkdir build
-cd build
-cmake ..
-cmake --build .
+
+## Run
+
+```bash
+build/src/bin/unofficial-discord-client 
 ```
