@@ -52,7 +52,7 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                         currentIndex: startValueRole
                         onActivated: settingsModel.setParameter(
-                                         settingsModel.currentIndex, index)
+                            settingsModel.currentIndex, index)
                     }
                 }
             }

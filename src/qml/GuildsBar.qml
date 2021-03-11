@@ -40,8 +40,8 @@ Rectangle {
 
                     visible: hmi.guildsModel.viewMode === ViewMode.Text
                     text: nameRole
-                    color: hmi.guildsModel.selected
-                           === index ? Material.accentColor : Material.foreground
+                    color: hmi.guildsModel.selected ===
+                        index ? Material.accentColor : Material.foreground
                 }
 
                 MouseArea {
