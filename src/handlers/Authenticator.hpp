@@ -11,6 +11,7 @@ class Authenticator : public QObject
 
   signals:
     void authenticationSuccess(const QString &token, const QJsonDocument &doc);
+    void saveSettings(QString token, QByteArray meInfo);
 
   private:
     QNetworkAccessManager m_nam;
@@ -19,6 +20,4 @@ class Authenticator : public QObject
     void handleLoginResponse(QString body, QString twoFA);
     void request2FA(QString ticket, QString mfa);
     void handlePersonInfo();
-
-    void saveSettings(const QJsonDocument &info);
 };

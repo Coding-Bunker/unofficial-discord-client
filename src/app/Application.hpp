@@ -33,6 +33,7 @@ class Application : public QObject
   private slots:
     void handleLoginSuccess(const QString &token, const QJsonDocument &meInfo);
     void handleGuildsFinished(const QByteArray &data);
+    void saveSettings(QString token, QByteArray meInfo);
 
   private:
     bool m_guildModelVisible{ false };

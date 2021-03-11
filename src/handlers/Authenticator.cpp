@@ -85,17 +85,7 @@ void Authenticator::handlePersonInfo()
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
         const auto info = QJsonDocument::fromJson(r->readAll());
-        saveSettings(info);
+        emit saveSettings(m_token, info.toJson());
         emit authenticationSuccess(m_token, info);
     });
-}
-
-void Authenticator::saveSettings(const QJsonDocument &info)
-{
-    QSettings settings(QSettings::Format::NativeFormat,
-                       QSettings::Scope::UserScope,
-                       "unofficial-discord-client");
-    settings.setValue("auth/token", m_token);
-    settings.setValue("auth/meInfo", info.toJson());
-    settings.sync();
 }
