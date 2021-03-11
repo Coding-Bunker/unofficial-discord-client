@@ -23,8 +23,6 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
     connect(&m_req, &Requester::messagesFinished, this, [&](QByteArray data) {
         m_user.setMessagesForChannel(m_guildsModel->selectedID(), data);
     });
-
-    loadSettings();
 }
 
 bool Application::guildModelVisible() const
@@ -39,17 +37,13 @@ GuildsModel *Application::guildsModel() const
 
 void Application::loadSettings()
 {
-    QSettings settings(QSettings::Format::NativeFormat,
-                       QSettings::Scope::UserScope,
-                       "unofficial-discord-client");
-    const auto token = settings.value("auth/token");
-    if (!token.isValid() || token.isNull()) {
-        return;
-    }
+    m_settings.loadSettings();
 
-    const auto info = settings.value("auth/meInfo").toByteArray();
-    auto d          = QJsonDocument::fromJson(info);
-    handleLoginSuccess(token.toString(), d);
+    const auto t  = m_settings.token();
+    const auto me = m_settings.meInfo();
+    if (!t.isEmpty() && !me.isEmpty()) {
+        handleLoginSuccess(t, QJsonDocument::fromJson(me));
+    }
 }
 
 void Application::handleLoginSuccess(const QString &token,

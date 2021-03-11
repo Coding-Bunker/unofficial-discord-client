@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core/Settings.hpp"
 #include "core/User.hpp"
 #include "gui/GuildsModel.hpp"
 #include "handlers/Authenticator.hpp"
@@ -41,4 +42,6 @@ class Application : public QObject
     Requester m_req;
 
     std::unique_ptr<GuildsModel> m_guildsModel;
+
+    Settings m_settings;
 };
