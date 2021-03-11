@@ -22,4 +22,15 @@ class Settings : public QObject
 
     QString m_token;
     QByteArray m_meInfo;
+
+    // PublicSetting means user can edit.
+    // It holds:
+    // - Description
+    // - Possible value
+    // - Value
+    using PublicSetting = std::tuple<QString, QStringList, int>;
+
+    PublicSetting m_guildsView{
+        "Show guilds view with:", { "text", "icon" }, 0
+    };
 };
