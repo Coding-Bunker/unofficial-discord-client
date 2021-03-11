@@ -13,6 +13,12 @@ ApplicationWindow {
         onActivated: Qt.quit()
     }
 
+    Shortcut {
+        sequence: "Ctrl+S"
+        context: Qt.ApplicationShortcut
+        onActivated: stackview.push(settings)
+    }
+
     StackView {
         id: stackview
 
@@ -28,6 +34,12 @@ ApplicationWindow {
             id: chat
 
             Chat {}
+        }
+
+        Component {
+            id: settings
+
+            Settings {}
         }
 
         initialItem: login
