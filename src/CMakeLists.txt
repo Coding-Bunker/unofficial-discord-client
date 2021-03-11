@@ -6,38 +6,38 @@ find_package(
 
 # ===== ===== ===== Create executable ===== ===== =====
 set(HEADER_LIST
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Types.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/User.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Guild.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Channel.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Message.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Settings.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/handlers/Authenticator.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/handlers/Requester.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/DiscordApi/DiscordAPI.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/gui/GuildsModel.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/gui/ChannelsModel.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/gui/MessagesModel.hpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/app/Application.hpp")
+    "${PROJECT_SOURCE_DIR}/src/core/Types.hpp"
+    "${PROJECT_SOURCE_DIR}/src/core/User.hpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Guild.hpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Channel.hpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Message.hpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Settings.hpp"
+    "${PROJECT_SOURCE_DIR}/src/handlers/Authenticator.hpp"
+    "${PROJECT_SOURCE_DIR}/src/handlers/Requester.hpp"
+    "${PROJECT_SOURCE_DIR}/src/DiscordApi/DiscordAPI.hpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/GuildsModel.hpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/ChannelsModel.hpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/MessagesModel.hpp"
+    "${PROJECT_SOURCE_DIR}/src/app/Application.hpp")
 
 set(SRC_LIST
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Guild.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/User.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Channel.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Message.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/core/Settings.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/handlers/Authenticator.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/handlers/Requester.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/gui/GuildsModel.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/gui/ChannelsModel.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/gui/MessagesModel.cpp"
-    "${unofficial-discord-client_SOURCE_DIR}/src/app/Application.cpp")
+    "${PROJECT_SOURCE_DIR}/src/core/Guild.cpp"
+    "${PROJECT_SOURCE_DIR}/src/core/User.cpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Channel.cpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Message.cpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Settings.cpp"
+    "${PROJECT_SOURCE_DIR}/src/handlers/Authenticator.cpp"
+    "${PROJECT_SOURCE_DIR}/src/handlers/Requester.cpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/GuildsModel.cpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/ChannelsModel.cpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/MessagesModel.cpp"
+    "${PROJECT_SOURCE_DIR}/src/app/Application.cpp")
 
 add_executable(
   unofficial-discord-client
   ${SRC_LIST} ${HEADER_LIST}
-  "${unofficial-discord-client_SOURCE_DIR}/src/app/main.cpp"
-  "${unofficial-discord-client_SOURCE_DIR}/src/qml/qml.qrc")
+  "${PROJECT_SOURCE_DIR}/src/app/main.cpp"
+  "${PROJECT_SOURCE_DIR}/src/qml/qml.qrc")
 
 target_link_libraries(unofficial-discord-client
                       PRIVATE Qt6::Quick Qt6::QuickControls2 Qt6::Network)
