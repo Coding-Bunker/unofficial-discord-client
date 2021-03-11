@@ -2,13 +2,6 @@
 
 #include <QObject>
 
-namespace SettingsCategory
-{
-const QString token  = "auth/token";
-const QString meInfo = "auth/meInfo";
-
-} // namespace SettingsCategory
-
 class Settings : public QObject
 {
     // clang-format off
@@ -19,11 +12,14 @@ class Settings : public QObject
     Settings(QObject *parent = nullptr);
 
     void loadSettings();
+    void saveAuthSettings(QString token, QByteArray meInfo);
 
     QString token() const noexcept;
     QByteArray meInfo() const noexcept;
 
   private:
+    const QString m_settingsFilename = "unofficial-discord-client";
+
     QString m_token;
     QByteArray m_meInfo;
 };
