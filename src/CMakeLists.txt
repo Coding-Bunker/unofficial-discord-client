@@ -35,8 +35,7 @@ set(SRC_LIST
 
 add_executable(
   unofficial-discord-client
-  ${SRC_LIST} ${HEADER_LIST}
-  "${PROJECT_SOURCE_DIR}/src/app/main.cpp"
+  ${SRC_LIST} ${HEADER_LIST} "${PROJECT_SOURCE_DIR}/src/app/main.cpp"
   "${PROJECT_SOURCE_DIR}/src/qml/qml.qrc")
 
 target_link_libraries(unofficial-discord-client
