@@ -42,3 +42,8 @@ QByteArray Settings::meInfo() const noexcept
 {
     return m_meInfo;
 }
+
+const QVector<UserSettingPOD> &Settings::parameters() const
+{
+    return m_parameters;
+}

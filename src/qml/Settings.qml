@@ -1,10 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+import Qt.labs.qmlmodels 1.0
 
 Rectangle {
     color: Material.backgroundColor
-    anchors.fill: parent
 
     Text {
         id: title
@@ -27,21 +27,34 @@ Rectangle {
             bottom: okButton.top
         }
 
-        model: 1
-        delegate: Row {
-            spacing: 5
+        model: settingsModel
 
-            Text {
-                text: "Guilds as:"
-                color: Material.foreground
-                font.bold: true
-            }
+        DelegateChooser {
+            id: chooser
 
-            Text {
-                text: "icon"
-                color: Material.foreground
+            role: "typeRole"
+
+            DelegateChoice {
+                roleValue: 0
+                Row {
+                    spacing: 5
+
+                    Text {
+                        text: descriptionRole
+                        color: Material.foreground
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    ComboBox {
+                        model: choicesRole
+                        anchors.verticalCenter: parent.verticalCenter
+                        onActivated: console.log("activated", currentIndex)
+                    }
+                }
             }
         }
+
+        delegate: chooser
     }
 
     Button {

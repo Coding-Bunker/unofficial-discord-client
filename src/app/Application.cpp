@@ -10,6 +10,7 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
     ctx->setContextProperty("hmi", this);
     ctx->setContextProperty("auth", &m_auth);
     ctx->setContextProperty("user", &m_user);
+    ctx->setContextProperty("settingsModel", &m_settingsModel);
 
     connect(&m_auth, &Authenticator::authenticationSuccess, this,
             &Application::handleLoginSuccess);
@@ -41,6 +42,8 @@ GuildsModel *Application::guildsModel() const
 void Application::loadSettings()
 {
     m_settings.loadSettings();
+
+    m_settingsModel.setSettings(&m_settings);
 
     const auto t  = m_settings.token();
     const auto me = m_settings.meInfo();
