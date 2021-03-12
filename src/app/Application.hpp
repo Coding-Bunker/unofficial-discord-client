@@ -26,6 +26,7 @@ class Application : public QObject
     GuildsModel *guildsModel() const;
 
     void loadSettings();
+    Q_INVOKABLE void saveSettings();
 
   signals:
     void loginSuccess();
@@ -34,7 +35,7 @@ class Application : public QObject
   private slots:
     void handleLoginSuccess(const QString &token, const QJsonDocument &meInfo);
     void handleGuildsFinished(const QByteArray &data);
-    void saveSettings(QString token, QByteArray meInfo);
+    void saveAuthSettings(QString token, QByteArray meInfo);
 
   private:
     bool m_guildModelVisible{ false };

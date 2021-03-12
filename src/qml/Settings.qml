@@ -71,6 +71,9 @@ Rectangle {
         height: parent.height * .1
 
         text: qsTr("Ok")
-        onClicked: stackview.pop()
+        onClicked: {
+            hmi.saveSettings()
+            stackview.pop()
+        }
     }
 }
