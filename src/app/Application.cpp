@@ -16,7 +16,7 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
             &Application::handleLoginSuccess);
 
     connect(&m_auth, &Authenticator::saveSettings, this,
-            &Application::saveSettings);
+            &Application::saveAuthSettings);
 
     connect(&m_req, &Requester::guildsFinished, this,
             &Application::handleGuildsFinished);
@@ -52,6 +52,11 @@ void Application::loadSettings()
     }
 }
 
+void Application::saveSettings()
+{
+    m_settings.save();
+}
+
 void Application::handleLoginSuccess(const QString &token,
                                      const QJsonDocument &meInfo)
 {
@@ -76,7 +81,7 @@ void Application::handleGuildsFinished(const QByteArray &data)
             &GuildsModel::updateMessages);
 }
 
-void Application::saveSettings(QString token, QByteArray meInfo)
+void Application::saveAuthSettings(QString token, QByteArray meInfo)
 {
     m_settings.saveAuthSettings(token, meInfo);
 }

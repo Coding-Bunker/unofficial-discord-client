@@ -7,9 +7,20 @@ namespace SettingsCategory
 const QString token  = "auth/token";
 const QString meInfo = "auth/meInfo";
 
+const QString guidsView = "UI/guildsView";
+
 } // namespace SettingsCategory
 
-Settings::Settings(QObject *parent) : QObject(parent) {}
+Settings::Settings(QObject *parent) : QObject(parent)
+{
+    m_parameters.push_back({
+        "Show guilds view with:",
+        { "text", "icon" },
+        0,
+        UserSettingPOD::ComboBox,
+        SettingsCategory::guidsView,
+    });
+}
 
 void Settings::loadSettings()
 {
@@ -22,6 +33,18 @@ void Settings::loadSettings()
 
     m_token  = token.toString();
     m_meInfo = settings.value(SettingsCategory::meInfo).toByteArray();
+}
+
+void Settings::save() const
+{
+    QSettings settings(QSettings::Format::NativeFormat,
+                       QSettings::Scope::UserScope, m_settingsFilename);
+
+    for (const auto &s : m_parameters) {
+        settings.setValue(s.persistentLabel, s.value);
+    }
+
+    settings.sync();
 }
 
 void Settings::saveAuthSettings(QString token, QByteArray meInfo)

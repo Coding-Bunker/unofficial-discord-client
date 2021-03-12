@@ -11,6 +11,7 @@ class UserSettingPOD
     QStringList possibleValues;
     int value;
     Type type;
+    QString persistentLabel;
 };
 
 class Settings : public QObject
@@ -23,6 +24,7 @@ class Settings : public QObject
     Settings(QObject *parent = nullptr);
 
     void loadSettings();
+    void save() const;
     void saveAuthSettings(QString token, QByteArray meInfo);
 
     QString token() const noexcept;
@@ -37,10 +39,5 @@ class Settings : public QObject
     QString m_token;
     QByteArray m_meInfo;
 
-    QVector<UserSettingPOD> m_parameters{
-        { "Show guilds view with:",
-          { "text", "icon" },
-          0,
-          UserSettingPOD::ComboBox },
-    };
+    QVector<UserSettingPOD> m_parameters;
 };
