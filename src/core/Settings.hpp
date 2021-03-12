@@ -2,6 +2,17 @@
 
 #include <QObject>
 
+class UserSettingPOD
+{
+  public:
+    enum Type { ComboBox };
+
+    QString description;
+    QStringList possibleValues;
+    int values;
+    Type type;
+};
+
 class Settings : public QObject
 {
     // clang-format off
@@ -17,20 +28,18 @@ class Settings : public QObject
     QString token() const noexcept;
     QByteArray meInfo() const noexcept;
 
+    const QVector<UserSettingPOD> &parameters() const;
+
   private:
     const QString m_settingsFilename = "unofficial-discord-client";
 
     QString m_token;
     QByteArray m_meInfo;
 
-    // PublicSetting means user can edit.
-    // It holds:
-    // - Description
-    // - Possible value
-    // - Value
-    using PublicSetting = std::tuple<QString, QStringList, int>;
-
-    PublicSetting m_guildsView{
-        "Show guilds view with:", { "text", "icon" }, 0
+    QVector<UserSettingPOD> m_parameters{
+        { "Show guilds view with:",
+          { "text", "icon" },
+          0,
+          UserSettingPOD::ComboBox },
     };
 };

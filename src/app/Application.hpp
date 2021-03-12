@@ -3,6 +3,7 @@
 #include "core/Settings.hpp"
 #include "core/User.hpp"
 #include "gui/GuildsModel.hpp"
+#include "gui/SettingsModel.hpp"
 #include "handlers/Authenticator.hpp"
 #include "handlers/Requester.hpp"
 
@@ -45,4 +46,5 @@ class Application : public QObject
     std::unique_ptr<GuildsModel> m_guildsModel;
 
     Settings m_settings;
+    SettingsModel m_settingsModel;
 };
