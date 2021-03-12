@@ -4,6 +4,8 @@ import QtQuick.Controls.Material 2.15
 import Qt.labs.qmlmodels 1.0
 
 Rectangle {
+    objectName: "settings"
+
     color: Material.backgroundColor
 
     Text {
