@@ -17,6 +17,9 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
     connect(&m_auth, &Authenticator::authenticationSuccess, this,
             &Application::handleLoginSuccess);
 
+    connect(&m_auth, &Authenticator::authenticationFailed, this,
+            &Application::handleLoginFailed);
+
     connect(&m_auth, &Authenticator::saveSettings, this,
             &Application::saveAuthSettings);
 
@@ -70,6 +73,12 @@ void Application::handleLoginSuccess(const QString &token,
     m_req.setToken(token);
     m_user.populate(meInfo);
     m_req.requestGuilds();
+}
+
+void Application::handleLoginFailed(const QString &errorNumber, const QString &errorMessage)
+{
+    QString title = "Error(" + errorNumber + ")";
+    emit showError(title, errorMessage);
 }
 
 void Application::handleGuildsFinished(const QByteArray &data)

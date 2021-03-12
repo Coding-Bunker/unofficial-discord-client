@@ -4,8 +4,10 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QNetworkReply>
 #include <QSettings>
+#include <QString>
 
 void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
 {
@@ -23,10 +25,43 @@ void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
 
-        // TODO: check error before proceding
-
-        handleLoginResponse(r->readAll(), twoFA);
+        if (r->error() != QNetworkReply::NetworkError::NoError) {
+            handleLoginFailure(r->error(), r->readAll());
+        } else {
+            handleLoginResponse(r->readAll(), twoFA);
+        }
     });
+}
+
+
+void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error, QString body) {
+    QString messageError = "";
+
+    if (301 <= error && error <= 399) {
+        const auto doc = QJsonDocument::fromJson(body.toLatin1());
+        const auto obj = doc.object();
+
+        if (obj.value("email").isArray() || obj.value("password").isArray()) {
+            if (obj.value("email").isArray()) {
+                const QJsonArray emailResponses = obj.value("email").toArray();
+                messageError += "On email: ";
+                for (const auto error : emailResponses) {
+                    messageError += error.toString() + "\n";
+                }
+            }
+            if (obj.value("password").isArray()) {
+                const QJsonArray passwordResponses = obj.value("password").toArray();
+                messageError += "On password: ";
+                for (const auto error : passwordResponses) {
+                    messageError += error.toString() + "\n";
+                }
+            }
+        }
+    } else {
+        messageError += "Network error";
+    }
+
+    emit authenticationFailed(QString::number(error), messageError);
 }
 
 void Authenticator::handleLoginResponse(QString body, QString twoFA)
