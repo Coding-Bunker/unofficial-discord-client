@@ -9,7 +9,7 @@ class UserSettingPOD
 
     QString description;
     QStringList possibleValues;
-    int values;
+    int value;
     Type type;
 };
 
@@ -29,6 +29,7 @@ class Settings : public QObject
     QByteArray meInfo() const noexcept;
 
     const QVector<UserSettingPOD> &parameters() const;
+    void setParameter(int indexOfParam, int valueOfChoices);
 
   private:
     const QString m_settingsFilename = "unofficial-discord-client";

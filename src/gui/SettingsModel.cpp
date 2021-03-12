@@ -41,3 +41,8 @@ QHash<int, QByteArray> SettingsModel::roleNames() const
              { Role::Type, "typeRole" },
              { Role::Choices, "choicesRole" } };
 }
+
+void SettingsModel::setParameter(int indexOfParam, int valueOfChoices)
+{
+    m_setting->setParameter(indexOfParam, valueOfChoices);
+}

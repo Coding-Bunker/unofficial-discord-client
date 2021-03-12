@@ -23,6 +23,8 @@ class SettingsModel : public QAbstractListModel
 
     QHash<int, QByteArray> roleNames() const override;
 
+    Q_INVOKABLE void setParameter(int indexOfParam, int valueOfChoices);
+
   private:
     Settings *m_setting;
 };

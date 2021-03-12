@@ -47,3 +47,8 @@ const QVector<UserSettingPOD> &Settings::parameters() const
 {
     return m_parameters;
 }
+
+void Settings::setParameter(int indexOfParam, int valueOfChoices)
+{
+    m_parameters[indexOfParam].value = valueOfChoices;
+}
