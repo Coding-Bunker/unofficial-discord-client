@@ -30,10 +30,12 @@ class Application : public QObject
 
   signals:
     void loginSuccess();
+    void showError(const QString &title, const QString &message);
     void guildsModelChanged();
 
   private slots:
     void handleLoginSuccess(const QString &token, const QJsonDocument &meInfo);
+    void handleLoginFailed(const QString &errorNumber, const QString &errorMessage);
     void handleGuildsFinished(const QByteArray &data);
     void saveAuthSettings(QString token, QByteArray meInfo);
     void handleGuildsIcons(snowflake guildID, QByteArray imgBase64);

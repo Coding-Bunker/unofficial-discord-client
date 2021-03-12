@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 class Authenticator : public QObject
 {
@@ -11,6 +12,7 @@ class Authenticator : public QObject
 
   signals:
     void authenticationSuccess(const QString &token, const QJsonDocument &doc);
+    void authenticationFailed(const QString &errorCode, const QString &errorMessage);
     void saveSettings(QString token, QByteArray meInfo);
 
   private:
@@ -18,6 +20,7 @@ class Authenticator : public QObject
     QString m_token;
 
     void handleLoginResponse(QString body, QString twoFA);
+    void handleLoginFailure(QNetworkReply::NetworkError error, QString body);
     void request2FA(QString ticket, QString mfa);
     void handlePersonInfo();
 };

@@ -51,5 +51,12 @@ ApplicationWindow {
         function onLoginSuccess() {
             stackview.push(chat)
         }
+        function onShowError(title, errorMessage) {
+            var popupComponent = Qt.createComponent("qrc:/PopupMessage.qml")
+            var popupMessageError = popupComponent.createObject(stackview);
+            popupMessageError.open()
+            popupMessageError.title = qsTr(title)
+            popupMessageError.message = qsTr(errorMessage)
+        }
     }
 }

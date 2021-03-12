@@ -5,6 +5,7 @@
         <file>GuildsBar.qml</file>
         <file>Login.qml</file>
         <file>MessagesWidget.qml</file>
+        <file>PopupMessage.qml</file>
         <file>Settings.qml</file>
         <file>UserInfoBar.qml</file>
         <file>main.qml</file>
