@@ -17,6 +17,7 @@ ApplicationWindow {
         sequence: "Ctrl+S"
         context: Qt.ApplicationShortcut
         onActivated: stackview.push(settings)
+        enabled: stackview.currentItem.objectName === settings.objectName
     }
 
     StackView {
