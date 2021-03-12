@@ -32,6 +32,10 @@ QVariant SettingsModel::data(const QModelIndex &index, int role) const
         return m_setting->parameters()[index.row()].possibleValues;
     }
 
+    if (role == Role::StartValue) {
+        return m_setting->parameters()[index.row()].value;
+    }
+
     return {};
 }
 
@@ -39,7 +43,8 @@ QHash<int, QByteArray> SettingsModel::roleNames() const
 {
     return { { Role::Description, "descriptionRole" },
              { Role::Type, "typeRole" },
-             { Role::Choices, "choicesRole" } };
+             { Role::Choices, "choicesRole" },
+             { Role::StartValue, "startValueRole" } };
 }
 
 void SettingsModel::setParameter(int indexOfParam, int valueOfChoices)

@@ -48,6 +48,7 @@ Rectangle {
                     ComboBox {
                         model: choicesRole
                         anchors.verticalCenter: parent.verticalCenter
+                        currentIndex: startValueRole
                         onActivated: settingsModel.setParameter(
                                          settingsModel.currentIndex, index)
                     }

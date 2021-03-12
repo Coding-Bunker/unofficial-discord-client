@@ -19,7 +19,7 @@ class SettingsModel : public QAbstractListModel
     QVariant data(const QModelIndex &index,
                   int role = Qt::DisplayRole) const override;
 
-    enum Role { Description = Qt::UserRole + 1, Type, Choices };
+    enum Role { Description = Qt::UserRole + 1, Type, Choices, StartValue };
 
     QHash<int, QByteArray> roleNames() const override;
 
