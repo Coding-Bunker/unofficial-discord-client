@@ -27,12 +27,12 @@ void Settings::loadSettings()
     QSettings settings(QSettings::Format::NativeFormat,
                        QSettings::Scope::UserScope, m_settingsFilename);
     const auto token = settings.value(SettingsCategory::token);
-    if (!token.isValid() || token.isNull()) {
-        return;
+    if (token.isValid() && !token.isNull()) {
+        m_token  = token.toString();
+        m_meInfo = settings.value(SettingsCategory::meInfo).toByteArray();
     }
 
-    m_token  = token.toString();
-    m_meInfo = settings.value(SettingsCategory::meInfo).toByteArray();
+    m_parameters[0].value = settings.value(SettingsCategory::guidsView).toInt();
 }
 
 void Settings::save() const
