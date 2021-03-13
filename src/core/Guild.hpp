@@ -9,6 +9,7 @@ class Guild
 
     snowflake id() const noexcept;
     QString name() const noexcept;
+    QImage icon() const noexcept;
 
     void addChannel(Channel &&c);
 

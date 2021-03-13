@@ -33,6 +33,8 @@ class Settings : public QObject
     const QVector<UserSettingPOD> &parameters() const;
     void setParameter(int indexOfParam, int valueOfChoices);
 
+    bool guildsViewAsIcon() const noexcept;
+
   private:
     const QString m_settingsFilename = "unofficial-discord-client";
 

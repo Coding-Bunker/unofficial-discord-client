@@ -1,5 +1,7 @@
 #include "GuildsModel.hpp"
 
+#include <QPixmap>
+
 GuildsModel::GuildsModel(QList<Guild> *g, QObject *parent) :
     QAbstractListModel(parent), m_guilds{ g }
 {
@@ -26,12 +28,16 @@ QVariant GuildsModel::data(const QModelIndex &index, int role) const
         return m_guilds->at(index.row()).name();
     }
 
+    if (role == Role::Icon) {
+        return m_guilds->at(index.row()).icon();
+    }
+
     return {};
 }
 
 QHash<int, QByteArray> GuildsModel::roleNames() const
 {
-    return { { Role::Name, "nameRole" } };
+    return { { Role::Name, "nameRole" }, { Role::Icon, "iconRole" } };
 }
 
 void GuildsModel::select(int index)
@@ -55,6 +61,16 @@ snowflake GuildsModel::selectedID() const
 ChannelsModel *GuildsModel::channelsModel()
 {
     return &m_channelsModel;
+}
+
+void GuildsModel::setViewMode(GuildsModel::ViewMode vm)
+{
+    m_viewMode = vm;
+}
+
+GuildsModel::ViewMode GuildsModel::viewMode() const noexcept
+{
+    return m_viewMode;
 }
 
 void GuildsModel::updateMessages()

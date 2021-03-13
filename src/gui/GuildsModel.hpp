@@ -11,6 +11,8 @@ class GuildsModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(int selected READ selected NOTIFY selectedChanged)
     Q_PROPERTY(ChannelsModel *channelsModel READ channelsModel CONSTANT)
+    Q_PROPERTY(ViewMode viewMode READ viewMode NOTIFY viewModeChanged)
+    Q_ENUMS(ViewMode)
     // clang-format on
 
   public:
@@ -20,7 +22,7 @@ class GuildsModel : public QAbstractListModel
     QVariant data(const QModelIndex &index,
                   int role = Qt::DisplayRole) const override;
 
-    enum Role { Name = Qt::UserRole + 1 };
+    enum Role { Name = Qt::UserRole + 1, Icon };
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -31,8 +33,14 @@ class GuildsModel : public QAbstractListModel
 
     ChannelsModel *channelsModel();
 
+    enum class ViewMode { Text, Icon };
+
+    void setViewMode(ViewMode vm);
+    ViewMode viewMode() const noexcept;
+
   signals:
     void selectedChanged();
+    void viewModeChanged();
 
   public slots:
     void updateMessages();
@@ -41,4 +49,5 @@ class GuildsModel : public QAbstractListModel
     QList<Guild> *m_guilds;
     int m_selected{ -1 };
     ChannelsModel m_channelsModel;
+    ViewMode m_viewMode;
 };
