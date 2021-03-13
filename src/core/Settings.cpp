@@ -75,3 +75,8 @@ void Settings::setParameter(int indexOfParam, int valueOfChoices)
 {
     m_parameters[indexOfParam].value = valueOfChoices;
 }
+
+bool Settings::guildsViewAsIcon() const noexcept
+{
+    return m_parameters[0].value == 1; // TODO: Fix magic numbers.
+}

@@ -1,8 +1,8 @@
 #include "Application.hpp"
 
 #include <QJsonDocument>
-#include <QQmlContext>
 #include <QSettings>
+#include <QtQml>
 
 Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
 {
@@ -11,6 +11,8 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
     ctx->setContextProperty("auth", &m_auth);
     ctx->setContextProperty("user", &m_user);
     ctx->setContextProperty("settingsModel", &m_settingsModel);
+
+    qmlRegisterUncreatableType<GuildsModel>("ui", 1, 0, "ViewMode", {});
 
     connect(&m_auth, &Authenticator::authenticationSuccess, this,
             &Application::handleLoginSuccess);
@@ -69,7 +71,10 @@ void Application::handleLoginSuccess(const QString &token,
 void Application::handleGuildsFinished(const QByteArray &data)
 {
     m_user.setGuilds(data);
-    m_guildsModel       = std::make_unique<GuildsModel>(&m_user.guilds);
+    m_guildsModel = std::make_unique<GuildsModel>(&m_user.guilds);
+    m_guildsModel->setViewMode(m_settings.guildsViewAsIcon()
+                                   ? GuildsModel::ViewMode::Icon
+                                   : GuildsModel::ViewMode::Text);
     m_guildModelVisible = true;
     emit guildsModelChanged();
     m_req.requestChannels(m_user.guildIDs());

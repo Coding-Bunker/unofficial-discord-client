@@ -1,11 +1,13 @@
 #include "Guild.hpp"
 
+#include <QImage>
 #include <QJsonObject>
 
 void Guild::unmarshal(const QJsonObject &obj)
 {
     m_id   = obj.value("id").toString().toULongLong();
     m_name = obj.value("name").toString();
+    m_icon = obj.value("icon").toString();
 }
 
 snowflake Guild::id() const noexcept
@@ -16,6 +18,13 @@ snowflake Guild::id() const noexcept
 QString Guild::name() const noexcept
 {
     return m_name;
+}
+
+QImage Guild::icon() const noexcept
+{
+    QByteArray by = QByteArray::fromBase64(m_icon.toLatin1());
+    QImage image  = QImage::fromData(by, "PNG");
+    return image;
 }
 
 void Guild::addChannel(Channel &&c)
