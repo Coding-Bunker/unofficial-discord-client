@@ -24,9 +24,9 @@ QString Guild::iconHash() const noexcept
     return m_iconHash;
 }
 
-QByteArray Guild::iconBase64() const noexcept
+const QByteArray &Guild::icondata() const noexcept
 {
-    return m_iconBase64;
+    return m_icondata;
 }
 
 void Guild::addChannel(Channel &&c)
@@ -61,5 +61,5 @@ void Guild::addMessageToChannel(Message &&m)
 
 void Guild::setIconBase64(QByteArray &&data)
 {
-    m_iconBase64 = data;
+    m_icondata = data;
 }

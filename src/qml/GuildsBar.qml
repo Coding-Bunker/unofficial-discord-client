@@ -25,15 +25,13 @@ Rectangle {
             delegate: Item {
                 height: txt.visible ? txt.height : img.height
 
-                Image {
+                ImageRender {
                     id: img
 
                     visible: hmi.guildsModel.viewMode === ViewMode.Icon
                     width: 32
                     height: 32
-                    fillMode: Image.PreserveAspectFit
-                    smooth: true
-                    source: "data:image/png;base64," + iconRole
+                    source: iconRole
                 }
 
                 Text {
