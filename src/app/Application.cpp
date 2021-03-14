@@ -60,6 +60,7 @@ void Application::loadSettings()
 void Application::saveSettings()
 {
     m_settings.save();
+    updateUI();
 }
 
 void Application::handleLoginSuccess(const QString &token,
@@ -74,14 +75,12 @@ void Application::handleLoginSuccess(const QString &token,
 void Application::handleGuildsFinished(const QByteArray &data)
 {
     m_user.setGuilds(data);
-    m_guildsModel = std::make_unique<GuildsModel>(&m_user.guilds);
-    m_guildsModel->setViewMode(m_settings.guildsViewAsIcon()
-                                   ? GuildsModel::ViewMode::Icon
-                                   : GuildsModel::ViewMode::Text);
+    m_guildsModel       = std::make_unique<GuildsModel>(&m_user.guilds);
     m_guildModelVisible = true;
     emit guildsModelChanged();
     m_req.requestChannels(m_user.guildIDs());
     m_req.requestGuildsImages(m_user.pairsGuildIDandHashImg());
+    updateUI();
 
     connect(m_guildsModel->channelsModel(), &ChannelsModel::requestMessages,
             &m_req, &Requester::requestMessages);
@@ -99,4 +98,11 @@ void Application::handleGuildsIcons(snowflake guildID, QByteArray imgBase64)
 {
     m_user.setIconBase64(guildID, std::move(imgBase64));
     m_guildsModel->updateGuildIcon();
+}
+
+void Application::updateUI()
+{
+    m_guildsModel->setViewMode(m_settings.guildsViewAsIcon()
+                                   ? GuildsModel::ViewMode::Icon
+                                   : GuildsModel::ViewMode::Text);
 }
