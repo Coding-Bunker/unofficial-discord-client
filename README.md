@@ -22,3 +22,7 @@ cmake --build build
 ```bash
 build/src/bin/unofficial-discord-client 
 ```
+
+## Features
+
+- [x] Settings (Ctrl + S)
