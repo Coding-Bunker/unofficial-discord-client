@@ -23,6 +23,9 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
     connect(&m_req, &Requester::guildsFinished, this,
             &Application::handleGuildsFinished);
 
+    connect(&m_req, &Requester::guildIconBase64, this,
+            &Application::handleGuildsIcons);
+
     connect(&m_req, &Requester::channelFinished,
             [&](const QByteArray &data) { m_user.setChannelsForGuild(data); });
 
@@ -78,6 +81,7 @@ void Application::handleGuildsFinished(const QByteArray &data)
     m_guildModelVisible = true;
     emit guildsModelChanged();
     m_req.requestChannels(m_user.guildIDs());
+    m_req.requestGuildsImages(m_user.pairsGuildIDandHashImg());
 
     connect(m_guildsModel->channelsModel(), &ChannelsModel::requestMessages,
             &m_req, &Requester::requestMessages);
@@ -89,4 +93,10 @@ void Application::handleGuildsFinished(const QByteArray &data)
 void Application::saveAuthSettings(QString token, QByteArray meInfo)
 {
     m_settings.saveAuthSettings(token, meInfo);
+}
+
+void Application::handleGuildsIcons(snowflake guildID, QByteArray imgBase64)
+{
+    m_user.setIconBase64(guildID, std::move(imgBase64));
+    m_guildsModel->updateGuildIcon();
 }

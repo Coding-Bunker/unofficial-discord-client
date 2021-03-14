@@ -33,7 +33,7 @@ Rectangle {
                     height: 32
                     fillMode: Image.PreserveAspectFit
                     smooth: true
-                    source: iconRole
+                    source: "data:image/png;base64," + iconRole
                 }
 
                 Text {

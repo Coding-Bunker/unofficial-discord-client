@@ -38,6 +38,8 @@ class GuildsModel : public QAbstractListModel
     void setViewMode(ViewMode vm);
     ViewMode viewMode() const noexcept;
 
+    void updateGuildIcon();
+
   signals:
     void selectedChanged();
     void viewModeChanged();

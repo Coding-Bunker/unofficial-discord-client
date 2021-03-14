@@ -1,7 +1,5 @@
 #include "GuildsModel.hpp"
 
-#include <QPixmap>
-
 GuildsModel::GuildsModel(QList<Guild> *g, QObject *parent) :
     QAbstractListModel(parent), m_guilds{ g }
 {
@@ -29,7 +27,7 @@ QVariant GuildsModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Role::Icon) {
-        return m_guilds->at(index.row()).icon();
+        return m_guilds->at(index.row()).iconBase64();
     }
 
     return {};
@@ -66,11 +64,20 @@ ChannelsModel *GuildsModel::channelsModel()
 void GuildsModel::setViewMode(GuildsModel::ViewMode vm)
 {
     m_viewMode = vm;
+    emit viewModeChanged();
 }
 
 GuildsModel::ViewMode GuildsModel::viewMode() const noexcept
 {
     return m_viewMode;
+}
+
+void GuildsModel::updateGuildIcon()
+{
+    if (m_viewMode == ViewMode::Icon) {
+        dataChanged(index(0, 0), index(this->rowCount() - 1, 0),
+                    { Role::Icon });
+    }
 }
 
 void GuildsModel::updateMessages()
