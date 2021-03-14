@@ -1,4 +1,5 @@
 #include "Application.hpp"
+#include "gui/ImageRender.hpp"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    qmlRegisterType<ImageRender>("ui", 1, 0, "ImageRender");
 
     Application a(engine.rootContext());
 

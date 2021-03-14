@@ -19,6 +19,7 @@ set(HEADER_LIST
     "${PROJECT_SOURCE_DIR}/src/gui/ChannelsModel.hpp"
     "${PROJECT_SOURCE_DIR}/src/gui/MessagesModel.hpp"
     "${PROJECT_SOURCE_DIR}/src/gui/SettingsModel.hpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/ImageRender.hpp"
     "${PROJECT_SOURCE_DIR}/src/app/Application.hpp")
 
 set(SRC_LIST
@@ -33,6 +34,7 @@ set(SRC_LIST
     "${PROJECT_SOURCE_DIR}/src/gui/ChannelsModel.cpp"
     "${PROJECT_SOURCE_DIR}/src/gui/MessagesModel.cpp"
     "${PROJECT_SOURCE_DIR}/src/gui/SettingsModel.cpp"
+    "${PROJECT_SOURCE_DIR}/src/gui/ImageRender.cpp"
     "${PROJECT_SOURCE_DIR}/src/app/Application.cpp")
 
 add_executable(

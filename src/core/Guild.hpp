@@ -10,7 +10,7 @@ class Guild
     snowflake id() const noexcept;
     QString name() const noexcept;
     QString iconHash() const noexcept;
-    QByteArray iconBase64() const noexcept;
+    const QByteArray &icondata() const noexcept;
 
     void addChannel(Channel &&c);
 
@@ -24,5 +24,5 @@ class Guild
     snowflake m_id;
     QString m_name;
     QString m_iconHash;
-    QByteArray m_iconBase64;
+    QByteArray m_icondata;
 };

@@ -12,7 +12,7 @@ static const QString clientSecret = QStringLiteral("og4kFEYYimJCaFn0v9R7mIPg45ci
 static const auto fakeBrowserUserAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0";
 
 static const QString baseURL      = QStringLiteral("https://discord.com/api/v6");
-static const QString baseImageURL = QStringLiteral("https://cdn.discordapp.com/");
+static const QString baseImageURL = QStringLiteral("https://cdn.discordapp.com");
 
 static const QString auth  = baseURL + QStringLiteral("/auth");
 static const QString login = auth + QStringLiteral("/login");

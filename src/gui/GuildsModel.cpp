@@ -16,6 +16,8 @@ int GuildsModel::rowCount(const QModelIndex &parent) const
     return m_guilds->size();
 }
 
+#include <QImage>
+
 QVariant GuildsModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || m_guilds == nullptr) {
@@ -27,7 +29,9 @@ QVariant GuildsModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Role::Icon) {
-        return m_guilds->at(index.row()).iconBase64();
+        QImage img;
+        img.loadFromData(m_guilds->at(index.row()).icondata());
+        return img;
     }
 
     return {};
