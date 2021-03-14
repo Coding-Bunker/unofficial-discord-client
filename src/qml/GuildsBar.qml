@@ -24,6 +24,7 @@ Rectangle {
 
             delegate: Item {
                 height: txt.visible ? txt.height : img.height
+                width: txt.visible ? txt.width : img.width
 
                 ImageRender {
                     id: img
