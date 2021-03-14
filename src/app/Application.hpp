@@ -49,4 +49,6 @@ class Application : public QObject
 
     Settings m_settings;
     SettingsModel m_settingsModel;
+
+    void updateUI();
 };
