@@ -41,6 +41,16 @@ QList<snowflake> User::guildIDs() const noexcept
     return ret;
 }
 
+QList<QPair<snowflake, QString>> User::pairsGuildIDandHashImg() noexcept
+{
+    QList<QPair<snowflake, QString>> ret;
+    for (const auto &g : guilds) {
+        ret.push_back(qMakePair<snowflake, QString>(g.id(), g.iconHash()));
+    }
+
+    return ret;
+}
+
 void User::setChannelsForGuild(const QByteArray &data)
 {
     const auto obj = QJsonDocument::fromJson(data).array();
@@ -72,6 +82,20 @@ void User::setMessagesForChannel(snowflake guildID, const QByteArray &data)
     }
 
     emit messagesUpdated();
+}
+
+void User::setIconBase64(snowflake guildID, QByteArray &&data)
+{
+    auto it = std::find_if(guilds.begin(), guilds.end(),
+                           [&](const Guild &g) { return guildID == g.id(); });
+
+    if (it == guilds.end()) {
+        qWarning() << "guild id not found";
+        return;
+    }
+
+    const auto pos = std::distance(guilds.begin(), it);
+    guilds[pos].setIconBase64(std::move(data));
 }
 
 void User::addMessageToGuild(snowflake guildID, Message &&m)

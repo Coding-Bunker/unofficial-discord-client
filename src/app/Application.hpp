@@ -36,6 +36,7 @@ class Application : public QObject
     void handleLoginSuccess(const QString &token, const QJsonDocument &meInfo);
     void handleGuildsFinished(const QByteArray &data);
     void saveAuthSettings(QString token, QByteArray meInfo);
+    void handleGuildsIcons(snowflake guildID, QByteArray imgBase64);
 
   private:
     bool m_guildModelVisible{ false };

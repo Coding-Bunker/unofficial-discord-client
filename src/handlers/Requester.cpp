@@ -34,6 +34,23 @@ void Requester::requestChannels(const QList<snowflake> &guildIDs)
     }
 }
 
+void Requester::requestGuildsImages(QList<QPair<snowflake, QString>> &&items)
+{
+    for (const auto &i : items) {
+        if (i.second.isEmpty()) {
+            continue;
+        }
+
+        const auto reply =
+            request(DiscordAPI::guildIcon.arg(i.first).arg(i.second));
+        connect(reply, &QNetworkReply::finished, this, [this, i]() {
+            const auto r = qobject_cast<QNetworkReply *>(sender());
+            r->deleteLater();
+            emit guildIconBase64(i.first, r->readAll());
+        });
+    }
+}
+
 void Requester::requestMessages(snowflake channelID)
 {
     const auto reply = request(DiscordAPI::messages.arg(channelID));

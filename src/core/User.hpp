@@ -22,9 +22,12 @@ class User : public QObject
 
     void setGuilds(const QByteArray &data);
     QList<snowflake> guildIDs() const noexcept;
+    QList<QPair<snowflake, QString>> pairsGuildIDandHashImg() noexcept;
 
     void setChannelsForGuild(const QByteArray &data);
     void setMessagesForChannel(snowflake guildID, const QByteArray &data);
+
+    void setIconBase64(snowflake guildID, QByteArray &&data);
 
     friend QDebug operator<<(QDebug dbg, const User &u);
 
