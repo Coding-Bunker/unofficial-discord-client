@@ -7,7 +7,6 @@
 #include <QJsonArray>
 #include <QNetworkReply>
 #include <QSettings>
-#include <QString>
 
 void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
 {
@@ -21,7 +20,7 @@ void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
     QJsonDocument doc(data);
 
     const auto reply = m_nam.post(req, doc.toJson());
-    connect(reply, &QNetworkReply::finished, this, [&]() {
+    connect(reply, &QNetworkReply::finished, this, [this, twoFA]() {
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
 
@@ -77,6 +76,10 @@ void Authenticator::handleLoginResponse(QString body, QString twoFA)
     Q_UNUSED(sms) // TODO: handle sms
 
     if (mfa) {
+        if (twoFA.isEmpty() || twoFA.isNull()) {
+            emit authenticationFailed("", "2FA required.");
+            return;
+        }
         request2FA(ticket, twoFA);
         return;
     }
