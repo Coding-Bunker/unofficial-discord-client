@@ -8,6 +8,7 @@ Rectangle {
 
     Row {
         id: row
+
         spacing: 10
         anchors.centerIn: parent
 
@@ -41,6 +42,7 @@ Rectangle {
 
                 TextInput {
                     id: txtEmail
+
                     anchors.fill: parent
                 }
             }
@@ -51,6 +53,7 @@ Rectangle {
 
                 TextInput {
                     id: txtPass
+
                     anchors.fill: parent
                     echoMode: TextInput.Password
                 }
@@ -62,6 +65,7 @@ Rectangle {
 
                 TextInput {
                     id: txt2FA
+
                     anchors.fill: parent
                 }
             }
@@ -76,6 +80,7 @@ Rectangle {
         }
 
         id: login
+
         width: row.width
         text: qsTr("Login")
         onClicked: auth.requestLogin(txtEmail.text, txtPass.text, txt2FA.text)
