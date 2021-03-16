@@ -5,8 +5,8 @@ import QtQuick.Controls.Material 2.15
 Popup {
     id: popup;
 
-    property alias message : error_message.text
-    property alias title : label.text
+    property alias message: error_message.text
+    property alias title: label.text
 
     anchors.centerIn: parent
     width: 400;
