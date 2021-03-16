@@ -17,6 +17,7 @@ Popup {
 
     Label {
         id: label
+
         text: "Error"
         color: Material.accentColor
     }
@@ -29,6 +30,7 @@ Popup {
         }
 
         id: error_message
+
         y: 88
         text: qsTr("message")
         anchors.horizontalCenterOffset: 1
