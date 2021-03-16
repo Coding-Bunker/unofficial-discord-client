@@ -12,7 +12,8 @@ class Authenticator : public QObject
 
   signals:
     void authenticationSuccess(const QString &token, const QJsonDocument &doc);
-    void authenticationFailed(const QString &errorCode, const QString &errorMessage);
+    void authenticationFailed(const QString &errorCode,
+                              const QString &errorMessage);
     void saveSettings(QString token, QByteArray meInfo);
 
   private:

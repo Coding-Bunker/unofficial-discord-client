@@ -2,9 +2,9 @@
 
 #include "DiscordApi/DiscordAPI.hpp"
 
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 #include <QNetworkReply>
 #include <QSettings>
 
@@ -32,8 +32,9 @@ void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
     });
 }
 
-
-void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error, QString body) {
+void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error,
+                                       QString body)
+{
     QString messageError = "";
 
     if (301 <= error && error <= 399) {
@@ -49,7 +50,8 @@ void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error, QStrin
                 }
             }
             if (obj.value("password").isArray()) {
-                const QJsonArray passwordResponses = obj.value("password").toArray();
+                const QJsonArray passwordResponses =
+                    obj.value("password").toArray();
                 messageError += "On password: ";
                 for (const auto error : passwordResponses) {
                     messageError += error.toString() + "\n";

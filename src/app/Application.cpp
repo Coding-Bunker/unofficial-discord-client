@@ -75,7 +75,8 @@ void Application::handleLoginSuccess(const QString &token,
     m_req.requestGuilds();
 }
 
-void Application::handleLoginFailed(const QString &errorNumber, const QString &errorMessage)
+void Application::handleLoginFailed(const QString &errorNumber,
+                                    const QString &errorMessage)
 {
     QString title = "Error(" + errorNumber + ")";
     emit showError(title, errorMessage);
