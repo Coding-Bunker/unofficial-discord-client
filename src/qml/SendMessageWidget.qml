@@ -15,6 +15,8 @@ Rectangle {
         spacing: 5
 
         TextInput {
+            id: txtInput
+
             height: parent.height
             width: parent.width * .9
             color: Material.foreground
@@ -35,7 +37,10 @@ Rectangle {
                 text: qsTr("send")
             }
 
-            onClicked: console.log("sent")
+            onClicked: {
+                hmi.guildsModel.channelsModel.sendMsg(txtInput.text)
+                txtInput.clear()
+            }
         }
     }
 }
