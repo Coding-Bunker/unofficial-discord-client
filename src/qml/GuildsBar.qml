@@ -22,6 +22,9 @@ Rectangle {
             clip: true
             boundsBehavior: ListView.StopAtBounds
 
+            layoutDirection: Qt.LeftToRight
+            orientation: hmi.guildsModel.viewMode === ViewMode.Icon ? ListView.Horizontal : ListView.Vertical
+
             delegate: Item {
                 height: txt.visible ? txt.height : img.height
                 width: txt.visible ? txt.width : img.width
