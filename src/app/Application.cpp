@@ -13,6 +13,7 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
     ctx->setContextProperty("settingsModel", &m_settingsModel);
 
     qmlRegisterUncreatableType<GuildsModel>("ui", 1, 0, "ViewMode", {});
+    qmlRegisterUncreatableType<GuildsModel>("ui", 1, 0, "ViewIconDirection", {});
 
     connect(&m_auth, &Authenticator::authenticationSuccess, this,
             &Application::handleLoginSuccess);
@@ -118,4 +119,7 @@ void Application::updateUI()
     m_guildsModel->setViewMode(m_settings.guildsViewAsIcon()
                                    ? GuildsModel::ViewMode::Icon
                                    : GuildsModel::ViewMode::Text);
+    m_guildsModel->setViewIconDirection(m_settings.guildsIconsAsHorizontalDirection()
+                                   ? GuildsModel::ViewIconDirection::Horizontal
+                                   : GuildsModel::ViewIconDirection::Vertical);
 }

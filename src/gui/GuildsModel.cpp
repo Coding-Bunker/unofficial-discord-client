@@ -76,6 +76,17 @@ GuildsModel::ViewMode GuildsModel::viewMode() const noexcept
     return m_viewMode;
 }
 
+void GuildsModel::setViewIconDirection(GuildsModel::ViewIconDirection vdir)
+{
+    m_viewIconDirection = vdir;
+    emit viewIconDirectionChanged();
+}
+
+GuildsModel::ViewIconDirection GuildsModel::viewIconDirection () const noexcept
+{
+    return m_viewIconDirection;
+}
+
 void GuildsModel::updateGuildIcon()
 {
     if (m_viewMode == ViewMode::Icon) {

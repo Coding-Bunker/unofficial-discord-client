@@ -12,7 +12,9 @@ class GuildsModel : public QAbstractListModel
     Q_PROPERTY(int selected READ selected NOTIFY selectedChanged)
     Q_PROPERTY(ChannelsModel *channelsModel READ channelsModel CONSTANT)
     Q_PROPERTY(ViewMode viewMode READ viewMode NOTIFY viewModeChanged)
+    Q_PROPERTY(ViewIconDirection viewIconDirection READ viewIconDirection NOTIFY viewIconDirectionChanged)
     Q_ENUMS(ViewMode)
+    Q_ENUMS(ViewIconDirection)
     // clang-format on
 
   public:
@@ -38,11 +40,17 @@ class GuildsModel : public QAbstractListModel
     void setViewMode(ViewMode vm);
     ViewMode viewMode() const noexcept;
 
+    enum class ViewIconDirection { Horizontal, Vertical};
+
+    void setViewIconDirection(ViewIconDirection vdir);
+    ViewIconDirection viewIconDirection () const noexcept;
+
     void updateGuildIcon();
 
   signals:
     void selectedChanged();
     void viewModeChanged();
+    void viewIconDirectionChanged();
 
   public slots:
     void updateMessages();
@@ -52,4 +60,5 @@ class GuildsModel : public QAbstractListModel
     int m_selected{ -1 };
     ChannelsModel m_channelsModel;
     ViewMode m_viewMode;
+    ViewIconDirection m_viewIconDirection;
 };
