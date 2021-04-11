@@ -57,6 +57,15 @@ void ChannelsModel::select(int index)
     emit requestMessages(m_channels->at(idx).id());
 }
 
+void ChannelsModel::sendMsg(QString txt)
+{
+    if (m_selected == -1) {
+        return;
+    }
+
+    emit sendMessage(m_channels->at(m_selected).id(), txt);
+}
+
 int ChannelsModel::selected() const
 {
     return m_selected;

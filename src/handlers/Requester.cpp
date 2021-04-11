@@ -3,6 +3,7 @@
 #include "DiscordApi/DiscordAPI.hpp"
 
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QNetworkReply>
 
 Requester::Requester(QObject *parent) : QObject(parent) {}
@@ -58,6 +59,26 @@ void Requester::requestMessages(snowflake channelID)
         const auto r = qobject_cast<QNetworkReply *>(sender());
         r->deleteLater();
         emit messagesFinished(r->readAll());
+    });
+}
+
+void Requester::sendMessage(snowflake channelID, QString txt)
+{
+    QUrl url(DiscordAPI::sendMessage.arg(channelID));
+    QNetworkRequest msg(url);
+    msg.setRawHeader("authorization", m_token.toLatin1());
+    msg.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject data;
+    data["content"] = txt;
+    QJsonDocument doc(data);
+
+    const auto post = m_nam.post(msg, doc.toJson());
+    connect(post, &QNetworkReply::finished, this, [=]() {
+        if (post->error() != QNetworkReply::NoError) {
+            qDebug() << post->errorString();
+        }
+        post->deleteLater();
     });
 }
 

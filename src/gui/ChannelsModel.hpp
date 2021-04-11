@@ -27,6 +27,7 @@ class ChannelsModel : public QAbstractListModel
     QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void select(int index);
+    Q_INVOKABLE void sendMsg(QString txt);
 
     int selected() const;
     MessagesModel *msgModel();
@@ -37,6 +38,7 @@ class ChannelsModel : public QAbstractListModel
     void selectedChanged();
     void requestMessages(snowflake channelID);
     void msgModelChanged();
+    void sendMessage(snowflake channelID, QString txt);
 
   private:
     QList<Channel> *m_channels{ nullptr };

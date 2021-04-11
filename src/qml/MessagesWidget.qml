@@ -13,7 +13,12 @@ Rectangle {
         width: parent.width - 10
 
         ListView {
-            anchors.fill: parent
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+
             model: hmi.guildsModel.channelsModel.msgModel
             visible: hmi.guildModelVisible && hmi.guildsModel.selected !== -1
             delegate: Row {
@@ -31,6 +36,10 @@ Rectangle {
                     color: Material.foreground
                 }
             }
+        }
+
+        SendMessageWidget {
+            anchors.bottom: parent.bottom
         }
     }
 }

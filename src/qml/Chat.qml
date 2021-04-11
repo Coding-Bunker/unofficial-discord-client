@@ -27,15 +27,12 @@ Rectangle {
     }
 
     MessagesWidget {
-        id: msgWidget
-
         anchors {
             top: guildsBar.bottom
             right: parent.right
             left: channelsBar.right
             bottom: userInfo.top
         }
-
     }
 
     ChannelsBar {
