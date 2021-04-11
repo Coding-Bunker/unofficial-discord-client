@@ -20,6 +20,7 @@ class Requester : public QObject
 
   public slots:
     void requestMessages(snowflake channelID);
+    void sendMessage(snowflake channelID, QString txt);
 
   signals:
     void guildsFinished(QByteArray data);

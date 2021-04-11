@@ -95,6 +95,9 @@ void Application::handleGuildsFinished(const QByteArray &data)
     connect(m_guildsModel->channelsModel(), &ChannelsModel::requestMessages,
             &m_req, &Requester::requestMessages);
 
+    connect(m_guildsModel->channelsModel(), &ChannelsModel::sendMessage, &m_req,
+            &Requester::sendMessage);
+
     connect(&m_user, &User::messagesUpdated, m_guildsModel.get(),
             &GuildsModel::updateMessages);
 }

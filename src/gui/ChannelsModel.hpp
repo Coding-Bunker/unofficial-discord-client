@@ -38,6 +38,7 @@ class ChannelsModel : public QAbstractListModel
     void selectedChanged();
     void requestMessages(snowflake channelID);
     void msgModelChanged();
+    void sendMessage(snowflake channelID, QString txt);
 
   private:
     QList<Channel> *m_channels{ nullptr };

@@ -24,6 +24,7 @@ static const QString guildIcon = baseImageURL + QStringLiteral("/icons/%1/%2.png
 static const QString channels  = baseURL + QStringLiteral("/guilds/%1/channels");
 
 static const QString messages = baseURL + QStringLiteral("/channels/%1/messages");
+static const QString sendMessage = baseURL + QStringLiteral("/channels/%1/messages");
 
 namespace DiscordTags
 {

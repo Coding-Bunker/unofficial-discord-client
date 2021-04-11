@@ -59,7 +59,11 @@ void ChannelsModel::select(int index)
 
 void ChannelsModel::sendMsg(QString txt)
 {
-    qDebug() << txt;
+    if (m_selected == -1) {
+        return;
+    }
+
+    emit sendMessage(m_channels->at(m_selected).id(), txt);
 }
 
 int ChannelsModel::selected() const
