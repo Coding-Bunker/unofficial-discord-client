@@ -34,6 +34,7 @@ class Settings : public QObject
     void setParameter(int indexOfParam, int valueOfChoices);
 
     bool guildsViewAsIcon() const noexcept;
+    bool guildsIconsAsHorizontalDirection() const noexcept;
 
   private:
     const QString m_settingsFilename = "unofficial-discord-client";

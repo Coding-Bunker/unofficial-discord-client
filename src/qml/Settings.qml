@@ -24,6 +24,8 @@ Rectangle {
     }
 
     ListView {
+        id: lw
+
         anchors {
             top: title.bottom
             bottom: okButton.top
@@ -31,14 +33,16 @@ Rectangle {
 
         model: settingsModel
 
-        DelegateChooser {
+        delegate: DelegateChooser {
             id: chooser
 
             role: "typeRole"
 
             DelegateChoice {
                 roleValue: 0
+
                 Row {
+                    readonly property int listIdx: index
                     spacing: 5
 
                     Text {
@@ -52,13 +56,11 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                         currentIndex: startValueRole
                         onActivated: settingsModel.setParameter(
-                            settingsModel.currentIndex, index)
+                            parent.listIdx, index)
                     }
                 }
             }
         }
-
-        delegate: chooser
     }
 
     Button {

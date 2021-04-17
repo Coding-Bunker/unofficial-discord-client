@@ -7,7 +7,8 @@ namespace SettingsCategory
 const QString token  = "auth/token";
 const QString meInfo = "auth/meInfo";
 
-const QString guidsView = "UI/guildsView";
+const QString guildsView = "UI/guildsView";
+const QString guildsViewIconDirection = "UI/guildsViewIconDirection";
 
 } // namespace SettingsCategory
 
@@ -18,8 +19,15 @@ Settings::Settings(QObject *parent) : QObject(parent)
         { "text", "icon" },
         0,
         UserSettingPOD::ComboBox,
-        SettingsCategory::guidsView,
+        SettingsCategory::guildsView,
     });
+    m_parameters.push_back({
+       "Set guilds icons direction:",
+       { "vertical", "horizontal" },
+       0,
+       UserSettingPOD::ComboBox,
+       SettingsCategory::guildsViewIconDirection,
+   });
 }
 
 void Settings::loadSettings()
@@ -32,7 +40,8 @@ void Settings::loadSettings()
         m_meInfo = settings.value(SettingsCategory::meInfo).toByteArray();
     }
 
-    m_parameters[0].value = settings.value(SettingsCategory::guidsView).toInt();
+    m_parameters[0].value = settings.value(SettingsCategory::guildsView).toInt();
+    m_parameters[1].value = settings.value(SettingsCategory::guildsViewIconDirection).toInt();
 }
 
 void Settings::save() const
@@ -79,4 +88,9 @@ void Settings::setParameter(int indexOfParam, int valueOfChoices)
 bool Settings::guildsViewAsIcon() const noexcept
 {
     return m_parameters[0].value == 1; // TODO: Fix magic numbers.
+}
+
+bool Settings::guildsIconsAsHorizontalDirection() const noexcept
+{
+    return m_parameters[1].value == 1; // TODO: Fix magic numbers.
 }
