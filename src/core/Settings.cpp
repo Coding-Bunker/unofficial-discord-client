@@ -7,7 +7,7 @@ namespace SettingsCategory
 const QString token  = "auth/token";
 const QString meInfo = "auth/meInfo";
 
-const QString guildsView = "UI/guildsView";
+const QString guildsView              = "UI/guildsView";
 const QString guildsViewIconDirection = "UI/guildsViewIconDirection";
 
 } // namespace SettingsCategory
@@ -22,12 +22,12 @@ Settings::Settings(QObject *parent) : QObject(parent)
         SettingsCategory::guildsView,
     });
     m_parameters.push_back({
-       "Set guilds icons direction:",
-       { "vertical", "horizontal" },
-       0,
-       UserSettingPOD::ComboBox,
-       SettingsCategory::guildsViewIconDirection,
-   });
+        "Set guilds icons direction:",
+        { "vertical", "horizontal" },
+        0,
+        UserSettingPOD::ComboBox,
+        SettingsCategory::guildsViewIconDirection,
+    });
 }
 
 void Settings::loadSettings()
@@ -40,8 +40,10 @@ void Settings::loadSettings()
         m_meInfo = settings.value(SettingsCategory::meInfo).toByteArray();
     }
 
-    m_parameters[0].value = settings.value(SettingsCategory::guildsView).toInt();
-    m_parameters[1].value = settings.value(SettingsCategory::guildsViewIconDirection).toInt();
+    m_parameters[0].value =
+        settings.value(SettingsCategory::guildsView).toInt();
+    m_parameters[1].value =
+        settings.value(SettingsCategory::guildsViewIconDirection).toInt();
 }
 
 void Settings::save() const
