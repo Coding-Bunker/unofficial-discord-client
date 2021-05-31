@@ -16,7 +16,11 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a")
+if (MSVC)
+    add_compile_options(/W4 /wd4711 -experimental:external
+        -external:anglebrackets -external:W0)
+else()
 set(CMAKE_CXX_FLAGS_INIT
     "-Werror"
     "-Wall"
@@ -25,6 +29,7 @@ set(CMAKE_CXX_FLAGS_INIT
     "-Warray-bounds"
     "-Wdouble-promotion"
     "-Weffc++"
+    "-Wno-c++98-compat"
     "-Wextra"
     "-Wimplicit-fallthrough"
     "-Winit-self"
@@ -42,5 +47,6 @@ set(CMAKE_CXX_FLAGS_INIT
     "-Wstrict-overflow=5"
     "-Wtautological-compare"
     "-Wuninitialized")
+endif()
 
 add_subdirectory(src)
