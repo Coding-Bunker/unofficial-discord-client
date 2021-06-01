@@ -40,10 +40,10 @@ class GuildsModel : public QAbstractListModel
     void setViewMode(ViewMode vm);
     ViewMode viewMode() const noexcept;
 
-    enum class ViewIconDirection { Horizontal, Vertical};
+    enum class ViewIconDirection { Horizontal, Vertical };
 
     void setViewIconDirection(ViewIconDirection vdir);
-    ViewIconDirection viewIconDirection () const noexcept;
+    ViewIconDirection viewIconDirection() const noexcept;
 
     void updateGuildIcon();
 

@@ -82,7 +82,7 @@ void GuildsModel::setViewIconDirection(GuildsModel::ViewIconDirection vdir)
     emit viewIconDirectionChanged();
 }
 
-GuildsModel::ViewIconDirection GuildsModel::viewIconDirection () const noexcept
+GuildsModel::ViewIconDirection GuildsModel::viewIconDirection() const noexcept
 {
     return m_viewIconDirection;
 }
