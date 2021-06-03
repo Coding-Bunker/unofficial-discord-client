@@ -16,37 +16,15 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a")
 if (MSVC)
-    add_compile_options(/W4 /wd4711 -experimental:external
-        -external:anglebrackets -external:W0)
+    set(CMAKE_CXX_FLAGS "/W4 /wd4711 /wd4577 /experimental:external \
+        /external:anglebrackets /external:W0")
 else()
-set(CMAKE_CXX_FLAGS_INIT
-    "-Werror"
-    "-Wall"
-    "-Wextra"
-    "-Wpedantic"
-    "-Warray-bounds"
-    "-Wdouble-promotion"
-    "-Weffc++"
-    "-Wno-c++98-compat"
-    "-Wextra"
-    "-Wimplicit-fallthrough"
-    "-Winit-self"
-    "-Wfloat-equal"
-    "-Wformat=2"
-    "-Wmissing-include-dirs"
-    "-Wno-unused-const-variable"
-    "-Wno-unused-function"
-    "-Wnull-dereference"
-    "-Wparentheses"
-    "-Wpedantic"
-    "-Wshift-overflow"
-    "-Wshadow"
-    "-Wstrict-aliasing=1"
-    "-Wstrict-overflow=5"
-    "-Wtautological-compare"
-    "-Wuninitialized")
+
+set(CMAKE_CXX_FLAGS
+    "-Wall -Wextra -Wpedantic -Wdouble-promotion -Wimplicit-fallthrough \
+    -Winit-self -Wfloat-equal -Wformat=2 -Wmissing-include-dirs \
+    -Wnull-dereference -Wshadow -Wstrict-overflow=5 -Wtautological-compare")
 endif()
 
 add_subdirectory(src)
