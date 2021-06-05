@@ -45,7 +45,7 @@ void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error,
             if (obj.value("email").isArray()) {
                 const QJsonArray& emailResponses {obj.value("email").toArray()};
                 messageError += "On email: ";
-                for (const auto error : emailResponses) {
+                for (const auto& error : emailResponses) {
                     messageError += error.toString() + "\n";
                 }
             }
@@ -53,7 +53,7 @@ void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error,
                 const QJsonArray& passwordResponses {
                     obj.value("password").toArray()};
                 messageError += "On password: ";
-                for (const auto error : passwordResponses) {
+                for (const auto& error : passwordResponses) {
                     messageError += error.toString() + "\n";
                 }
             }

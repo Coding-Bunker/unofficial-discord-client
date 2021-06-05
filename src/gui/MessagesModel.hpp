@@ -24,5 +24,5 @@ class MessagesModel : public QAbstractListModel
     QHash<int, QByteArray> roleNames() const override;
 
   private:
-    QList<Message> *m_messages{ nullptr };
+    QList<Message>* m_messages{nullptr};
 };
