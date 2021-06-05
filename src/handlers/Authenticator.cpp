@@ -8,7 +8,7 @@
 #include <QNetworkReply>
 #include <QSettings>
 
-void Authenticator::requestLogin(QString& email, QString& pass, QString& twoFA)
+void Authenticator::requestLogin(QString &email, QString &pass, QString &twoFA)
 {
     QNetworkRequest req(DiscordAPI::login);
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -19,9 +19,9 @@ void Authenticator::requestLogin(QString& email, QString& pass, QString& twoFA)
     data["password"] = pass;
     QJsonDocument doc(data);
 
-    const auto* reply {m_nam.post(req, doc.toJson())};
+    const auto *reply{ m_nam.post(req, doc.toJson()) };
     connect(reply, &QNetworkReply::finished, this, [this, twoFA]() {
-        const auto r {qobject_cast<QNetworkReply *>(sender())};
+        const auto r{ qobject_cast<QNetworkReply *>(sender()) };
         r->deleteLater();
 
         if (r->error() != QNetworkReply::NetworkError::NoError) {
@@ -38,22 +38,25 @@ void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error,
     QString messageError = "";
 
     if (301 <= error && error <= 399) {
-        const auto& doc {QJsonDocument::fromJson(body.toLatin1())};
-        const auto& obj {doc.object()};
+        const auto &doc{ QJsonDocument::fromJson(body.toLatin1()) };
+        const auto &obj{ doc.object() };
 
         if (obj.value("email").isArray() || obj.value("password").isArray()) {
             if (obj.value("email").isArray()) {
-                const QJsonArray& emailResponses {obj.value("email").toArray()};
+                const QJsonArray &emailResponses{
+                    obj.value("email").toArray()
+                };
                 messageError += "On email: ";
-                for (const auto& error : emailResponses) {
+                for (const auto &error : emailResponses) {
                     messageError += error.toString() + "\n";
                 }
             }
             if (obj.value("password").isArray()) {
-                const QJsonArray& passwordResponses {
-                    obj.value("password").toArray()};
+                const QJsonArray &passwordResponses{
+                    obj.value("password").toArray()
+                };
                 messageError += "On password: ";
-                for (const auto& error : passwordResponses) {
+                for (const auto &error : passwordResponses) {
                     messageError += error.toString() + "\n";
                 }
             }
@@ -67,13 +70,13 @@ void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error,
 
 void Authenticator::handleLoginResponse(QString body, QString twoFA)
 {
-    const auto& doc {QJsonDocument::fromJson(body.toLatin1())};
-    const auto& obj {doc.object()};
+    const auto &doc{ QJsonDocument::fromJson(body.toLatin1()) };
+    const auto &obj{ doc.object() };
 
-    const auto& token  {obj.value("token").toString()};
-    const auto  mfa    {obj.value("mfa").toBool()};
-    const auto  sms    {obj.value("sms").toBool()};
-    const auto& ticket {obj.value("ticket").toString()};
+    const auto &token{ obj.value("token").toString() };
+    const auto mfa{ obj.value("mfa").toBool() };
+    const auto sms{ obj.value("sms").toBool() };
+    const auto &ticket{ obj.value("ticket").toString() };
 
     Q_UNUSED(sms) // TODO: handle sms
 
@@ -103,13 +106,13 @@ void Authenticator::request2FA(QString ticket, QString mfa)
     data["ticket"]           = ticket;
     QJsonDocument doc(data);
 
-    const auto* reply {m_nam.post(req, doc.toJson())};
+    const auto *reply{ m_nam.post(req, doc.toJson()) };
     connect(reply, &QNetworkReply::finished, this, [&]() {
-        const auto r {qobject_cast<QNetworkReply *>(sender())};
+        const auto r{ qobject_cast<QNetworkReply *>(sender()) };
         r->deleteLater();
-        const auto& doc {QJsonDocument::fromJson(r->readAll())};
-        const auto& obj {doc.object()};
-        m_token        = obj.value("token").toString();
+        const auto &doc{ QJsonDocument::fromJson(r->readAll()) };
+        const auto &obj{ doc.object() };
+        m_token = obj.value("token").toString();
         handlePersonInfo();
     });
 }
@@ -120,11 +123,11 @@ void Authenticator::handlePersonInfo()
     req.setRawHeader("authorization", m_token.toLatin1());
     req.setRawHeader("User-Agent", DiscordAPI::fakeBrowserUserAgent);
 
-    const auto* reply {m_nam.get(req)};
+    const auto *reply{ m_nam.get(req) };
     connect(reply, &QNetworkReply::finished, this, [&]() {
-        const auto r {qobject_cast<QNetworkReply *>(sender())};
+        const auto r{ qobject_cast<QNetworkReply *>(sender()) };
         r->deleteLater();
-        const auto& info {QJsonDocument::fromJson(r->readAll())};
+        const auto &info{ QJsonDocument::fromJson(r->readAll()) };
         emit saveSettings(m_token, info.toJson());
         emit authenticationSuccess(m_token, info);
     });

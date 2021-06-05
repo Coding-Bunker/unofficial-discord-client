@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setApplicationName("unofficial-discord-client");
     QGuiApplication::setOrganizationName("Coding Bunker");
     QGuiApplication::setApplicationVersion("0.0.1");
-   // QGuiApplication;
+    // QGuiApplication;
 
     QQuickStyle::setStyle("Material");
 
