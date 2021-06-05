@@ -5,44 +5,45 @@
 
 #include <QAbstractListModel>
 
-class ChannelsModel : public QAbstractListModel {
-  // clang-format off
+class ChannelsModel : public QAbstractListModel
+{
+    // clang-format off
     Q_OBJECT
     Q_PROPERTY(int selected READ selected NOTIFY selectedChanged)
     Q_PROPERTY(MessagesModel* msgModel READ msgModel NOTIFY msgModelChanged)
-  // clang-format on
+    // clang-format on
 
-public:
-  explicit ChannelsModel(QObject *parent = nullptr);
+  public:
+    explicit ChannelsModel(QObject *parent = nullptr);
 
-  void setChannels(QList<Channel> *c);
+    void setChannels(QList<Channel> *c);
 
-  int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-  QVariant data(const QModelIndex &index,
-                int role = Qt::DisplayRole) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index,
+                  int role = Qt::DisplayRole) const override;
 
-  enum Role { Name = Qt::UserRole + 1 };
+    enum Role { Name = Qt::UserRole + 1 };
 
-  QHash<int, QByteArray> roleNames() const override;
+    QHash<int, QByteArray> roleNames() const override;
 
-  Q_INVOKABLE void select(int index);
-  Q_INVOKABLE void sendMsg(QString txt);
+    Q_INVOKABLE void select(int index);
+    Q_INVOKABLE void sendMsg(QString txt);
 
-  int selected() const;
-  MessagesModel *msgModel();
+    int selected() const;
+    MessagesModel *msgModel();
 
-  void updateMessages();
+    void updateMessages();
 
-signals:
-  void selectedChanged();
-  void requestMessages(snowflake channelID);
-  void msgModelChanged();
-  void sendMessage(snowflake channelID, QString txt);
+  signals:
+    void selectedChanged();
+    void requestMessages(snowflake channelID);
+    void msgModelChanged();
+    void sendMessage(snowflake channelID, QString txt);
 
-private:
-  QList<Channel> *m_channels{nullptr};
-  int m_selected{-1};
-  MessagesModel m_msgModel;
+  private:
+    QList<Channel> *m_channels{ nullptr };
+    int m_selected{ -1 };
+    MessagesModel m_msgModel;
 
-  void resetSelected();
+    void resetSelected();
 };

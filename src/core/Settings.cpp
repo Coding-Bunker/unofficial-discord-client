@@ -34,7 +34,7 @@ void Settings::loadSettings()
 {
     QSettings settings(QSettings::Format::NativeFormat,
                        QSettings::Scope::UserScope, m_settingsFilename);
-    const auto& token {settings.value(SettingsCategory::token)};
+    const auto &token{ settings.value(SettingsCategory::token) };
     if (token.isValid() && !token.isNull()) {
         m_token  = token.toString();
         m_meInfo = settings.value(SettingsCategory::meInfo).toByteArray();
