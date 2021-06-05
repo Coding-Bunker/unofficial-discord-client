@@ -16,7 +16,7 @@ class Channel
     snowflake guildId() const;
     int position() const;
 
-    enum Type {
+    enum class Type {
         GUILD_TEXT,     // a text channel within a server
         DM,             // a direct message between users
         GUILD_VOICE,    // a voice channel within a server

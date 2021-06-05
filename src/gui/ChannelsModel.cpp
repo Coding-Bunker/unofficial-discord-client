@@ -44,9 +44,9 @@ void ChannelsModel::select(int index)
     m_selected = index;
     emit selectedChanged();
 
-    const auto pos = std::find_if(
+    const auto pos{ std::find_if(
         m_channels->begin(), m_channels->end(),
-        [&](const Channel &c) { return c.position() == m_selected; });
+        [&](const Channel &c) { return c.position() == m_selected; }) };
 
     if (pos == m_channels->end()) {
         qWarning() << Q_FUNC_INFO << "can't request messages for this channel";

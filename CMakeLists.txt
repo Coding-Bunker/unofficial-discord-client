@@ -20,11 +20,10 @@ if (MSVC)
     set(CMAKE_CXX_FLAGS "/W4 /wd4711 /wd4577 /experimental:external \
         /external:anglebrackets /external:W0")
 else()
-
-set(CMAKE_CXX_FLAGS
-    "-Wall -Wextra -Wpedantic -Wdouble-promotion -Wimplicit-fallthrough \
-    -Winit-self -Wfloat-equal -Wformat=2 -Wmissing-include-dirs \
-    -Wnull-dereference -Wshadow -Wstrict-overflow=5 -Wtautological-compare")
+    set(CMAKE_CXX_FLAGS
+        "-Wall -Wextra -Wpedantic -Wdouble-promotion -Wimplicit-fallthrough \
+        -Winit-self -Wfloat-equal -Wformat=2 -Wmissing-include-dirs \
+        -Wnull-dereference -Wshadow -Wstrict-overflow=5 -Wtautological-compare")
 endif()
 
 add_subdirectory(src)
