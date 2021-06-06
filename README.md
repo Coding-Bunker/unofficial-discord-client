@@ -26,3 +26,8 @@ build/src/bin/unofficial-discord-client
 ## Features
 
 - [x] Settings (Ctrl + S)
+- [] Voice, news and other types of channels
+- [] Mentions
+- [] Attachments
+- [] Reactions
+- [] Custom emojis
