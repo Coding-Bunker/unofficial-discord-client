@@ -34,8 +34,24 @@ void Guild::addChannel(Channel &&c)
     // FIXME: for now I just add text channel, should handle categories and
     // voice
 
-    if (c.type() == Channel::GUILD_TEXT) {
-        channels.push_back(c);
+    // Clang does not support "using enum" yet, so kludge here is needed
+    using Type = Channel::Type;
+    switch (c.type()) {
+        case Type::GUILD_TEXT:
+            channels.push_back(c);
+            break;
+        case Type::GROUP_DM:
+            break;
+        case Type::GUILD_CATEGORY:
+            break;
+        case Type::GUILD_NEWS:
+            break;
+        case Type::GUILD_STORE:
+            break;
+        case Type::GUILD_VOICE:
+            break;
+        case Type::DM:
+            break;
     }
 
     std::sort(channels.begin(), channels.end(),
