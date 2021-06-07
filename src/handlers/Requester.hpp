@@ -17,7 +17,8 @@ class Requester : public QObject
   public:
     void requestGuilds();
     void requestChannels(const QList<snowflake> &guildIDs);
-    void requestGuildsImages(const QList<std::pair<snowflake, QString>> &&items);
+    void
+    requestGuildsImages(const QList<std::pair<snowflake, QString>> &&items);
 
   public slots:
     void requestMessages(snowflake channelID);
