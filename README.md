@@ -1,6 +1,8 @@
 # unofficial-discord-client
 
-![Build](https://github.com/Coding-Bunker/unofficial-discord-client/workflows/Build/badge.svg)
+[![Build Linux](https://github.com/Coding-Bunker/unofficial-discord-client/actions/workflows/build-linux.yml/badge.svg)](https://github.com/Coding-Bunker/unofficial-discord-client/actions/workflows/build-linux.yml)
+[![Build W10](https://github.com/Coding-Bunker/unofficial-discord-client/actions/workflows/build-w10.yml/badge.svg)](https://github.com/Coding-Bunker/unofficial-discord-client/actions/workflows/build-w10.yml)
+[![Build MacOS](https://github.com/Coding-Bunker/unofficial-discord-client/actions/workflows/build-macos.yml/badge.svg)](https://github.com/Coding-Bunker/unofficial-discord-client/actions/workflows/build-macos.yml)
 
 # Description
 
