@@ -4,6 +4,9 @@
 #include "Types.hpp"
 
 #include <QJsonObject>
+#include <optional>
+
+using std::optional;
 
 class Channel
 {
@@ -11,10 +14,10 @@ class Channel
     void unmarshal(const QJsonObject &obj);
 
     snowflake id() const;
-    QString name() const;
+    optional<QString> name() const;
 
-    snowflake guildId() const;
-    int position() const;
+    optional<snowflake> guildId() const;
+    optional<int> position() const;
 
     enum class Type {
         GUILD_TEXT,     // a text channel within a server
@@ -27,6 +30,14 @@ class Channel
                      // own server
         GUILD_STORE, // a channel in which game developers can sell their game
                      // on Discord
+        GUILD_NEWS_THREAD =
+            10, // a temporary sub-channel within a GUILD_NEWS channel
+        GUILD_PUBLIC_THREAD, // a temporary sub-channel within a GUILD_TEXT
+                             // channel
+        GUILD_PRIVATE_THREAD, // a temporary sub-channel within a GUILD_TEXT
+                              // channel that is only viewable by those invited
+                              // and those with the MANAGE_THREADS permission
+        GUILD_STAGE_VOICE // a voice channel for hosting events with an audience
     };
 
     Type type() const;
@@ -34,11 +45,15 @@ class Channel
     QList<Message> messages;
 
   private:
+    /*Only the id and type of channel object is technically guranteed to return
+    values */
     snowflake m_id;
-    QString m_name;
-    bool m_nfsw;
-    snowflake m_guildId;
-    snowflake m_parentId;
-    int m_position;
+
+    optional<bool> m_nfsw;
+    optional<QString> m_name, m_topic;
+    optional<snowflake> m_guildId, m_parentId;
+    optional<int> m_position;
     Type m_type;
+    optional<snowflake> m_last_message_id;
+    optional<unsigned short> rate_limit_per_user, message_count, member_count;
 };
