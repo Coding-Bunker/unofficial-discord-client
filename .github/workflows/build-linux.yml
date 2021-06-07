@@ -1,0 +1,32 @@
+name: Build Linux
+
+on: [push, pull_request]
+
+jobs:
+  Build:
+    strategy:
+      matrix:
+        qt_version: [6.1.0]
+        platform: [ubuntu-latest]
+        arch: [x64, x86]
+      fail-fast: false
+    runs-on: ${{ matrix.platform }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Installing Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt_version }}
+          arch: ${{ matrix.qtarch }}
+          cached: 'false'
+
+      - name: Build
+        shell: bash
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build . --parallel $(nproc)
