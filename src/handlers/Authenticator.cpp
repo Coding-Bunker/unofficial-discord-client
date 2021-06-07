@@ -110,8 +110,8 @@ void Authenticator::request2FA(QString ticket, QString mfa)
     connect(reply, &QNetworkReply::finished, this, [&]() {
         const auto r{ qobject_cast<QNetworkReply *>(sender()) };
         r->deleteLater();
-        const auto &doc{ QJsonDocument::fromJson(r->readAll()) };
-        const auto &obj{ doc.object() };
+        const auto &docObj{ QJsonDocument::fromJson(r->readAll()) };
+        const auto &obj{ docObj.object() };
         m_token = obj.value("token").toString();
         handlePersonInfo();
     });
