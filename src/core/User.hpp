@@ -6,11 +6,17 @@
 #include <QVector>
 #include <QtDebug>
 
+<<<<<<< HEAD
 #include <optional>
 #include <utility>
 
 using std::optional;
 
+=======
+#include <utility>
+
+class QJsonArray;
+>>>>>>> 4ec4a79 (WIP)
 
 class User : public QObject
 {
