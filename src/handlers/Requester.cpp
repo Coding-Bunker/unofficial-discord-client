@@ -45,7 +45,7 @@ void Requester::requestChannels(const QList<snowflake> &guildIDs)
     }
 }
 
-void Requester::requestGuildsImages(QList<QPair<snowflake, QString>> &&items)
+void Requester::requestGuildsImages(const QList<std::pair<snowflake, QString>>&& items)
 {
     for (const auto &i : items) {
         if (i.second.isEmpty()) {
@@ -92,7 +92,7 @@ void Requester::sendMessage(snowflake channelID, QString txt)
     });
 }
 
-QNetworkReply *Requester::request(const QString &api)
+QNetworkReply const *Requester::request(const QString &api)
 {
     QUrl url{ api };
     QNetworkRequest req{ url };

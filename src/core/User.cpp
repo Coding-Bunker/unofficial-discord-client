@@ -41,9 +41,10 @@ QList<snowflake> User::guildIDs() const noexcept
     return ret;
 }
 
-QList<QPair<snowflake, QString>> User::pairsGuildIDandHashImg() noexcept
+using std::pair;
+QList<pair<snowflake, QString>> User::pairsGuildIDandHashImg() noexcept
 {
-    QList<QPair<snowflake, QString>> ret;
+    QList<pair<snowflake, QString>> ret;
     for (const auto &g : guilds) {
         ret.push_back(qMakePair<snowflake, QString>(g.id(), g.iconHash()));
     }
@@ -62,7 +63,7 @@ void User::setChannelsForGuild(const QByteArray &data)
             std::find_if(guilds.begin(), guilds.end(),
                          [&](const Guild &g) { return c.guildId() == g.id(); });
         if (it == guilds.end()) {
-            qWarning() << "guild id not found for channel " << c.name();
+            qWarning() << "guild id not found for channel " << *c.name();
             continue;
         }
 
