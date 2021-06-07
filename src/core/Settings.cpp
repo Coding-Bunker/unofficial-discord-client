@@ -34,16 +34,16 @@ void Settings::loadSettings()
 {
     QSettings settings(QSettings::Format::NativeFormat,
                        QSettings::Scope::UserScope, m_settingsFilename);
-    const auto &token{ settings.value(SettingsCategory::token) };
+    const auto &token{ settings[SettingsCategory::token) };
     if (token.isValid() && !token.isNull()) {
         m_token  = token.toString();
-        m_meInfo = settings.value(SettingsCategory::meInfo).toByteArray();
+        m_meInfo = settings[SettingsCategory::meInfo).toByteArray();
     }
 
     m_parameters[0].value =
-        settings.value(SettingsCategory::guildsView).toInt();
+        settings[SettingsCategory::guildsView).toInt();
     m_parameters[1].value =
-        settings.value(SettingsCategory::guildsViewIconDirection).toInt();
+        settings[SettingsCategory::guildsViewIconDirection).toInt();
 }
 
 void Settings::save() const
