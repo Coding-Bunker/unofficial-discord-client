@@ -66,7 +66,7 @@ void Requester::requestMessages(snowflake channelID)
 
 void Requester::sendMessage(snowflake channelID, QString txt)
 {
-    QUrl url(DiscordAPI::sendMessage.arg(channelID));
+    QUrl url(DiscordAPI::messages.arg(channelID));
     QNetworkRequest msg(url);
     msg.setRawHeader("authorization", m_token.toLatin1());
     msg.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
