@@ -32,8 +32,8 @@ class Channel
                      // on Discord
         GUILD_NEWS_THREAD =
             10, // a temporary sub-channel within a GUILD_NEWS channel
-        GUILD_PUBLIC_THREAD, // a temporary sub-channel within a GUILD_TEXT
-                             // channel
+        GUILD_PUBLIC_THREAD,  // a temporary sub-channel within a GUILD_TEXT
+                              // channel
         GUILD_PRIVATE_THREAD, // a temporary sub-channel within a GUILD_TEXT
                               // channel that is only viewable by those invited
                               // and those with the MANAGE_THREADS permission

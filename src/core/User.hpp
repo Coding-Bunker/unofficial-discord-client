@@ -5,7 +5,6 @@
 
 #include <QVector>
 #include <QtDebug>
-
 #include <utility>
 
 class QJsonArray;
