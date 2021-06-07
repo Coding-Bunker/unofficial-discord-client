@@ -9,11 +9,11 @@ class Requester : public QObject
     Q_OBJECT
 
   public:
-    explicit Requester(QObject *parent = nullptr);
-
     void setToken(const QString &token);
 
   public:
+    void initWebsocket();
+
     void requestGuilds();
     void requestChannels(const QList<snowflake> &guildIDs);
     void requestGuildsImages(QList<QPair<snowflake, QString>> &&items);
@@ -31,6 +31,7 @@ class Requester : public QObject
   private:
     QString m_token;
     QNetworkAccessManager m_nam;
+    QString m_websocketAddress;
 
     QNetworkReply *request(const QString &api);
 };

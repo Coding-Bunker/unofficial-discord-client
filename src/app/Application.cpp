@@ -75,6 +75,7 @@ void Application::handleLoginSuccess(const QString &token,
     m_req.setToken(token);
     m_user.populate(meInfo);
     m_req.requestGuilds();
+    m_req.initWebsocket();
 }
 
 void Application::handleLoginFailed(const QString &errorNumber,

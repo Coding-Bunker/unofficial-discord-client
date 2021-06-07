@@ -26,7 +26,7 @@ static const QString channels  = baseURL + QStringLiteral("/guilds/%1/channels")
 static const QString messages       = baseURL + QStringLiteral("/channels/%1/messages");
 
 static const QString gatewayVersion = QStringLiteral("9");
-static const QString gateway        = QStringLiteral("/gateway");
+static const QString gateway        = baseURL + QStringLiteral("/gateway");
 
 namespace DiscordTags
 {

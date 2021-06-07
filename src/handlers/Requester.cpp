@@ -6,11 +6,21 @@
 #include <QJsonObject>
 #include <QNetworkReply>
 
-Requester::Requester(QObject *parent) : QObject(parent) {}
-
 void Requester::setToken(const QString &token)
 {
     m_token = token;
+}
+
+void Requester::initWebsocket()
+{
+    const auto *reply{ request(DiscordAPI::gateway) };
+    connect(reply, &QNetworkReply::finished, this, [&]() {
+        const auto r{ qobject_cast<QNetworkReply *>(sender()) };
+        r->deleteLater();
+        const auto doc     = QJsonDocument::fromJson(r->readAll());
+        const auto obj     = doc.object();
+        m_websocketAddress = obj.value("url").toString();
+    });
 }
 
 void Requester::requestGuilds()
@@ -57,8 +67,6 @@ void Requester::requestMessages(snowflake channelID)
     const auto *reply{ request(DiscordAPI::messages.arg(channelID)) };
     connect(reply, &QNetworkReply::finished, this, [&]() {
         const auto r{ qobject_cast<QNetworkReply *>(sender()) };
-        const auto &tmp{ QJsonDocument::fromJson(r->readAll()) };
-        qDebug().noquote() << tmp.toJson(QJsonDocument::Indented);
         r->deleteLater();
         emit messagesFinished(r->readAll());
     });
@@ -89,5 +97,6 @@ QNetworkReply *Requester::request(const QString &api)
     QUrl url{ api };
     QNetworkRequest req{ url };
     req.setRawHeader("authorization", m_token.toLatin1());
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     return m_nam.get(req);
 }
