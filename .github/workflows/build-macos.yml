@@ -1,4 +1,4 @@
-name: Build
+name: Build MacOS
 
 on: [push, pull_request]
 
@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         qt_version: [6.1.0]
-        platform: [ubuntu-20.04, windows-latest, macos-latest]
+        platform: [macos-latest]
         arch: [x64]
       fail-fast: false
     runs-on: ${{ matrix.platform }}
@@ -29,4 +29,4 @@ jobs:
           mkdir build
           cd build
           cmake ..
-          cmake --build .
+          cmake --build . --parallel $(nproc)
