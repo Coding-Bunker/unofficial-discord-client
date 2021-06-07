@@ -45,7 +45,8 @@ void Requester::requestChannels(const QList<snowflake> &guildIDs)
     }
 }
 
-void Requester::requestGuildsImages(const QList<std::pair<snowflake, QString>>&& items)
+void Requester::requestGuildsImages(
+    const QList<std::pair<snowflake, QString>> &&items)
 {
     for (const auto &i : items) {
         if (i.second.isEmpty()) {
