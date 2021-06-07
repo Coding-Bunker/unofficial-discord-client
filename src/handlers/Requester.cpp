@@ -45,8 +45,12 @@ void Requester::requestChannels(const QList<snowflake> &guildIDs)
     }
 }
 
+<<<<<<< HEAD
 void Requester::requestGuildsImages(
     const QList<std::pair<snowflake, QString>> &&items)
+=======
+void Requester::requestGuildsImages(const QList<std::pair<snowflake, QString>>&& items)
+>>>>>>> 4ec4a79 (WIP)
 {
     for (const auto &i : items) {
         if (i.second.isEmpty()) {
@@ -68,6 +72,11 @@ void Requester::requestMessages(snowflake channelID)
     const auto *reply{ request(DiscordAPI::messages.arg(channelID)) };
     connect(reply, &QNetworkReply::finished, this, [&]() {
         const auto r{ qobject_cast<QNetworkReply *>(sender()) };
+<<<<<<< HEAD
+=======
+        //const auto &tmp{ QJsonDocument::fromJson(r->readAll()) };
+        //qDebug().noquote() << tmp.toJson(QJsonDocument::Indented);
+>>>>>>> 4ec4a79 (WIP)
         r->deleteLater();
         emit messagesFinished(r->readAll());
     });
