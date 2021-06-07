@@ -3,6 +3,7 @@
 #include "core/Types.hpp"
 
 #include <QNetworkAccessManager>
+#include <utility>
 
 class Requester : public QObject
 {
@@ -16,7 +17,7 @@ class Requester : public QObject
   public:
     void requestGuilds();
     void requestChannels(const QList<snowflake> &guildIDs);
-    void requestGuildsImages(QList<QPair<snowflake, QString>> &&items);
+    void requestGuildsImages(const QList<std::pair<snowflake, QString>> &&items);
 
   public slots:
     void requestMessages(snowflake channelID);
@@ -32,5 +33,5 @@ class Requester : public QObject
     QString m_token;
     QNetworkAccessManager m_nam;
 
-    QNetworkReply *request(const QString &api);
+    QNetworkReply const *request(const QString &api);
 };

@@ -27,8 +27,8 @@ QVariant ChannelsModel::data(const QModelIndex &index, int role) const
         return {};
     }
 
-    if (role == Role::Name) {
-        return m_channels->at(index.row()).name();
+    if (role == Role::Name && m_channels->at(index.row()).name()) {
+        return m_channels->at(index.row()).name().value();
     }
 
     return {};
