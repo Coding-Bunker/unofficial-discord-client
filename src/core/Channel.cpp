@@ -38,7 +38,11 @@ void Channel::unmarshal(const QJsonObject &obj)
 /*
 bool key_exists(const QJsonObject &k, QString &l)
 {
+<<<<<<< HEAD
     return !k[l).isNull();
+=======
+    return !k.value(l).isNull();
+>>>>>>> 4ec4a79 (WIP)
 }*/
 
 >>>>>>> b282813 (Add preliminary support for attachments and roles.)
