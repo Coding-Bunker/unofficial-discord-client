@@ -3,7 +3,6 @@
 void Channel::unmarshal(const QJsonObject &obj)
 {
     // clazy:excludeall=qt4-qstring-from-array
-<<<<<<< HEAD
     m_id       = obj[QStringLiteral("id")].toString().toULongLong();
     m_name     = obj[QStringLiteral("name")].toString();
     m_nfsw     = obj[QStringLiteral("nfwm")].toBool();
@@ -20,32 +19,6 @@ void Channel::unmarshal(const QJsonObject &obj)
     member_count  = obj[QStringLiteral("member_count")].toString().toUShort();
 }
 
-=======
-    m_id                = obj["id"].toString().toULongLong();
-    m_name              = obj["name"].toString();
-    m_nfsw              = obj["nfwm"].toBool();
-    m_parentId          = obj["parent_id"].toString().toULongLong();
-    m_guildId           = obj["guild_id"].toString().toULongLong();
-    m_position          = obj["position"].toInt();
-    m_topic             = obj["topic"].toString();
-    m_last_message_id   = obj["last_message_id"].toString().toULongLong();
-    rate_limit_per_user = obj["rate_limit_per_user"].toString().toUShort();
-    m_type              = static_cast<Type>(obj["type"].toInt());
-    message_count       = obj["message_count"].toString().toUShort();
-    member_count        = obj["member_count"].toString().toUShort();
-}
-
-/*
-bool key_exists(const QJsonObject &k, QString &l)
-{
-<<<<<<< HEAD
-    return !k[l).isNull();
-=======
-    return !k.value(l).isNull();
->>>>>>> 4ec4a79 (WIP)
-}*/
-
->>>>>>> b282813 (Add preliminary support for attachments and roles.)
 snowflake Channel::id() const
 {
     return m_id;
