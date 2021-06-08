@@ -6,11 +6,11 @@
 
 Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
 {
-    ctx->setContextProperty("qtVersion", QT_VERSION_STR);
-    ctx->setContextProperty("hmi", this);
-    ctx->setContextProperty("auth", &m_auth);
-    ctx->setContextProperty("user", &m_user);
-    ctx->setContextProperty("settingsModel", &m_settingsModel);
+    ctx->setContextProperty(QStringLiteral("qtVersion"), QT_VERSION_STR);
+    ctx->setContextProperty(QStringLiteral("hmi"), this);
+    ctx->setContextProperty(QStringLiteral("auth"), &m_auth);
+    ctx->setContextProperty(QStringLiteral("user"), &m_user);
+    ctx->setContextProperty(QStringLiteral("settingsModel"), &m_settingsModel);
 
     qmlRegisterUncreatableType<GuildsModel>("ui", 1, 0, "ViewMode", {});
     qmlRegisterUncreatableType<GuildsModel>("ui", 1, 0, "ViewIconDirection",
@@ -34,9 +34,10 @@ Application::Application(QQmlContext *ctx, QObject *parent) : QObject(parent)
     connect(&m_req, &Requester::channelFinished,
             [&](const QByteArray &data) { m_user.setChannelsForGuild(data); });
 
-    connect(&m_req, &Requester::messagesFinished, this, [&](QByteArray data) {
-        m_user.setMessagesForChannel(m_guildsModel->selectedID(), data);
-    });
+    connect(&m_req, &Requester::messagesFinished, this,
+            [&](const QByteArray &data) {
+                m_user.setMessagesForChannel(m_guildsModel->selectedID(), data);
+            });
 }
 
 bool Application::guildModelVisible() const

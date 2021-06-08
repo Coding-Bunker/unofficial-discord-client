@@ -1,27 +1,39 @@
 #include "Guild.hpp"
 
+#include <QJsonArray>
 #include <QJsonObject>
+#include <utility>
 
 void Guild::unmarshal(const QJsonObject &obj)
 {
-    m_id       = obj.value("id").toString().toULongLong();
-    m_name     = obj.value("name").toString();
-    m_iconHash = obj.value("icon").toString();
-}
+    Guild_Base::unmarshal(obj);
+    only_mentioned =
+        obj[QStringLiteral("default_message_notifications")].toInt();
+    m_mfa_required = obj[QStringLiteral("mfa_level")].toInt();
+    if (!obj[QStringLiteral("banner")].isNull())
+        m_bannerhash = obj[QStringLiteral("banner")].toString();
+    if (!obj[QStringLiteral("vanity_url")].isNull())
+        m_vanity_url = obj[QStringLiteral("vanity_url")].toString();
+    m_nsfwlvl =
+        static_cast<NSFW_level>(obj[QStringLiteral("nsfw_level")].toInt());
+    m_explilvl = static_cast<Explicit_Filter_level>(
+        obj[QStringLiteral("explicit_content_filter")].toInt());
+    m_verilvl =
+        static_cast<Veri_level>(obj[QStringLiteral("mfa_level")].toInt());
+    m_public_updates_channel_id =
+        obj[QStringLiteral("public_updates_channel_id")]
+            .toString()
+            .toULongLong();
+    m_preferredlocale = obj[QStringLiteral("preferred_locale")].toString();
 
-snowflake Guild::id() const noexcept
-{
-    return m_id;
-}
-
-QString Guild::name() const noexcept
-{
-    return m_name;
-}
-
-QString Guild::iconHash() const noexcept
-{
-    return m_iconHash;
+    m_roles.reserve(obj[QStringLiteral("roles")].toArray().size());
+    auto tmp{ obj[QStringLiteral("roles")].toArray() };
+    for (const auto &&f : std::as_const(tmp)) {
+        const auto &&e{ f.toObject() };
+        Role j;
+        j.unmarshal(e);
+        m_roles.emplace_back(j);
+    }
 }
 
 const QByteArray &Guild::icondata() const noexcept
@@ -51,6 +63,14 @@ void Guild::addChannel(Channel &&c)
         case Type::GUILD_VOICE:
             break;
         case Type::DM:
+            break;
+        case Type::GUILD_NEWS_THREAD:
+            break;
+        case Type::GUILD_PUBLIC_THREAD:
+            break;
+        case Type::GUILD_PRIVATE_THREAD:
+            break;
+        case Type::GUILD_STAGE_VOICE:
             break;
     }
 
@@ -85,12 +105,12 @@ snowflake Guild::public_updates_channel_id() const
     return m_public_updates_channel_id;
 }
 
-const QString& Guild::splashHash() const
+const QString &Guild::splashHash() const
 {
     return m_splashHash;
 }
 
-const QString& Guild::preferredlocale() const
+const QString &Guild::preferredlocale() const
 {
     return m_preferredlocale;
 }
@@ -115,12 +135,12 @@ snowflake Guild::ownerid() const
     return m_ownerid;
 }
 
-const QString& Guild::desc() const
+const QString &Guild::desc() const
 {
     return m_desc;
 }
 
-const QString& Guild::vanity_url() const
+const QString &Guild::vanity_url() const
 {
     return m_vanity_url;
 }
@@ -140,7 +160,7 @@ bool Guild::is_only_mentioned() const
     return only_mentioned;
 }
 
-const QVariantList& Guild::roles() const
+const QVariantList &Guild::roles() const
 {
     return m_roles;
 }

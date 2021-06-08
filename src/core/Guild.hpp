@@ -10,16 +10,115 @@ enum class NSFW_level : unsigned char {
     Age_Restricted
 };
 enum class Veri_level : unsigned char {
-    None, Verified_Email, Five_Minutes, Ten_Minutes, Verified_PhoneNum
+    None,
+    Verified_Email,
+    Five_Minutes,
+    Ten_Minutes,
+    Verified_PhoneNum
 };
 enum class Explicit_Filter_level : unsigned char {
-    None, Without_Roles, Everyone
+    None,
+    Without_Roles,
+    Everyone
 };
 
-class Guild
+#include <QDateTime>
+#include <QMap>
+#include <optional>
+#include <utility>
+
+enum class NSFW_level : unsigned char {
+    Default,
+    Explicit,
+    Safe,
+    Age_Restricted
+};
+enum class Veri_level : unsigned char {
+    None,
+    Verified_Email,
+    Five_Minutes,
+    Ten_Minutes,
+    Verified_PhoneNum
+};
+enum class Explicit_Filter_level : unsigned char {
+    None,
+    Without_Roles,
+    Everyone
+};
+
+enum class Guild_Features : unsigned char {
+    Animated_Guild_Icon, // guild has access to set an animated guild icon
+    Banner,              // guild has access to set a guild banner image
+    Commerce,  // guild has access to use commerce features (i.e. create
+               // store channels)
+    Community, // guild can enable welcome screen, Membership Screening, stage
+               // channels and discovery, and receives community updates
+    Discoverable,        // guild is able to be discovered in the directory
+    Featurable,          // guild is able to be featured in the directory
+    Invite_Splash,       // guild has access to set an invite splash background
+    Member_Verification, // guild has enabled Membership
+                         // Screening
+    News_Channels,       // guild has access to create news channels
+    Partnered,           //	guild is partnered
+    Previewable,         // guild can be previewed before joining via Membership
+                         // Screening or the directory
+    Vanity_Url,          // guild has access to set a vanity URL
+    Verified,            //	guild is verified
+    VIP_Higher_Voice_Bitrate, // guild has access to set 384kbps bitrate in
+                              // voice (previously VIP voice servers)
+    Welcome_Screen,           // guild has enabled the welcome screen
+    Ticketed_Events,          //	guild has enabled ticketed events
+    Monetization,             // guild has enabled monetization
+    More_Stickers,            // guild has increased custom sticker slots
+};
+
+using g = Guild_Features;
+const QMap<const char *, Guild_Features> guild_features_map{
+    { "ANIMATED_ICON", g::Animated_Guild_Icon },
+    { "BANNER", g::Banner },
+    { "COMMERCE", g::Commerce },
+    { "COMMUNITY", g::Community },
+    { "DISCOVERABLE", g::Discoverable },
+    { "FEATURABLE", g::Featurable },
+    { "INVITE_SPLASH", g::Invite_Splash },
+    { "MEMBER_VERIFICATION_GATE_ENABLED", g::Member_Verification },
+    { "NEWS", g::News_Channels },
+    { "PARTNERED", g::Partnered },
+    { "PREVIEW_ENABLED", g::Previewable },
+    { "VANITY_URL", g::Vanity_Url },
+    { "VERIFIED", g::Verified },
+    { "VIP_REGIONS", g::VIP_Higher_Voice_Bitrate },
+    { "WELCOME_SCREEN_ENABLED", g::Welcome_Screen },
+    { "TICKETED_EVENTS_ENABLED", g::Ticketed_Events },
+    { "MONETIZATION_ENABLED", g::Monetization },
+    { "MORE_STICKERS", g::More_Stickers },
+};
+
+class Guild_Base
 {
+    // Common fields returned in both guild and guild preview objects
+    snowflake m_id;
+    QString m_name, m_iconHash, m_splash, m_discovery_splash, m_description;
+    QList<Emoji> m_custom_emojis;
+    QList<Guild_Features> m_features;
+
   public:
-    void unmarshal(const QJsonObject &obj);
+    virtual void unmarshal(const QJsonObject &o)
+    {
+        unmarshal(std::move(o));
+    }
+    void unmarshal(const QJsonObject &&);
+    snowflake id() const;
+    const QString &name() const;
+    QString iconHash() const;
+    const QString &splash() const;
+    const QString &discovery_splash() const;
+    const QString &description() const;
+    const QList<Emoji> &custom_emojis() const;
+    const QList<Guild_Features> &features() const;
+};
+
+using std::optional;
 
     snowflake id() const noexcept;
     QString name() const noexcept;
@@ -34,25 +133,28 @@ class Guild
     void setIconBase64(QByteArray &&data);
 
     QList<Channel> channels;
+<<<<<<< HEAD
+=======
 
-    void setBannerhash(const QString& newBannerhash);
+>>>>>>> 74ff62e (Add preliminary support for attachments and roles.)
+    void setBannerhash(const QString &newBannerhash);
 
     snowflake public_updates_channel_id() const;
-    const QString& splashHash() const;
-    const QString& preferredlocale() const;
+    const QString &splashHash() const;
+    const QString &preferredlocale() const;
     NSFW_level nsfwlvl() const;
 
     snowflake mfalvl() const;
     void setMfalvl(snowflake newMfalvl);
 
     snowflake ownerid() const;
-    const QString& desc() const;
-    const QString& vanity_url() const;
+    const QString &desc() const;
+    const QString &vanity_url() const;
     Veri_level verilvl() const;
     Explicit_Filter_level explilvl() const;
     bool is_only_mentioned() const;
 
-    const QVariantList& roles() const;
+    const QVariantList &roles() const;
 
   private:
     // Guranteed members to be returned in guild object

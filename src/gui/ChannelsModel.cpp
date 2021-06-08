@@ -27,8 +27,8 @@ QVariant ChannelsModel::data(const QModelIndex &index, int role) const
         return {};
     }
 
-    if (role == Role::Name) {
-        return m_channels->at(index.row()).name();
+    if (role == Role::Name && m_channels->at(index.row()).name()) {
+        return m_channels->at(index.row()).name().value();
     }
 
     return {};
@@ -44,6 +44,7 @@ void ChannelsModel::select(int index)
     m_selected = index;
     emit selectedChanged();
 
+    // clazy:excludeall=detaching-member
     const auto pos{ std::find_if(
         m_channels->begin(), m_channels->end(),
         [&](const Channel &c) { return c.position() == m_selected; }) };
@@ -57,7 +58,7 @@ void ChannelsModel::select(int index)
     emit requestMessages(m_channels->at(idx).id());
 }
 
-void ChannelsModel::sendMsg(QString txt)
+void ChannelsModel::sendMsg(QString &txt)
 {
     if (m_selected == -1) {
         return;

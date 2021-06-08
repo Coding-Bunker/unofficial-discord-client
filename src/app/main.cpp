@@ -7,11 +7,12 @@
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication::setApplicationName("unofficial-discord-client");
-    QGuiApplication::setOrganizationName("Coding Bunker");
-    QGuiApplication::setApplicationVersion("0.0.1");
+    QGuiApplication::setApplicationName(
+        QStringLiteral("unofficial-discord-client"));
+    QGuiApplication::setOrganizationName(QStringLiteral("Coding Bunker"));
+    QGuiApplication::setApplicationVersion(QStringLiteral("0.0.1"));
 
-    QQuickStyle::setStyle("Material");
+    QQuickStyle::setStyle(QStringLiteral("Material"));
 
     QGuiApplication app(argc, argv);
 
@@ -21,7 +22,7 @@ int main(int argc, char *argv[])
 
     Application a(engine.rootContext());
 
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl &url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject *obj, const QUrl &objUrl) {

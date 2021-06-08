@@ -1,11 +1,20 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+//import "Menubar" as Private
 
 ApplicationWindow {
     width: 640
     height: 480
     visible: true
+
+    // Kludge
+    Loader {
+        id: kludge
+        source: "Menubar.qml"
+    }
+
+    menuBar: kludge.item
 
     Shortcut {
         sequence: StandardKey.Quit
