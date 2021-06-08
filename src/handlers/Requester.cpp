@@ -19,7 +19,7 @@ void Requester::initWebsocket()
         r->deleteLater();
         const auto doc     = QJsonDocument::fromJson(r->readAll());
         const auto obj     = doc.object();
-        m_websocketAddress = obj.value("url").toString();
+        m_websocketAddress = obj["url"].toString();
     });
 }
 
