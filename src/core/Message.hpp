@@ -12,6 +12,10 @@
 
 using std::optional;
 
+#include <optional>
+
+using std::optional;
+
 class Message
 {
   public:
