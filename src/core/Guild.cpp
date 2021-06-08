@@ -79,3 +79,68 @@ void Guild::setIconBase64(QByteArray &&data)
 {
     m_icondata = data;
 }
+
+snowflake Guild::public_updates_channel_id() const
+{
+    return m_public_updates_channel_id;
+}
+
+const QString& Guild::splashHash() const
+{
+    return m_splashHash;
+}
+
+const QString& Guild::preferredlocale() const
+{
+    return m_preferredlocale;
+}
+
+NSFW_level Guild::nsfwlvl() const
+{
+    return m_nsfwlvl;
+}
+
+snowflake Guild::mfalvl() const
+{
+    return m_mfalvl;
+}
+
+void Guild::setMfalvl(snowflake newMfalvl)
+{
+    m_mfalvl = newMfalvl;
+}
+
+snowflake Guild::ownerid() const
+{
+    return m_ownerid;
+}
+
+const QString& Guild::desc() const
+{
+    return m_desc;
+}
+
+const QString& Guild::vanity_url() const
+{
+    return m_vanity_url;
+}
+
+Veri_level Guild::verilvl() const
+{
+    return m_verilvl;
+}
+
+Explicit_Filter_level Guild::explilvl() const
+{
+    return m_explilvl;
+}
+
+bool Guild::is_only_mentioned() const
+{
+    return only_mentioned;
+}
+
+const QVariantList& Guild::roles() const
+{
+    return m_roles;
+}

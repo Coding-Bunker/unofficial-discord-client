@@ -6,7 +6,7 @@
 #include <QVector>
 #include <QtDebug>
 
-class QJsonArray;
+using std::optional;
 
 class User : public QObject
 {
