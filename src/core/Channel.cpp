@@ -20,7 +20,11 @@ void Channel::unmarshal(const QJsonObject &obj)
 /*
 bool key_exists(const QJsonObject &k, QString &l)
 {
+<<<<<<< HEAD
     return !k[l).isNull();
+=======
+    return !k.value(l).isNull();
+>>>>>>> 2d0b1ee5ce0a55777d3de9e1449fa0f809496b37
 }*/
 
 snowflake Channel::id() const
