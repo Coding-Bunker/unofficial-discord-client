@@ -1,9 +1,15 @@
 #pragma once
 
 #include "Types.hpp"
+#include "role.hpp"
+#include "Attachment.hpp"
 
 #include <QDateTime>
 #include <QJsonObject>
+
+#include <optional>
+
+using std::optional;
 
 class Message
 {
@@ -35,7 +41,7 @@ class Message
         GUILD_INVITE_REMINDER
     };
 
-    snowflake guildID() const;
+    optional<snowflake> guildID() const;
 
     snowflake channelID() const;
 
@@ -45,12 +51,23 @@ class Message
 
     QString author() const;
 
+    snowflake id() const;
+    const QDateTime& edited_timestamp() const;
+    Type type() const;
+    bool getTts() const;
+    bool getMentions_all() const;
+    const QList<Role>& getMentioned_roles() const;
+    const QList<Attachment>& getAttachments() const;
+
   private:
     snowflake m_id;
     snowflake m_channelID;
-    snowflake m_guildID;
+    optional<snowflake> m_guildID;
     QString m_author;
     QString m_content;
-    QDateTime m_timestamp;
+    QDateTime m_timestamp, m_edited_timestamp;
     Type m_type;
+    bool tts, mentions_all;
+    QList<Role> mentioned_roles;
+    QList<Attachment> attachments;
 };
