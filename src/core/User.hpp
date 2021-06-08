@@ -5,12 +5,10 @@
 
 #include <QVector>
 #include <QtDebug>
-
 #include <optional>
 #include <utility>
 
 using std::optional;
-
 
 class User : public QObject
 {
