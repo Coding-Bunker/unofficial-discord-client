@@ -85,12 +85,12 @@ snowflake Guild::public_updates_channel_id() const
     return m_public_updates_channel_id;
 }
 
-const QString& Guild::splashHash() const
+const QString &Guild::splashHash() const
 {
     return m_splashHash;
 }
 
-const QString& Guild::preferredlocale() const
+const QString &Guild::preferredlocale() const
 {
     return m_preferredlocale;
 }
@@ -115,12 +115,12 @@ snowflake Guild::ownerid() const
     return m_ownerid;
 }
 
-const QString& Guild::desc() const
+const QString &Guild::desc() const
 {
     return m_desc;
 }
 
-const QString& Guild::vanity_url() const
+const QString &Guild::vanity_url() const
 {
     return m_vanity_url;
 }
@@ -140,7 +140,7 @@ bool Guild::is_only_mentioned() const
     return only_mentioned;
 }
 
-const QVariantList& Guild::roles() const
+const QVariantList &Guild::roles() const
 {
     return m_roles;
 }

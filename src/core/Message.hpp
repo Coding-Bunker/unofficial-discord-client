@@ -1,12 +1,11 @@
 #pragma once
 
+#include "Attachment.hpp"
 #include "Types.hpp"
 #include "role.hpp"
-#include "Attachment.hpp"
 
 #include <QDateTime>
 #include <QJsonObject>
-
 #include <optional>
 
 using std::optional;
@@ -46,12 +45,12 @@ class Message
     QString author() const;
 
     snowflake id() const;
-    const QDateTime& edited_timestamp() const;
+    const QDateTime &edited_timestamp() const;
     Type type() const;
     bool getTts() const;
     bool getMentions_all() const;
-    const QList<Role>& getMentioned_roles() const;
-    const QList<Attachment>& getAttachments() const;
+    const QList<Role> &getMentioned_roles() const;
+    const QList<Attachment> &getAttachments() const;
 
   private:
     snowflake m_id;

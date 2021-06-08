@@ -10,10 +10,16 @@ enum class NSFW_level : unsigned char {
     Age_Restricted
 };
 enum class Veri_level : unsigned char {
-    None, Verified_Email, Five_Minutes, Ten_Minutes, Verified_PhoneNum
+    None,
+    Verified_Email,
+    Five_Minutes,
+    Ten_Minutes,
+    Verified_PhoneNum
 };
 enum class Explicit_Filter_level : unsigned char {
-    None, Without_Roles, Everyone
+    None,
+    Without_Roles,
+    Everyone
 };
 
 class Guild
@@ -35,24 +41,24 @@ class Guild
 
     QList<Channel> channels;
 
-    void setBannerhash(const QString& newBannerhash);
+    void setBannerhash(const QString &newBannerhash);
 
     snowflake public_updates_channel_id() const;
-    const QString& splashHash() const;
-    const QString& preferredlocale() const;
+    const QString &splashHash() const;
+    const QString &preferredlocale() const;
     NSFW_level nsfwlvl() const;
 
     snowflake mfalvl() const;
     void setMfalvl(snowflake newMfalvl);
 
     snowflake ownerid() const;
-    const QString& desc() const;
-    const QString& vanity_url() const;
+    const QString &desc() const;
+    const QString &vanity_url() const;
     Veri_level verilvl() const;
     Explicit_Filter_level explilvl() const;
     bool is_only_mentioned() const;
 
-    const QVariantList& roles() const;
+    const QVariantList &roles() const;
 
   private:
     // Guranteed members to be returned in guild object
