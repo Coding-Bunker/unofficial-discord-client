@@ -1,7 +1,5 @@
 #include "role.hpp"
 
-
-
 void Role::unmarshal(const QJsonObject &obj)
 {
     // clazy:excludeall=qt4-qstring-from-array
@@ -29,12 +27,12 @@ snowflake Role::id() const
     return m_id;
 }
 
-const QString& Role::name() const
+const QString &Role::name() const
 {
     return m_name;
 }
 
-const QString& Role::permissions() const
+const QString &Role::permissions() const
 {
     return m_permissions;
 }

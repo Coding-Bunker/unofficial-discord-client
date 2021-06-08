@@ -1,7 +1,5 @@
 #include "Attachment.hpp"
 
-
-
 void Attachment::unmarshall(const QJsonObject &obj)
 {
     m_id = obj["id"].toString().toULongLong();
@@ -22,7 +20,6 @@ void Attachment::unmarshall(const QJsonObject &obj)
             m_width  = obj["width"].toInteger();
         }
     }
-
 }
 
 snowflake Attachment::id() const
@@ -35,17 +32,17 @@ size_t Attachment::filesize() const
     return m_filesize;
 }
 
-const QString& Attachment::filename() const
+const QString &Attachment::filename() const
 {
     return m_filename;
 }
 
-const QString& Attachment::url() const
+const QString &Attachment::url() const
 {
     return m_url;
 }
 
-const QString& Attachment::proxyurl() const
+const QString &Attachment::proxyurl() const
 {
     return m_proxyurl;
 }
