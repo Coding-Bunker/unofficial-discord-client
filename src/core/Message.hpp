@@ -5,15 +5,9 @@
 #include "Embed.hpp"
 #include "Role.hpp"
 #include "Types.hpp"
-#include "role.hpp"
-#include "Attachment.hpp"
 
 #include <QDateTime>
 #include <QJsonObject>
-#include <optional>
-
-using std::optional;
-
 #include <optional>
 
 using std::optional;

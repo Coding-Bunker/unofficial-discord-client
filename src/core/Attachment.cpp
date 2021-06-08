@@ -26,6 +26,7 @@ void Attachment::unmarshall(const QJsonObject &obj)
             m_width = w = obj[QStringLiteral("width")].toInteger();
         }
     }
+<<<<<<< HEAD
 }
 
 Attachment::Attachment(snowflake i, QString &n, long long s, const QString &u,
@@ -35,6 +36,8 @@ Attachment::Attachment(snowflake i, QString &n, long long s, const QString &u,
     m_filesize(s), m_filename(n), m_url(u), m_proxyurl(pu), m_content_type(ct),
     m_height(h), m_width(w)
 {
+=======
+>>>>>>> c60c38e (Add preliminary support for attachments and roles.)
 }
 
 snowflake Attachment::id() const
