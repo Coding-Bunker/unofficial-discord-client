@@ -40,7 +40,6 @@ class Guild
     void setIconBase64(QByteArray &&data);
 
     QList<Channel> channels;
-
     void setBannerhash(const QString &newBannerhash);
 
     snowflake public_updates_channel_id() const;

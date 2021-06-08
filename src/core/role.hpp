@@ -6,7 +6,6 @@
 #include <QJsonObject>
 #include <QString>
 #include <optional>
-
 using std::optional;
 class Role
 {
@@ -22,6 +21,8 @@ class Role
     class Tags
     {
         optional<snowflake> id, integration_id;
+
+      public:
         Tags(snowflake id, snowflake inte) : id(id), integration_id(inte) {}
     };
     optional<Tags> getTags() const;
@@ -31,7 +32,6 @@ class Role
     QString m_name, m_permissions;
     unsigned m_color{ 0 }, m_position;
     bool m_hoisted, m_managed, m_mentionable;
-
     optional<Tags> m_tags;
 };
 
