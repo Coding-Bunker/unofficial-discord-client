@@ -65,12 +65,12 @@ bool Message::getMentions_all() const
     return mentions_all;
 }
 
-const QList<Role>& Message::getMentioned_roles() const
+const QList<Role> &Message::getMentioned_roles() const
 {
     return mentioned_roles;
 }
 
-const QList<Attachment>& Message::getAttachments() const
+const QList<Attachment> &Message::getAttachments() const
 {
     return attachments;
 }

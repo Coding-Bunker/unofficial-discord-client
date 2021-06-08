@@ -4,7 +4,6 @@
 #include "Types.hpp"
 
 #include <QJsonObject>
-
 #include <optional>
 
 using std::optional;
@@ -15,9 +14,9 @@ class Attachment
     void unmarshall(const QJsonObject &obj);
     snowflake id() const;
     size_t filesize() const;
-    const QString& filename() const;
-    const QString& url() const;
-    const QString& proxyurl() const;
+    const QString &filename() const;
+    const QString &url() const;
+    const QString &proxyurl() const;
     optional<QString> content_type() const;
     optional<unsigned> height() const;
     optional<unsigned> width() const;
