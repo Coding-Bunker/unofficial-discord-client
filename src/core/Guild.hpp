@@ -115,6 +115,10 @@ class Guild : public Guild_Base
     void setIconBase64(QByteArray &&data);
 
     QList<Channel> channels;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 74ff62e (Add preliminary support for attachments and roles.)
     void setBannerhash(const QString &newBannerhash);
 
     snowflake public_updates_channel_id() const;
