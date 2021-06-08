@@ -1,39 +1,41 @@
-#pragma once
+#ifndef ROLE_HPP
+#define ROLE_HPP
 
 #include "Types.hpp"
-
-#include <QJsonObject>
 #include <QString>
+#include <QJsonObject>
+
 #include <optional>
 
+
+using std::optional;
 class Role
 {
   public:
     void unmarshal(const QJsonObject &obj);
     snowflake id() const;
-    const QString &name() const;
-    const QString &permissions() const;
+    const QString& name() const;
+    const QString& permissions() const;
     bool hoisted() const;
     bool managed() const;
     bool mentionable() const;
     // XXX: cludge
     class Tags
     {
-        std::optional<snowflake> m_id;
-        std::optional<snowflake> m_integrationId;
-
-      public:
-        Tags(std::optional<snowflake> id, std::optional<snowflake> inte) :
-            m_id{ id }, m_integrationId{ inte }
-        {
-        }
+        optional<snowflake> id, integration_id;
+        Tags(snowflake id, snowflake inte) : id(id), integration_id(inte){}
     };
-    std::optional<Tags> getTags() const;
+    optional<Tags> getTags() const;
+
 
   private:
     snowflake m_id;
     QString m_name, m_permissions;
-    unsigned m_color{ 0 }, m_position;
+    unsigned m_color{0}, m_position;
     bool m_hoisted, m_managed, m_mentionable;
-    std::optional<Tags> m_tags;
+
+
+    optional<Tags> m_tags;
 };
+
+#endif // ROLE_HPP
