@@ -5,9 +5,15 @@
 #include "Embed.hpp"
 #include "Role.hpp"
 #include "Types.hpp"
+#include "role.hpp"
+#include "Attachment.hpp"
 
 #include <QDateTime>
 #include <QJsonObject>
+#include <optional>
+
+using std::optional;
+
 #include <optional>
 
 using std::optional;
@@ -53,6 +59,7 @@ class Message
     QString author() const;
 
     snowflake id() const;
+<<<<<<< HEAD
     const QDateTime &edited_timestamp() const;
     Type type() const;
     bool getTts() const;
@@ -63,6 +70,14 @@ class Message
     bool getPinned() const;
 
     const QList<Embed> &getEmbeds() const;
+=======
+    const QDateTime& edited_timestamp() const;
+    Type type() const;
+    bool getTts() const;
+    bool getMentions_all() const;
+    const QList<Role>& getMentioned_roles() const;
+    const QList<Attachment>& getAttachments() const;
+>>>>>>> b282813 (Add preliminary support for attachments and roles.)
 
   private:
     snowflake m_id;
@@ -72,8 +87,14 @@ class Message
     QString m_content;
     QDateTime m_timestamp, m_edited_timestamp;
     Type m_type;
+<<<<<<< HEAD
     bool tts, mentions_all, pinned;
     QList<Role> mentioned_roles;
     QList<Attachment> attachments;
     QList<Embed> embeds;
+=======
+    bool tts, mentions_all;
+    QList<Role> mentioned_roles;
+    QList<Attachment> attachments;
+>>>>>>> b282813 (Add preliminary support for attachments and roles.)
 };

@@ -13,6 +13,7 @@ set(HEADER_LIST
     "${PROJECT_SOURCE_DIR}/src/core/Message.hpp"
     "${PROJECT_SOURCE_DIR}/src/core/Settings.hpp"
     "${PROJECT_SOURCE_DIR}/src/core/Role.hpp"
+<<<<<<< HEAD
     "${PROJECT_SOURCE_DIR}/src/core/Embed.hpp"
     "${PROJECT_SOURCE_DIR}/src/core/Component.hpp"
     "${PROJECT_SOURCE_DIR}/src/core/Attachment.hpp"
@@ -20,6 +21,9 @@ set(HEADER_LIST
     "${PROJECT_SOURCE_DIR}/src/core/Voice.hpp"
     "${PROJECT_SOURCE_DIR}/src/gateway/Gateway.hpp"
     "${PROJECT_SOURCE_DIR}/src/gateway/common.hpp"
+=======
+    "${PROJECT_SOURCE_DIR}/src/core/Attachment.hpp"
+>>>>>>> b282813 (Add preliminary support for attachments and roles.)
     "${PROJECT_SOURCE_DIR}/src/handlers/Authenticator.hpp"
     "${PROJECT_SOURCE_DIR}/src/handlers/Requester.hpp"
     "${PROJECT_SOURCE_DIR}/src/DiscordApi/DiscordAPI.hpp"
@@ -38,11 +42,14 @@ set(SRC_LIST
     "${PROJECT_SOURCE_DIR}/src/core/Settings.cpp"
     "${PROJECT_SOURCE_DIR}/src/core/Role.cpp"
     "${PROJECT_SOURCE_DIR}/src/core/Attachment.cpp"
+<<<<<<< HEAD
     "${PROJECT_SOURCE_DIR}/src/core/Embed.cpp"
     "${PROJECT_SOURCE_DIR}/src/core/Component.cpp"
     "${PROJECT_SOURCE_DIR}/src/core/Emoji.cpp"
     "${PROJECT_SOURCE_DIR}/src/core/Voice.cpp"
     "${PROJECT_SOURCE_DIR}/src/gateway/Gateway.cpp"
+=======
+>>>>>>> b282813 (Add preliminary support for attachments and roles.)
     "${PROJECT_SOURCE_DIR}/src/handlers/Authenticator.cpp"
     "${PROJECT_SOURCE_DIR}/src/handlers/Requester.cpp"
     "${PROJECT_SOURCE_DIR}/src/gui/GuildsModel.cpp"

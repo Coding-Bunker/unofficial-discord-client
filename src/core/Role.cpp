@@ -1,4 +1,6 @@
-#include "Role.hpp"
+#include "role.hpp"
+
+
 
 void Role::unmarshal(const QJsonObject &obj)
 {
@@ -12,14 +14,13 @@ void Role::unmarshal(const QJsonObject &obj)
     m_managed     = obj["managed"].toBool();
     m_mentionable = obj["mentionable"].toBool();
     if (!obj["tags"].isUndefined()) {
-        const auto &t{ obj["tags"].toObject() };
-        optional<snowflake> id, intid;
-        if (!t["id"].isUndefined() && !t["integration_id"].isUndefined()) {
-            id.emplace(t["id"].toString().toULongLong());
-            intid.emplace(t["integration_id"].toString().toULongLong());
-        }
-        Role::Tags l(id, intid);
-        m_tags = l;
+        const auto &k{ obj["tags"].toObject() };
+        snowflake t1, t2;
+        if (!k["bot_id"].isUndefined())
+            t1 = k["bot_id"].toString().toULongLong();
+        if (!k["integration_id"].isUndefined())
+            t2 = k["bot_id"].toString().toULongLong();
+        m_tags{ Tags(t1, t2) };
     }
 }
 
@@ -28,12 +29,12 @@ snowflake Role::id() const
     return m_id;
 }
 
-const QString &Role::name() const
+const QString& Role::name() const
 {
     return m_name;
 }
 
-const QString &Role::permissions() const
+const QString& Role::permissions() const
 {
     return m_permissions;
 }
