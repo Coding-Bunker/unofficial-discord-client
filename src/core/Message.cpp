@@ -3,7 +3,6 @@
 #include <QJsonArray>
 void Message::unmarshal(const QJsonObject &obj)
 {
-<<<<<<< HEAD
     // clazy:excludeall=qt4-qstring-from-array
     m_id        = obj[QStringLiteral("id")].toString().toULongLong();
     m_guildID   = obj[QStringLiteral("guild_id")].toString().toULongLong();
@@ -37,18 +36,6 @@ void Message::unmarshal(const QJsonObject &obj)
         b.unmarshall(o);
         attachments.emplace_back(b);
     }
-=======
-    m_id        = obj["id"].toString().toULongLong();
-    m_guildID   = obj["guild_id?"].toString().toULongLong();
-    m_channelID = obj["channel_id"].toString().toULongLong();
-
-    const auto authorObj = obj["author"].toObject();
-    m_author             = authorObj["username"].toString();
-
-    m_content   = obj["content"].toString();
-    m_timestamp = QDateTime::fromString(obj["timestamp"].toString());
-    m_type      = static_cast<Type>(obj["type"].toInt());
->>>>>>> b282813 (Add preliminary support for attachments and roles.)
 }
 
 optional<snowflake> Message::guildID() const
@@ -102,16 +89,11 @@ bool Message::getMentions_all() const
     return mentions_all;
 }
 
-<<<<<<< HEAD
 const QList<Role> &Message::getMentioned_roles() const
-=======
-const QList<Role>& Message::getMentioned_roles() const
->>>>>>> b282813 (Add preliminary support for attachments and roles.)
 {
     return mentioned_roles;
 }
 
-<<<<<<< HEAD
 const QList<Attachment> &Message::getAttachments() const
 {
     return attachments;
@@ -126,9 +108,3 @@ const QList<Embed> &Message::getEmbeds() const
 {
     return embeds;
 }
-=======
-const QList<Attachment>& Message::getAttachments() const
-{
-    return attachments;
-}
->>>>>>> b282813 (Add preliminary support for attachments and roles.)
