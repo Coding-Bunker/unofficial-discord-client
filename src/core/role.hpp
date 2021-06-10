@@ -1,5 +1,4 @@
-#ifndef ROLE_HPP
-#define ROLE_HPP
+#pragma once
 
 #include "Types.hpp"
 
@@ -25,6 +24,19 @@ class Role
         Tags(snowflake id, snowflake inte) : id(id), integration_id(inte) {}
     };
     optional<Tags> getTags() const;
+    // Needed to construct from JSON within array of role objects found in user
+    Role(snowflake id, QString name, unsigned long color, bool pinned,
+         unsigned position, QString perm, bool manag, bool menti,
+         optional<Tags> t) :
+        m_id(id),
+        m_name(name), m_permissions(perm), m_hoisted(pinned),
+        m_position(position), m_managed(manag), m_mentionable(menti), m_tags(t),
+        m_color(color)
+    {
+    }
+    Role() = default;
+
+    unsigned long position() const;
 
   private:
     snowflake m_id;
@@ -34,5 +46,3 @@ class Role
 
     optional<Tags> m_tags;
 };
-
-#endif // ROLE_HPP
