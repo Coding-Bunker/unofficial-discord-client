@@ -1,5 +1,6 @@
 #include "Message.hpp"
 
+#include <QJsonArray>
 void Message::unmarshal(const QJsonObject &obj)
 {
     m_id        = obj["id"].toString().toULongLong();
@@ -12,6 +13,28 @@ void Message::unmarshal(const QJsonObject &obj)
     m_content   = obj["content"].toString();
     m_timestamp = QDateTime::fromString(obj["timestamp"].toString());
     m_type      = static_cast<Type>(obj["type"].toInt());
+    m_edited_timestamp =
+        QDateTime::fromString(obj["edited_timestamp"].toString());
+    m_type       = static_cast<Type>(obj["type"].toInt());
+    tts          = obj["tts"].toBool();
+    mentions_all = obj["mentions_everyone"].toBool();
+    pinned       = obj["pinned"].toBool();
+    const auto &roles{ obj["mentioned_roles"].toArray() };
+    // GULP!
+    for (const auto &k : roles) {
+        const auto &o{ k.toObject() };
+        Role j{};
+        j.unmarshal(o);
+        mentioned_roles.emplace_back(j);
+    }
+    const auto &attac{ obj["attachments"].toArray() };
+    // GULP! Again!
+    for (const auto &k : attac) {
+        const auto &o{ k.toObject() };
+        Attachment b;
+        b.unmarshall(o);
+        attachments.emplace_back(b);
+    }
 }
 
 optional<snowflake> Message::guildID() const
@@ -74,3 +97,16 @@ const QList<Attachment> &Message::getAttachments() const
 {
     return attachments;
 }
+<<<<<<< HEAD
+=======
+
+bool Message::getPinned() const
+{
+    return pinned;
+}
+
+const QList<Embed> &Message::getEmbeds() const
+{
+    return embeds;
+}
+>>>>>>> 89882e1 (Use #pragma once for headers, and start part 1 in adding Embed objects.)

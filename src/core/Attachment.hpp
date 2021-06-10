@@ -1,5 +1,4 @@
-#ifndef ATTACHMENT_HPP
-#define ATTACHMENT_HPP
+#pragma once
 
 #include "Types.hpp"
 
@@ -20,14 +19,21 @@ class Attachment
     optional<QString> content_type() const;
     optional<unsigned> height() const;
     optional<unsigned> width() const;
+    Attachment(snowflake i, QString n, long long s, QString u, QString pu,
+               optional<QString> ct, optional<unsigned> h,
+               optional<unsigned> w) :
+        m_id(i),
+        m_filesize(s), m_filename(n), m_url(u), m_proxyurl(pu),
+        m_content_type(ct), m_height(h), m_width(w)
+    {
+    }
+    Attachment() = default;
 
   private:
     snowflake m_id;
-    size_t m_filesize;
+    long long m_filesize;
     QString m_filename, m_url, m_proxyurl;
     optional<QString> m_content_type;
     // Probably won't bite us in the posterior, will it?
     optional<unsigned> m_height, m_width;
 };
-
-#endif // ATTACHMENT_HPP

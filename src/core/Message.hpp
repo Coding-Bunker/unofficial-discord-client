@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Attachment.hpp"
+#include "Embed.hpp"
+#include "Role.hpp"
 #include "Types.hpp"
-#include "role.hpp"
 
 #include <QDateTime>
 #include <QJsonObject>
@@ -63,4 +64,5 @@ class Message
     bool tts, mentions_all;
     QList<Role> mentioned_roles;
     QList<Attachment> attachments;
+    QList<Embed> embeds;
 };
