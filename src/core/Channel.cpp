@@ -17,6 +17,20 @@ void Channel::unmarshal(const QJsonObject &obj)
     member_count        = obj["member_count"].toString().toUShort();
 }
 
+/*
+bool key_exists(const QJsonObject &k, QString &l)
+{
+<<<<<<< HEAD
+    return !k[l).isNull();
+=======
+    return !k.value(l).isNull();
+<<<<<<< HEAD
+>>>>>>> 4ec4a79 (WIP)
+=======
+>>>>>>> 2d0b1ee5ce0a55777d3de9e1449fa0f809496b37
+>>>>>>> 17a0b43a7993c64631a46f28011ba408220b3e08
+}*/
+
 snowflake Channel::id() const
 {
     return m_id;
