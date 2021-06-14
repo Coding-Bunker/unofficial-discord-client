@@ -8,7 +8,6 @@
 
 The main purpose of this client is to be a desktop application fast and simple to use in order to replace the official application. Is a community project and anyone can help with issues, feedback or coding. The purpose is to learn how manage desktop application in C++ with Qt framework using public API provided by discord.
 
-
 ## Build
 
 - Qt min version 6.0.0
@@ -28,7 +27,8 @@ build/src/bin/unofficial-discord-client
 ## Features
 
 - [x] Settings (Ctrl + S)
-- [ ] Voice, news and other types of channels
+- [ ] News and other types of channels
+  - Voice channels require Qt Multimedia for audio handling, which has not been ported to Qt 6 yet: https://github.com/Coding-Bunker/unofficial-discord-client/issues/45
 - [ ] Mentions
 - [ ] Attachments
 - [ ] Reactions
