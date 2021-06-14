@@ -6,12 +6,13 @@
 
 void User::populate(const QJsonDocument &doc)
 {
-    const auto info = doc.object();
+    // clazy:excludeall=qt4-qstring-from-array
+    const auto &info{ doc.object() };
 
-    m_id            = info.value("id").toString().toULongLong();
-    m_username      = info.value("username").toString();
-    m_avatar        = info.value("avatar").toString();
-    m_discriminator = info.value("discriminator").toString();
+    m_id            = info[QStringLiteral("id")].toString().toULongLong();
+    m_username      = info[QStringLiteral("username")].toString();
+    m_avatar        = info[QStringLiteral("avatar")].toString();
+    m_discriminator = info[QStringLiteral("discriminator")].toString();
 
     emit usernameChanged();
 }
@@ -23,29 +24,35 @@ QString User::username() const
 
 void User::setGuilds(const QByteArray &data)
 {
-    const auto array = QJsonDocument::fromJson(data).array();
+    const auto &array{ QJsonDocument::fromJson(data).array() };
+    guilds.reserve(array.size());
     for (const auto &a : array) {
-        const auto obj = a.toObject();
+        const auto &obj{ a.toObject() };
         Guild g;
         g.unmarshal(obj);
-        guilds.push_back(g);
+        guilds.emplace_back(g);
     }
 }
 
 QList<snowflake> User::guildIDs() const noexcept
 {
-    QList<snowflake> ret;
+    QList<snowflake> ret(guilds.size());
     for (const auto &g : guilds) {
-        ret.push_back(g.id());
+        ret.emplace_back(g.id());
     }
     return ret;
 }
 
 QList<QPair<snowflake, QString>> User::pairsGuildIDandHashImg() noexcept
 {
+<<<<<<< HEAD
     QList<QPair<snowflake, QString>> ret;
+=======
+    QList<pair<snowflake, QString>> ret(guilds.size());
+>>>>>>> b44681e (Follow advice from clazy: make string arguments to Qt functions QStringLiterals.)
     for (const auto &g : guilds) {
-        ret.push_back(qMakePair<snowflake, QString>(g.id(), g.iconHash()));
+        ret.emplace_back(
+            std::make_pair<snowflake, QString>(g.id(), g.iconHash()));
     }
 
     return ret;
@@ -53,14 +60,14 @@ QList<QPair<snowflake, QString>> User::pairsGuildIDandHashImg() noexcept
 
 void User::setChannelsForGuild(const QByteArray &data)
 {
-    const auto obj = QJsonDocument::fromJson(data).array();
+    const auto &obj{ QJsonDocument::fromJson(data).array() };
     for (const auto &o : obj) {
-        const auto ch = o.toObject();
+        const auto &ch{ o.toObject() };
         Channel c;
         c.unmarshal(ch);
-        auto it =
-            std::find_if(guilds.begin(), guilds.end(),
-                         [&](const Guild &g) { return c.guildId() == g.id(); });
+        const auto &it{ std::find_if(
+            guilds.begin(), guilds.end(),
+            [&](const Guild &g) { return c.guildId() == g.id(); }) };
         if (it == guilds.end()) {
             qWarning() << "guild id not found for channel " << c.name();
             continue;

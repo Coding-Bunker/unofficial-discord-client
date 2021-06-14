@@ -53,6 +53,13 @@ class Message
     const QList<Role> &getMentioned_roles() const;
     const QList<Attachment> &getAttachments() const;
 
+<<<<<<< HEAD
+=======
+    bool getPinned() const;
+
+    const QList<Embed> &getEmbeds() const;
+
+>>>>>>> b44681e (Follow advice from clazy: make string arguments to Qt functions QStringLiterals.)
   private:
     snowflake m_id;
     snowflake m_channelID;

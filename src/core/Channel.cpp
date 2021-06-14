@@ -2,13 +2,21 @@
 
 void Channel::unmarshal(const QJsonObject &obj)
 {
-    m_id       = obj.value("id").toString().toULongLong();
-    m_name     = obj.value("name").toString();
-    m_nfsw     = obj.value("nfwm").toBool();
-    m_parentId = obj.value("parent_id").toString().toULongLong();
-    m_guildId  = obj.value("guild_id").toString().toULongLong();
-    m_position = obj.value("position").toInt();
-    m_type     = static_cast<Type>(obj.value("type").toInt());
+    // clazy:excludeall=qt4-qstring-from-array
+    m_id       = obj[QStringLiteral("id")].toString().toULongLong();
+    m_name     = obj[QStringLiteral("name")].toString();
+    m_nfsw     = obj[QStringLiteral("nfwm")].toBool();
+    m_parentId = obj[QStringLiteral("parent_id")].toString().toULongLong();
+    m_guildId  = obj[QStringLiteral("guild_id")].toString().toULongLong();
+    m_position = obj[QStringLiteral("position")].toInt();
+    m_topic    = obj[QStringLiteral("topic")].toString();
+    m_last_message_id =
+        obj[QStringLiteral("last_message_id")].toString().toULongLong();
+    rate_limit_per_user =
+        obj[QStringLiteral("rate_limit_per_user")].toString().toUShort();
+    m_type        = static_cast<Type>(obj[QStringLiteral("type")].toInt());
+    message_count = obj[QStringLiteral("message_count")].toString().toUShort();
+    member_count  = obj[QStringLiteral("member_count")].toString().toUShort();
 }
 
 snowflake Channel::id() const

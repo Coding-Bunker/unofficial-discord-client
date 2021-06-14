@@ -90,8 +90,8 @@ GuildsModel::ViewIconDirection GuildsModel::viewIconDirection() const noexcept
 void GuildsModel::updateGuildIcon()
 {
     if (m_viewMode == ViewMode::Icon) {
-        dataChanged(index(0, 0), index(this->rowCount() - 1, 0),
-                    { Role::Icon });
+        emit dataChanged(index(0, 0), index(this->rowCount() - 1, 0),
+                         { Role::Icon });
     }
 }
 

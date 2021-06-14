@@ -11,7 +11,6 @@ void Role::unmarshal(const QJsonObject &obj)
     m_hoisted     = obj["hoist"].toBool();
     m_managed     = obj["managed"].toBool();
     m_mentionable = obj["mentionable"].toBool();
-    optional<Role::Tags> l;
     if (!obj["tags"].isUndefined()) {
         const auto &t{ obj["tags"].toObject() };
         optional<snowflake> id, intid;
@@ -19,7 +18,8 @@ void Role::unmarshal(const QJsonObject &obj)
             id.emplace(t["id"].toString().toULongLong());
             intid.emplace(t["integration_id"].toString().toULongLong());
         }
-        m_tags = l.emplace(id, intid);
+        Role::Tags l(id, intid);
+        m_tags = l;
     }
 }
 
