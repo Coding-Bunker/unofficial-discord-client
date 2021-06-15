@@ -1,4 +1,4 @@
-#include "role.hpp"
+#include "Role.hpp"
 
 void Role::unmarshal(const QJsonObject &obj)
 {
@@ -18,7 +18,7 @@ void Role::unmarshal(const QJsonObject &obj)
             t1 = k["bot_id"].toString().toULongLong();
         if (!k["integration_id"].isUndefined())
             t2 = k["bot_id"].toString().toULongLong();
-        m_tags{ Tags(t1, t2) };
+        m_tags = Tags(t1, t2);
     }
 }
 

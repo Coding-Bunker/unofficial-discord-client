@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Channel.hpp"
-#include "role.hpp"
+#include "Role.hpp"
 
 enum class NSFW_level : unsigned char {
     Default,
