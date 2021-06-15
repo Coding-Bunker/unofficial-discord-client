@@ -8,13 +8,6 @@
 
 #include <QDateTime>
 #include <QJsonObject>
-<<<<<<< HEAD
-#include <optional>
-
-using std::optional;
-
-=======
->>>>>>> 74ff62e (Add preliminary support for attachments and roles.)
 #include <optional>
 
 using std::optional;
