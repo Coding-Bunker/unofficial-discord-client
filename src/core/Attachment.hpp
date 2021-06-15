@@ -27,7 +27,7 @@ class Attachment
     snowflake m_id;
     long long m_filesize;
     QString m_filename, m_url, m_proxyurl;
-    optional<QString> m_content_type;
+    std::optional<QString> m_content_type;
     // Probably won't bite us in the posterior, will it?
-    optional<unsigned> m_height, m_width;
+    std::optional<unsigned> m_height, m_width;
 };

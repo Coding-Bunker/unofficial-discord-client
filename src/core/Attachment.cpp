@@ -62,17 +62,17 @@ const QString &Attachment::proxyurl() const
     return m_proxyurl;
 }
 
-optional<QString> Attachment::content_type() const
+std::optional<QString> Attachment::content_type() const
 {
     return m_content_type;
 }
 
-optional<unsigned> Attachment::height() const
+std::optional<unsigned> Attachment::height() const
 {
     return m_height;
 }
 
-optional<unsigned> Attachment::width() const
+std::optional<unsigned> Attachment::width() const
 {
     return m_width;
 }
