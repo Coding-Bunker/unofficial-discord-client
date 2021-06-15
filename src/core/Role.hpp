@@ -1,12 +1,11 @@
-#ifndef ROLE_HPP
-#define ROLE_HPP
+#pragma once
 
 #include "Types.hpp"
 
 #include <QJsonObject>
 #include <QString>
 #include <optional>
-using std::optional;
+
 class Role
 {
   public:
@@ -20,19 +19,21 @@ class Role
     // XXX: cludge
     class Tags
     {
-        optional<snowflake> id, integration_id;
+        std::optional<snowflake> m_id;
+        std::optional<snowflake> m_integrationId;
 
       public:
-        Tags(snowflake id, snowflake inte) : id(id), integration_id(inte) {}
+        Tags(std::optional<snowflake> id, std::optional<snowflake> inte) :
+            m_id{ id }, m_integrationId{ inte }
+        {
+        }
     };
-    optional<Tags> getTags() const;
+    std::optional<Tags> getTags() const;
 
   private:
     snowflake m_id;
     QString m_name, m_permissions;
     unsigned m_color{ 0 }, m_position;
     bool m_hoisted, m_managed, m_mentionable;
-    optional<Tags> m_tags;
+    std::optional<Tags> m_tags;
 };
-
-#endif // ROLE_HPP

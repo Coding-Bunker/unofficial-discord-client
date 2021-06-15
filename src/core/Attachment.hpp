@@ -1,12 +1,9 @@
-#ifndef ATTACHMENT_HPP
-#define ATTACHMENT_HPP
+#pragma once
 
 #include "Types.hpp"
 
 #include <QJsonObject>
 #include <optional>
-
-using std::optional;
 
 class Attachment
 {
@@ -17,17 +14,15 @@ class Attachment
     const QString &filename() const;
     const QString &url() const;
     const QString &proxyurl() const;
-    optional<QString> content_type() const;
-    optional<unsigned> height() const;
-    optional<unsigned> width() const;
+    std::optional<QString> content_type() const;
+    std::optional<unsigned> height() const;
+    std::optional<unsigned> width() const;
 
   private:
     snowflake m_id;
     size_t m_filesize;
     QString m_filename, m_url, m_proxyurl;
-    optional<QString> m_content_type;
+    std::optional<QString> m_content_type;
     // Probably won't bite us in the posterior, will it?
-    optional<unsigned> m_height, m_width;
+    std::optional<unsigned> m_height, m_width;
 };
-
-#endif // ATTACHMENT_HPP
