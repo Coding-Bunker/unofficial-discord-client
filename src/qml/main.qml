@@ -8,25 +8,16 @@ ApplicationWindow {
     height: 480
     visible: true
 
-    // Kludge
-    Loader {
-        id: kludge
-        source: "Menubar.qml"
+    Menubar {
+        id: mb
     }
 
-    menuBar: kludge.item
+    menuBar: mb
 
     Shortcut {
         sequence: StandardKey.Quit
         context: Qt.ApplicationShortcut
         onActivated: Qt.quit()
-    }
-
-    Shortcut {
-        sequence: "Ctrl+S"
-        context: Qt.ApplicationShortcut
-        onActivated: stackview.push(settings)
-        enabled: stackview.currentItem.objectName === settings.objectName
     }
 
     StackView {
@@ -44,12 +35,6 @@ ApplicationWindow {
             id: chat
 
             Chat {}
-        }
-
-        Component {
-            id: settings
-
-            Settings {}
         }
 
         initialItem: login

@@ -1,26 +1,9 @@
 #pragma once
 
 #include "Channel.hpp"
-#include "role.hpp"
-
-enum class NSFW_level : unsigned char {
-    Default,
-    Explicit,
-    Safe,
-    Age_Restricted
-};
-enum class Veri_level : unsigned char {
-    None,
-    Verified_Email,
-    Five_Minutes,
-    Ten_Minutes,
-    Verified_PhoneNum
-};
-enum class Explicit_Filter_level : unsigned char {
-    None,
-    Without_Roles,
-    Everyone
-};
+#include "Emoji.hpp"
+#include "Guild_Member.hpp"
+#include "Role.hpp"
 
 #include <QDateTime>
 #include <QMap>
@@ -119,13 +102,8 @@ class Guild_Base
 };
 
 using std::optional;
-
-    snowflake id() const noexcept;
-    QString name() const noexcept;
-    QString iconHash() const noexcept;
-    QString bannerHash() const noexcept;
-    const QByteArray &icondata() const noexcept;
-
+class Guild : Guild_Base
+{
     void addChannel(Channel &&c);
 
     void addMessageToChannel(Message &&m);
@@ -133,10 +111,6 @@ using std::optional;
     void setIconBase64(QByteArray &&data);
 
     QList<Channel> channels;
-<<<<<<< HEAD
-=======
-
->>>>>>> 74ff62e (Add preliminary support for attachments and roles.)
     void setBannerhash(const QString &newBannerhash);
 
     snowflake public_updates_channel_id() const;
@@ -171,6 +145,20 @@ using std::optional;
     NSFW_level m_nsfwlvl;
     Veri_level m_verilvl;
     Explicit_Filter_level m_explilvl;
-    bool only_mentioned;
-    QVariantList m_roles;
+    bool only_mentioned, m_mfa_required;
+    QList<Role> m_roles;
+};
+
+class Guild_Preview : public Guild_Base
+{
+    unsigned m_member_count, m_online_count;
+
+  public:
+    void unmarshal(const QJsonObject &o)
+    {
+        unmarshal(std::move(o));
+    }
+    void unmarshal(const QJsonObject &&);
+    const unsigned &member_count() const;
+    const unsigned &online_count() const;
 };

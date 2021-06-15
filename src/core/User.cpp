@@ -1,5 +1,7 @@
 #include "User.hpp"
 
+#include "Guild.hpp"
+
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>

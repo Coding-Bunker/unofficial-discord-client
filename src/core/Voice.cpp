@@ -66,7 +66,7 @@ optional<bool> Voice::self_stream() const
     return m_self_stream;
 }
 
-optional<GuildMember> Voice::member() const
+optional<GuildMember> &Voice::member()
 {
     return m_member;
 }

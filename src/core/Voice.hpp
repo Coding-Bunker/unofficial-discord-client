@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Guild.hpp"
+#include "Guild_Member.hpp"
 #include "Types.hpp"
 
 #include <QDateTime>
@@ -37,7 +38,7 @@ class Voice
     const QDateTime &requested_to_speak() const;
     optional<snowflake> guild_id() const;
     optional<bool> self_stream() const;
-    optional<GuildMember> member() const;
+    optional<GuildMember> &member();
 };
 
 class Voice_Region

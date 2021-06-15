@@ -1,11 +1,18 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Controls.Material 2.15
-import Qt.labs.qmlmodels 1.0
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import QtQuick.Dialogs
+import QtQuick.Window
 
-Rectangle {
-    objectName: "settings"
-
+Window {
+    id: settings_diag
+    property alias sd: settings_diag
+    title: "Settings"
+    flags: Qt.Dialog
+    standardButtons: Dialog.Save
+    onAccepted: {
+        hmi.saveSettings();
+        settings_diag.close();
+    }
     color: Material.backgroundColor
 
     Text {
@@ -56,29 +63,10 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                         currentIndex: startValueRole
                         onActivated: settingsModel.setParameter(
-                            parent.listIdx, index)
+                                         parent.listIdx, index)
                     }
                 }
             }
-        }
-    }
-
-    Button {
-        id: okButton
-
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottomMargin: 10
-            bottom: parent.bottom
-        }
-
-        width: parent.width * .3
-        height: parent.height * .1
-
-        text: qsTr("Ok")
-        onClicked: {
-            hmi.saveSettings()
-            stackview.pop()
         }
     }
 }

@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Dialogs
 
@@ -7,10 +7,10 @@ MenuBar {
     Dialog {
         title: "About"
         id: about_diag
-        modal: false
         contentItem: Text {
             id: ab
-            property string homepage: "https://github.com/Coding-Bunker/unofficial-discord-client"
+            readonly property string homepage:
+                "https://github.com/Coding-Bunker/unofficial-discord-client"
             anchors.centerIn: parent
             text: "Copyright 2021 Federico Guerinoni and Charlie Lin.<br/>
             Homepage: < a href = \"" + homepage + "\">here</a>"
@@ -25,9 +25,21 @@ MenuBar {
             cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
         }
     }
+    /*Settings{
+        id: lololololololol
+    }*/
+
     Menu {
         title: "File"
-        MenuItem {
+        MenuBarItem {
+            text: "Settings"
+            Settings {
+                id: lololol
+            }
+
+            onTriggered: lololol.sd.open()
+        }
+        MenuBarItem {
             text: "Quit"
             //shortcut: StandardKey.Quit
             onTriggered: Qt.quit()
@@ -35,7 +47,7 @@ MenuBar {
     }
     Menu {
         title: "About"
-        MenuItem {
+        MenuBarItem {
             text: "About this build"
             onTriggered: about_diag.open()
         }

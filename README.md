@@ -28,7 +28,10 @@ build/src/bin/unofficial-discord-client
 
 - [x] Settings (Ctrl + S)
 - [ ] News and other types of channels
-  - Voice channels require Qt Multimedia for audio handling, which has not been ported to Qt 6 yet: https://github.com/Coding-Bunker/unofficial-discord-client/issues/45
+  - Voice channels require the following three: Qt Multimedia for audio handling,
+  which has not been ported to Qt 6 yet: https://github.com/Coding-Bunker/unofficial-discord-client/issues/45,
+  a library to send and receive Opus audio data (perhaps https://github.com/xiph/opus),
+  and a library to encrypt and decrypt Opus data using the xsalsa20_poly1305 cipher (perhaps [libsodium](https://github.com/jedisct1/libsodium)).
 - [ ] Mentions
 - [ ] Attachments
 - [ ] Reactions

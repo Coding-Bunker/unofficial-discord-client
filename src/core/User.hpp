@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Guild.hpp"
+#include "Message.hpp"
 #include "Types.hpp"
 
 #include <QVector>
