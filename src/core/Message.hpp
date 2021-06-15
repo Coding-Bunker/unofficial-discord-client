@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Attachment.hpp"
+#include "Role.hpp"
 #include "Types.hpp"
-#include "role.hpp"
 
 #include <QDateTime>
 #include <QJsonObject>

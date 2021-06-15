@@ -22,6 +22,8 @@ class Role
     class Tags
     {
         optional<snowflake> id, integration_id;
+
+      public:
         Tags(snowflake id, snowflake inte) : id(id), integration_id(inte) {}
     };
     optional<Tags> getTags() const;
