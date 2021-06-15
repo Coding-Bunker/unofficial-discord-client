@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Channel.hpp"
-#include "role.hpp"
+#include "Role.hpp"
 
 enum class NSFW_level : unsigned char {
     Default,
@@ -40,10 +40,6 @@ class Guild
     void setIconBase64(QByteArray &&data);
 
     QList<Channel> channels;
-<<<<<<< HEAD
-=======
-
->>>>>>> 74ff62e (Add preliminary support for attachments and roles.)
     void setBannerhash(const QString &newBannerhash);
 
     snowflake public_updates_channel_id() const;
