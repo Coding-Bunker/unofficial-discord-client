@@ -19,7 +19,7 @@ void Requester::initWebsocket()
         r->deleteLater();
         const auto doc     = QJsonDocument::fromJson(r->readAll());
         const auto obj     = doc.object();
-        m_websocketAddress = obj.value("url").toString();
+        m_websocketAddress = obj["url"].toString();
     });
 }
 
@@ -45,7 +45,8 @@ void Requester::requestChannels(const QList<snowflake> &guildIDs)
     }
 }
 
-void Requester::requestGuildsImages(QList<QPair<snowflake, QString>> &&items)
+void Requester::requestGuildsImages(
+    const QList<std::pair<snowflake, QString>> &&items)
 {
     for (const auto &i : items) {
         if (i.second.isEmpty()) {
@@ -92,7 +93,7 @@ void Requester::sendMessage(snowflake channelID, QString txt)
     });
 }
 
-QNetworkReply *Requester::request(const QString &api)
+QNetworkReply const *Requester::request(const QString &api)
 {
     QUrl url{ api };
     QNetworkRequest req{ url };

@@ -5,8 +5,10 @@
 
 #include <QVector>
 #include <QtDebug>
+#include <optional>
+#include <utility>
 
-class QJsonArray;
+using std::optional;
 
 class User : public QObject
 {
@@ -22,7 +24,7 @@ class User : public QObject
 
     void setGuilds(const QByteArray &data);
     QList<snowflake> guildIDs() const noexcept;
-    QList<QPair<snowflake, QString>> pairsGuildIDandHashImg() noexcept;
+    QList<std::pair<snowflake, QString>> pairsGuildIDandHashImg() noexcept;
 
     void setChannelsForGuild(const QByteArray &data);
     void setMessagesForChannel(snowflake guildID, const QByteArray &data);
