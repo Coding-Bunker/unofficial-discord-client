@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Attachment.hpp"
+#include "Component.hpp"
 #include "Embed.hpp"
 #include "Role.hpp"
 #include "Types.hpp"
@@ -50,16 +51,15 @@ class Message
     Type type() const;
     bool getTts() const;
     bool getMentions_all() const;
-    const QList<Role> &getMentioned_roles() const;
-    const QList<Attachment> &getAttachments() const;
+    const QList<Role &> &getMentioned_roles() const;
+    const QList<Attachment &> &getAttachments() const;
 
-<<<<<<< HEAD
-=======
     bool getPinned() const;
 
-    const QList<Embed> &getEmbeds() const;
+    const QList<Embed &> &getEmbeds() const;
 
->>>>>>> b44681e (Follow advice from clazy: make string arguments to Qt functions QStringLiterals.)
+    const QList<Action_Row> &getAction_rows() const;
+
   private:
     snowflake m_id;
     snowflake m_channelID;

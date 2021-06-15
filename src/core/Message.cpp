@@ -88,25 +88,27 @@ bool Message::getMentions_all() const
     return mentions_all;
 }
 
-const QList<Role> &Message::getMentioned_roles() const
+const QList<Role &> &Message::getMentioned_roles() const
 {
     return mentioned_roles;
 }
 
-const QList<Attachment> &Message::getAttachments() const
+const QList<Attachment &> &Message::getAttachments() const
 {
     return attachments;
 }
-<<<<<<< HEAD
-=======
 
 bool Message::getPinned() const
 {
     return pinned;
 }
 
-const QList<Embed> &Message::getEmbeds() const
+const QList<Embed &> &Message::getEmbeds() const
 {
     return embeds;
 }
->>>>>>> 89882e1 (Use #pragma once for headers, and start part 1 in adding Embed objects.)
+
+const QList<Action_Row> &Message::getAction_rows() const
+{
+    return action_rows;
+}
