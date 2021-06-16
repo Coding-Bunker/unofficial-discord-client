@@ -51,14 +51,14 @@ class Message
     Type type() const;
     bool getTts() const;
     bool getMentions_all() const;
-    const QList<Role &> &getMentioned_roles() const;
-    const QList<Attachment &> &getAttachments() const;
+    const QList<Role> &getMentioned_roles() const;
+    const QList<Attachment> &getAttachments() const;
 
     bool getPinned() const;
 
-    const QList<Embed &> &getEmbeds() const;
+    const QList<Embed> &getEmbeds() const;
 
-    const QList<Action_Row> &getAction_rows() const;
+    // const QList<Component> &getAction_rows() const;
 
   private:
     snowflake m_id;
@@ -68,8 +68,15 @@ class Message
     QString m_content;
     QDateTime m_timestamp, m_edited_timestamp;
     Type m_type;
+<<<<<<< HEAD
     bool tts, mentions_all;
     QList<Role> mentioned_roles;
     QList<Attachment> attachments;
+=======
+    bool tts, mentions_all, pinned;
+    QList<Role> mentioned_roles;
+    QList<Attachment> attachments;
+    // QList<Component> action_rows;
+>>>>>>> 7ba87d1 (Part 2 of Component support.)
     QList<Embed> embeds;
 };

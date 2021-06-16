@@ -11,11 +11,11 @@ const QString &Emoji::name() const
 {
     return m_name;
 }
-
+/*
 optional<User> &Emoji::user()
 {
     return m_user;
-}
+}*/
 
 optional<bool> Emoji::require_colons() const
 {
@@ -54,6 +54,6 @@ void Emoji::unmarshal(const QJsonObject &o)
         const auto &t{ QJsonDocument(o["user"].toObject()) };
         User u;
         u.populate(t);
-        m_user.emplace(u);
+        // m_user.emplace(u);
     }
 }

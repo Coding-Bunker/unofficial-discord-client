@@ -15,14 +15,26 @@ constexpr int Component::type()
 
 void Component::unmarshal(const QJsonObject &o)
 {
+    Component::unmarshal(std::move(o));
+}
+
+void Component::unmarshal(const QJsonObject &&o)
+{
     if (o["type"] == 1) {
         Action_Row a;
         if (o.contains("components")) {
+            a.buttons()->reserve(o["componenets"].toArray().size());
             for (const auto &b : o["components"].toArray()) {
-                const auto &l{ b.toObject() };
+                Button but;
+                but.unmarshal(b.toObject());
+                a.buttons()->emplace_back(but);
             }
         }
+        m_component.emplace<Action_Row>(a);
     } else {
+        // Button but;
+        // but.unmarshal(o);
+        // m_component.emplace<Button>(but);
     }
 }
 
@@ -47,7 +59,7 @@ void Button::unmarshal(const QJsonObject &&o)
     if (o.contains("emoji")) {
         Emoji t;
         t.unmarshal(o["emoji"].toObject());
-        m_emoji.emplace(t);
+        // m_emoji.emplace(t);
     }
     if (o.contains("label"))
         m_label = o["label"].toString();
@@ -89,11 +101,11 @@ optional<bool> Button::disabled() const
  * somehow propogates down through inheritance to where the emoji member getter
  * does not work at the moment.
  */
-
+/*
 optional<Emoji> Button::emoji()
 {
     // return m_emoji;
-}
+}*/
 
 optional<QString> Button::url() const
 {

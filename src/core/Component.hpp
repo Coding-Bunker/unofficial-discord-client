@@ -3,7 +3,6 @@
 #include "Emoji.hpp"
 
 #include <QJsonObject>
-#include <QList>
 #include <optional>
 #include <variant>
 
@@ -19,11 +18,11 @@ enum class Button_Style : unsigned char {
 
 class Button
 {
-    const int type{ 2 };
+    int type{ 2 };
     Button_Style m_style;
     optional<QString> m_label, m_custom_id;
     optional<bool> m_disabled;
-    optional<Emoji> m_emoji;
+    // optional<Emoji> m_emoji;
     optional<QString> m_url;
 
   public:
@@ -34,13 +33,13 @@ class Button
     optional<QString> label() const;
     optional<QString> custom_id() const;
     optional<bool> disabled() const;
-    optional<Emoji> emoji();
+    // optional<Emoji> emoji();
     optional<QString> url() const;
 };
 
 class Action_Row
 {
-    const int type{ 1 };
+    int type{ 1 };
     optional<QList<Button>> m_buttons;
 
   public:
@@ -55,6 +54,7 @@ class Component
   public:
     constexpr int type();
     void unmarshal(const QJsonObject &o);
+    void unmarshal(const QJsonObject &&o);
 };
 
 // template<class T> constexpr T &get(Component &c);

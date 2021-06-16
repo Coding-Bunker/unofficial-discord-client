@@ -4,28 +4,31 @@
 
 namespace SettingsCategory
 {
-const QString token  = "auth/token";
-const QString meInfo = "auth/meInfo";
+const QString token  = QStringLiteral("auth/token");
+const QString meInfo = QStringLiteral("auth/meInfo");
 
-const QString guildsView              = "UI/guildsView";
-const QString guildsViewIconDirection = "UI/guildsViewIconDirection";
+const QString guildsView = QStringLiteral("UI/guildsView");
+const QString guildsViewIconDirection =
+    QStringLiteral("UI/guildsViewIconDirection");
 
 } // namespace SettingsCategory
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
+    // FUTURE: when Clang supports using enum
+    // using UserSettingPOD::Type;
     m_parameters.push_back({
         "Show guilds view with:",
         { "text", "icon" },
         0,
-        UserSettingPOD::ComboBox,
+        UserSettingPOD::Type::ComboBox,
         SettingsCategory::guildsView,
     });
     m_parameters.push_back({
         "Set guilds icons direction:",
         { "vertical", "horizontal" },
         0,
-        UserSettingPOD::ComboBox,
+        UserSettingPOD::Type::ComboBox,
         SettingsCategory::guildsViewIconDirection,
     });
 }
