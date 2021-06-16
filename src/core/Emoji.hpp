@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Types.hpp"
-#include "User.hpp"
+//#include "User.hpp"
 
 #include <QJsonObject>
 #include <optional>

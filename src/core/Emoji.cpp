@@ -52,8 +52,8 @@ void Emoji::unmarshal(const QJsonObject &o)
         m_available = o["available"].toBool();
     if (o.contains("user")) {
         const auto &t{ QJsonDocument(o["user"].toObject()) };
-        User u;
-        u.populate(t);
+        // User u;
+        // u.populate(t);
         // m_user.emplace(u);
     }
 }

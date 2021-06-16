@@ -1,6 +1,7 @@
 #include "Component.hpp"
 
 #include <QJsonArray>
+#include <utility>
 
 constexpr int Component::type()
 {
@@ -20,11 +21,13 @@ void Component::unmarshal(const QJsonObject &o)
 
 void Component::unmarshal(const QJsonObject &&o)
 {
-    if (o["type"] == 1) {
+    if (o[QStringLiteral("type")] == 1) {
         Action_Row a;
-        if (o.contains("components")) {
-            a.buttons()->reserve(o["componenets"].toArray().size());
-            for (const auto &b : o["components"].toArray()) {
+        if (o.contains(QStringLiteral("components"))) {
+            a.buttons()->reserve(
+                o[QStringLiteral("componenets")].toArray().size());
+            const auto &comp_array{ o[QStringLiteral("components")].toArray() };
+            for (const auto &b : comp_array) {
                 Button but;
                 but.unmarshal(b.toObject());
                 a.buttons()->emplace_back(but);
@@ -53,22 +56,22 @@ void Button::unmarshal(const QJsonObject &o)
 
 void Button::unmarshal(const QJsonObject &&o)
 {
-    m_url = o["url"].toString();
-    if (o.contains("style"))
-        m_style = static_cast<Button_Style>(o["style"].toInt());
-    if (o.contains("emoji")) {
-        Emoji t;
-        t.unmarshal(o["emoji"].toObject());
+    m_url = o[QStringLiteral("url")].toString();
+    if (o.contains(QStringLiteral("style")))
+        m_style = static_cast<Button_Style>(o[QStringLiteral("style")].toInt());
+    if (o.contains(QStringLiteral("emoji"))) {
+        // Emoji t;
+        // t.unmarshal(o[QStringLiteral("emoji")].toObject());
         // m_emoji.emplace(t);
     }
-    if (o.contains("label"))
-        m_label = o["label"].toString();
-    if (o.contains("custom_id"))
-        m_custom_id = o["custom_id"].toString();
-    if (o.contains("url"))
-        m_url = o["url"].toString();
-    if (o.contains("disabled"))
-        m_disabled = o["disabled"].toBool();
+    if (o.contains(QStringLiteral("label")))
+        m_label = o[QStringLiteral("label")].toString();
+    if (o.contains(QStringLiteral("custom_id")))
+        m_custom_id = o[QStringLiteral("custom_id")].toString();
+    if (o.contains(QStringLiteral("url")))
+        m_url = o[QStringLiteral("url")].toString();
+    if (o.contains(QStringLiteral("disabled")))
+        m_disabled = o[QStringLiteral("disabled")].toBool();
 }
 
 int Button::getType() const
