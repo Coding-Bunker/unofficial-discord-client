@@ -4,6 +4,7 @@ project(
   unofficial-discord-client
   VERSION 0.1
   DESCRIPTION "Discord unofficial desktop application"
+  HOMEPAGE_URL "https://github.com/Coding-Bunker/unofficial-discord-client/"
   LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
