@@ -3,22 +3,23 @@
 #include <QJsonArray>
 void Message::unmarshal(const QJsonObject &obj)
 {
-    m_id        = obj["id"].toString().toULongLong();
-    m_guildID   = obj["guild_id?"].toString().toULongLong();
-    m_channelID = obj["channel_id"].toString().toULongLong();
+    // clazy:excludeall=qt4-qstring-from-array
+    m_id        = obj[QStringLiteral("id")].toString().toULongLong();
+    m_guildID   = obj[QStringLiteral("guild_id?")].toString().toULongLong();
+    m_channelID = obj[QStringLiteral("channel_id")].toString().toULongLong();
 
-    const auto authorObj = obj["author"].toObject();
-    m_author             = authorObj["username"].toString();
+    const auto &authorObj{ obj["author"].toObject() };
+    m_author = authorObj[QStringLiteral("username")].toString();
 
-    m_content   = obj["content"].toString();
-    m_timestamp = QDateTime::fromString(obj["timestamp"].toString());
-    m_type      = static_cast<Type>(obj["type"].toInt());
-    m_edited_timestamp =
-        QDateTime::fromString(obj["edited_timestamp"].toString());
-    m_type       = static_cast<Type>(obj["type"].toInt());
-    tts          = obj["tts"].toBool();
-    mentions_all = obj["mentions_everyone"].toBool();
-    pinned       = obj["pinned"].toBool();
+    m_content = obj[QStringLiteral("content")].toString();
+    m_timestamp =
+        QDateTime::fromString(obj[QStringLiteral("timestamp")].toString());
+    m_edited_timestamp = QDateTime::fromString(
+        obj[QStringLiteral("edited_timestamp")].toString());
+    m_type       = static_cast<Type>(obj[QStringLiteral("type")].toInt());
+    tts          = obj[QStringLiteral("tts")].toBool();
+    mentions_all = obj[QStringLiteral("mentions_everyone")].toBool();
+    pinned       = obj[QStringLiteral("pinned")].toBool();
     const auto &roles{ obj["mentioned_roles"].toArray() };
     // GULP!
     for (const auto &k : roles) {
