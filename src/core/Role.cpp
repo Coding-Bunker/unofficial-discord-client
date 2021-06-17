@@ -13,11 +13,14 @@ void Role::unmarshal(const QJsonObject &obj)
     m_mentionable = obj["mentionable"].toBool();
     if (!obj["tags"].isUndefined()) {
         const auto &k{ obj["tags"].toObject() };
-        snowflake t1, t2;
-        if (!k["bot_id"].isUndefined())
+        std::optional<snowflake> t1;
+        std::optional<snowflake> t2;
+        if (!k["bot_id"].isUndefined()) {
             t1 = k["bot_id"].toString().toULongLong();
-        if (!k["integration_id"].isUndefined())
+        }
+        if (!k["integration_id"].isUndefined()) {
             t2 = k["bot_id"].toString().toULongLong();
+        }
         m_tags.emplace(Tags(t1, t2));
     }
 }
@@ -52,7 +55,7 @@ bool Role::mentionable() const
     return m_mentionable;
 }
 
-optional<Role::Tags> Role::getTags() const
+std::optional<Role::Tags> Role::getTags() const
 {
     return m_tags;
 }
