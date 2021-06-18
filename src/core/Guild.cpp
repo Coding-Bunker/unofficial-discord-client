@@ -1,27 +1,39 @@
 #include "Guild.hpp"
 
+#include <QJsonArray>
 #include <QJsonObject>
+#include <utility>
 
 void Guild::unmarshal(const QJsonObject &obj)
 {
-    m_id       = obj.value("id").toString().toULongLong();
-    m_name     = obj.value("name").toString();
-    m_iconHash = obj.value("icon").toString();
-}
+    Guild_Base::unmarshal(obj);
+    only_mentioned =
+        obj[QStringLiteral("default_message_notifications")].toInt();
+    m_mfa_required = obj[QStringLiteral("mfa_level")].toInt();
+    if (!obj[QStringLiteral("banner")].isNull())
+        m_bannerhash = obj[QStringLiteral("banner")].toString();
+    if (!obj[QStringLiteral("vanity_url")].isNull())
+        m_vanity_url = obj[QStringLiteral("vanity_url")].toString();
+    m_nsfwlvl =
+        static_cast<NSFW_level>(obj[QStringLiteral("nsfw_level")].toInt());
+    m_explilvl = static_cast<Explicit_Filter_level>(
+        obj[QStringLiteral("explicit_content_filter")].toInt());
+    m_verilvl =
+        static_cast<Veri_level>(obj[QStringLiteral("mfa_level")].toInt());
+    m_public_updates_channel_id =
+        obj[QStringLiteral("public_updates_channel_id")]
+            .toString()
+            .toULongLong();
+    m_preferredlocale = obj[QStringLiteral("preferred_locale")].toString();
 
-snowflake Guild::id() const noexcept
-{
-    return m_id;
-}
-
-QString Guild::name() const noexcept
-{
-    return m_name;
-}
-
-QString Guild::iconHash() const noexcept
-{
-    return m_iconHash;
+    m_roles.reserve(obj[QStringLiteral("roles")].toArray().size());
+    auto tmp{ obj[QStringLiteral("roles")].toArray() };
+    for (const auto &&f : std::as_const(tmp)) {
+        const auto &&e{ f.toObject() };
+        Role j;
+        j.unmarshal(e);
+        m_roles.emplace_back(j);
+    }
 }
 
 const QByteArray &Guild::icondata() const noexcept
@@ -85,11 +97,6 @@ snowflake Guild::public_updates_channel_id() const
     return m_public_updates_channel_id;
 }
 
-const QString &Guild::splashHash() const
-{
-    return m_splashHash;
-}
-
 const QString &Guild::preferredlocale() const
 {
     return m_preferredlocale;
@@ -100,24 +107,9 @@ NSFW_level Guild::nsfwlvl() const
     return m_nsfwlvl;
 }
 
-snowflake Guild::mfalvl() const
-{
-    return m_mfalvl;
-}
-
-void Guild::setMfalvl(snowflake newMfalvl)
-{
-    m_mfalvl = newMfalvl;
-}
-
 snowflake Guild::ownerid() const
 {
     return m_ownerid;
-}
-
-const QString &Guild::desc() const
-{
-    return m_desc;
 }
 
 const QString &Guild::vanity_url() const
@@ -140,7 +132,87 @@ bool Guild::is_only_mentioned() const
     return only_mentioned;
 }
 
-const QVariantList &Guild::roles() const
+bool Guild::mfa_required() const
 {
-    return m_roles;
+    return m_mfa_required;
+}
+
+void Guild_Preview::unmarshal(const QJsonObject &&o)
+{
+    Guild_Base::unmarshal(o);
+    m_member_count = o[QStringLiteral("approximate_member_count")].toInteger();
+    m_online_count =
+        o[QStringLiteral("approximate_presence_count")].toInteger();
+}
+
+const unsigned &Guild_Preview::online_count() const
+{
+    return m_online_count;
+}
+
+void Guild_Base::unmarshal(const QJsonObject &&obj)
+{
+    if (!obj[QStringLiteral("discovery_splash")].isNull())
+        m_discovery_splash = obj[QStringLiteral("discovery_splash")].toString();
+    if (!obj[QStringLiteral("description")].isNull())
+        m_description = obj[QStringLiteral("description")].toString();
+    if (!obj[QStringLiteral("icon")].isNull())
+        m_iconHash = obj[QStringLiteral("icon")].toString();
+    if (!obj[QStringLiteral("splash")].isNull())
+        m_splash = obj[QStringLiteral("splash")].toString();
+    m_id   = obj[QStringLiteral("id")].toString().toULongLong();
+    m_name = obj[QStringLiteral("name")].toString();
+
+    auto tmp{ obj[QStringLiteral("features")].toArray() };
+    m_features.reserve(obj[QStringLiteral("features")].toArray().size());
+    m_custom_emojis.reserve(obj[QStringLiteral("emojis")].toArray().size());
+    for (const auto &&f : tmp)
+        m_features.emplace_back(guild_features_map[qPrintable(f.toString())]);
+    tmp = obj[QStringLiteral("emojis")].toArray();
+    for (const auto &&f : std::as_const(tmp)) {
+        const auto &&e{ f.toObject() };
+        Emoji j;
+        j.unmarshal(e);
+        m_custom_emojis.emplace_back(j);
+    }
+}
+
+snowflake Guild_Base::id() const
+{
+    return m_id;
+}
+
+const QString &Guild_Base::name() const
+{
+    return m_name;
+}
+
+QString Guild_Base::iconHash() const
+{
+    return m_iconHash;
+}
+
+const QString &Guild_Base::splash() const
+{
+    return m_splash;
+}
+
+const QString &Guild_Base::discovery_splash() const
+{
+    return m_discovery_splash;
+}
+
+const QString &Guild_Base::description() const
+{
+    return m_description;
+}
+
+const QList<Emoji> &Guild_Base::custom_emojis() const
+{
+    return m_custom_emojis;
+}
+
+const QList<Guild_Features> &Guild_Base::features() const
+{
+    return m_features;
 }

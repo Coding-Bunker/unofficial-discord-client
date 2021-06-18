@@ -16,7 +16,7 @@ class Emoji
     optional<bool> m_require_colons, m_managed, m_animated, m_available;
 
   public:
-    Emoji();
+    // Emoji();
     void unmarshal(const QJsonObject &o);
     snowflake id() const;
     const QString &name() const;
