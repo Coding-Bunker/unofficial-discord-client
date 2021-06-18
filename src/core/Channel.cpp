@@ -43,3 +43,33 @@ Channel::Type Channel::type() const
 {
     return m_type;
 }
+
+snowflake Channel::last_message_id() const
+{
+    return m_last_message_id;
+}
+
+snowflake Channel::parentId() const
+{
+    return m_parentId;
+}
+
+const QString &Channel::topic() const
+{
+    return m_topic;
+}
+
+bool Channel::nfsw() const
+{
+    return m_nfsw;
+}
+
+unsigned short Channel::getMember_count() const
+{
+    return member_count;
+}
+
+unsigned short Channel::getMessage_count() const
+{
+    return message_count;
+}

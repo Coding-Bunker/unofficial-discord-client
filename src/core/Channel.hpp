@@ -33,12 +33,19 @@ class Channel
 
     QList<Message> messages;
 
+    snowflake last_message_id() const;
+    snowflake parentId() const;
+    const QString &topic() const;
+    bool nfsw() const;
+    unsigned short getMember_count() const;
+    unsigned short getMessage_count() const;
+
   private:
-    snowflake m_id;
-    QString m_name;
+    snowflake m_id, m_last_message_id, m_guildId, m_parentId;
+    QString m_name, m_topic;
     bool m_nfsw;
-    snowflake m_guildId;
-    snowflake m_parentId;
     int m_position;
+    unsigned rate_limit_per_user;
+    unsigned short member_count, message_count;
     Type m_type;
 };

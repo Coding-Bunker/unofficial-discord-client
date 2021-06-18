@@ -21,16 +21,13 @@ class Role
     class Tags
     {
         optional<snowflake> id, integration_id;
-<<<<<<< HEAD
         Tags(snowflake id, snowflake inte) : id(id), integration_id(inte) {}
-=======
 
       public:
         Tags(optional<snowflake> id, optional<snowflake> inte) :
             id(id), integration_id(inte)
         {
         }
->>>>>>> b44681e (Follow advice from clazy: make string arguments to Qt functions QStringLiterals.)
     };
     optional<Tags> getTags() const;
     // Needed to construct from JSON within array of role objects found in user

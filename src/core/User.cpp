@@ -3,6 +3,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <utility>
 
 void User::populate(const QJsonDocument &doc)
 {
@@ -43,13 +44,10 @@ QList<snowflake> User::guildIDs() const noexcept
     return ret;
 }
 
+using std::pair;
 QList<QPair<snowflake, QString>> User::pairsGuildIDandHashImg() noexcept
 {
-<<<<<<< HEAD
-    QList<QPair<snowflake, QString>> ret;
-=======
     QList<pair<snowflake, QString>> ret(guilds.size());
->>>>>>> b44681e (Follow advice from clazy: make string arguments to Qt functions QStringLiterals.)
     for (const auto &g : guilds) {
         ret.emplace_back(
             std::make_pair<snowflake, QString>(g.id(), g.iconHash()));
