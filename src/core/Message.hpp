@@ -68,15 +68,8 @@ class Message
     QString m_content;
     QDateTime m_timestamp, m_edited_timestamp;
     Type m_type;
-<<<<<<< HEAD
-    bool tts, mentions_all;
-    QList<Role> mentioned_roles;
-    QList<Attachment> attachments;
-=======
     bool tts, mentions_all, pinned;
     QList<Role> mentioned_roles;
     QList<Attachment> attachments;
-    // QList<Component> action_rows;
->>>>>>> 7ba87d1 (Part 2 of Component support.)
     QList<Embed> embeds;
 };
