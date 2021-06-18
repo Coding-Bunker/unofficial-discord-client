@@ -5,7 +5,7 @@ void Message::unmarshal(const QJsonObject &obj)
 {
     // clazy:excludeall=qt4-qstring-from-array
     m_id        = obj[QStringLiteral("id")].toString().toULongLong();
-    m_guildID   = obj[QStringLiteral("guild_id?")].toString().toULongLong();
+    m_guildID   = obj[QStringLiteral("guild_id")].toString().toULongLong();
     m_channelID = obj[QStringLiteral("channel_id")].toString().toULongLong();
 
     const auto &authorObj{ obj["author"].toObject() };
