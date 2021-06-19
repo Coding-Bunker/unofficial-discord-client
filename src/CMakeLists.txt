@@ -39,7 +39,7 @@ set(SRC_LIST
     "${PROJECT_SOURCE_DIR}/src/core/Embed.cpp"
     "${PROJECT_SOURCE_DIR}/src/core/Component.cpp"
     "${PROJECT_SOURCE_DIR}/src/core/Emoji.cpp"
-    "${PROJECT_SOURCE_DIR}/src/core/Voice.hpp"
+    "${PROJECT_SOURCE_DIR}/src/core/Voice.cpp"
     "${PROJECT_SOURCE_DIR}/src/handlers/Authenticator.cpp"
     "${PROJECT_SOURCE_DIR}/src/handlers/Requester.cpp"
     "${PROJECT_SOURCE_DIR}/src/gui/GuildsModel.cpp"

@@ -76,33 +76,33 @@ void Voice::unmarshal(const QJsonObject &&o)
     if (o.contains(QStringLiteral("guild_id")))
         m_guild_id = o[QStringLiteral("guild_id")].toString().toULongLong();
     if (!o[QStringLiteral("channel_id")].isNull())
-        m_channel_id = o["channel_id"].toString().toULongLong();
-    m_user_id = o["user_id"].toString().toULongLong();
-    if (o.contains("member")) {
+        m_channel_id = o[QStringLiteral("channel_id")].toString().toULongLong();
+    m_user_id = o[QStringLiteral("user_id")].toString().toULongLong();
+    if (o.contains(QStringLiteral("member"))) {
         Guild_Member g;
-        g.unmarshal(o["member"].toObject());
+        g.unmarshal(o[QStringLiteral("member")].toObject());
         m_member.emplace(g);
     }
-    m_session_id = o["session_id"].toString();
-    m_deaf       = o["deaf"].toBool();
-    m_mute       = o["mute"].toBool();
-    m_self_deaf  = o["self_deaf"].toBool();
-    m_self_mute  = o["self_mute"].toBool();
-    m_camera_on  = o["self_video"].toBool();
-    m_surpress   = o["surpress"].toBool();
-    if (!o["request_to_speak_tinestamp"].isNull())
-        m_requested_to_speak =
-            QDateTime::fromString(o["request_to_speak_timestamo"].toString());
+    m_session_id = o[QStringLiteral("session_id")].toString().toLocal8Bit();
+    m_deaf       = o[QStringLiteral("deaf")].toBool();
+    m_mute       = o[QStringLiteral("mute")].toBool();
+    m_self_deaf  = o[QStringLiteral("self_deaf")].toBool();
+    m_self_mute  = o[QStringLiteral("self_mute")].toBool();
+    m_camera_on  = o[QStringLiteral("self_video")].toBool();
+    m_surpress   = o[QStringLiteral("surpress")].toBool();
+    if (!o[QStringLiteral("request_to_speak_tinestamp")].isNull())
+        m_requested_to_speak = QDateTime::fromString(
+            o[QStringLiteral("request_to_speak_timestamo")].toString());
 }
 
 void Voice_Region::unmarshal(const QJsonObject &&o)
 {
-    m_id         = o["id"].toString();
-    m_name       = o["name"].toString();
-    m_vip        = o["vip"].toBool();
-    m_optimal    = o["optimal"].toBool();
-    m_deprecated = o["deprecated"].toBool();
-    m_custom     = o["custom"].toBool();
+    m_id         = o[QStringLiteral("id")].toString().toLocal8Bit();
+    m_name       = o[QStringLiteral("name")].toString();
+    m_vip        = o[QStringLiteral("vip")].toBool();
+    m_optimal    = o[QStringLiteral("optimal")].toBool();
+    m_deprecated = o[QStringLiteral("deprecated")].toBool();
+    m_custom     = o[QStringLiteral("custom")].toBool();
 }
 
 const QByteArray &Voice_Region::id() const
