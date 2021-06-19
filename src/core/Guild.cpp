@@ -216,3 +216,67 @@ const QList<Guild_Features> &Guild_Base::features() const
 {
     return m_features;
 }
+
+void Guild_Member::unmarshal(const QJsonObject &&o)
+{
+    // TODO: handle user field
+    if (o.contains(QStringLiteral("nick")) &&
+        !o[QStringLiteral("nick")].isNull())
+        m_nick = o[QStringLiteral("nick")].toString();
+    const auto &a{ o[QStringLiteral("roles")].toArray() };
+    m_roles.reserve(a.size());
+    for (const auto &r : a)
+        m_roles.emplace_back(r.toString().toULongLong());
+    using D     = QDateTime;
+    m_join_time = D::fromString(o[QStringLiteral("joined_at")].toString());
+    if (o.contains(QStringLiteral("premium_since")) &&
+        !o[QStringLiteral("premium_since")].isNull())
+        m_premium_join_time =
+            D::fromString(o[QStringLiteral("premium_since")].toString());
+    m_deaf = o[QStringLiteral("deaf")].toBool();
+    m_mute = o[QStringLiteral("mute")].toBool();
+    if (o.contains(QStringLiteral("pending")))
+        m_pending = o[QStringLiteral("pending")].toBool();
+    if (o.contains(QStringLiteral("permissions")))
+        m_permissions = o[QStringLiteral("permissions")].toString();
+}
+
+optional<bool> Guild_Member::pending() const
+{
+    return m_pending;
+}
+
+optional<QString> Guild_Member::nick() const
+{
+    return m_nick;
+}
+
+optional<QString> Guild_Member::permissions() const
+{
+    return m_permissions;
+}
+
+optional<QDateTime> Guild_Member::premium_join_time() const
+{
+    return m_premium_join_time;
+}
+
+const QList<snowflake> &Guild_Member::roles() const
+{
+    return m_roles;
+}
+
+const QDateTime &Guild_Member::join_time() const
+{
+    return m_join_time;
+}
+
+bool Guild_Member::deaf() const
+{
+    return m_deaf;
+}
+
+bool Guild_Member::mute() const
+{
+    return m_mute;
+}

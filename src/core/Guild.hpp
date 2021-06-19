@@ -3,8 +3,12 @@
 #include "Channel.hpp"
 #include "Emoji.hpp"
 #include "Role.hpp"
+//#include "User.hpp"
 
+#include <QDateTime>
 #include <QMap>
+#include <optional>
+#include <utility>
 
 enum class NSFW_level : unsigned char {
     Default,
@@ -97,6 +101,8 @@ class Guild_Base
     const QList<Guild_Features> &features() const;
 };
 
+using std::optional;
+
 class Guild : public Guild_Base
 {
   public:
@@ -152,4 +158,30 @@ class Guild_Preview : public Guild_Base
     void unmarshal(const QJsonObject &&);
     const unsigned &member_count() const;
     const unsigned &online_count() const;
+};
+
+class Guild_Member
+{
+    // optional<User> m_user;
+    optional<bool> m_pending;
+    optional<QString> m_nick, m_permissions;
+    optional<QDateTime> m_premium_join_time;
+    QList<snowflake> m_roles;
+    QDateTime m_join_time;
+    bool m_deaf, m_mute;
+
+  public:
+    void unmarshal(const QJsonObject &o)
+    {
+        unmarshal(std::move(o));
+    }
+    void unmarshal(const QJsonObject &&);
+    optional<bool> pending() const;
+    optional<QString> nick() const;
+    optional<QString> permissions() const;
+    optional<QDateTime> premium_join_time() const;
+    const QList<snowflake> &roles() const;
+    const QDateTime &join_time() const;
+    bool deaf() const;
+    bool mute() const;
 };
