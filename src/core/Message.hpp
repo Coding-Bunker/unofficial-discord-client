@@ -58,8 +58,6 @@ class Message
 
     const QList<Embed> &getEmbeds() const;
 
-    // const QList<Component> &getAction_rows() const;
-
   private:
     snowflake m_id;
     snowflake m_channelID;

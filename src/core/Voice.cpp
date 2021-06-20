@@ -66,7 +66,7 @@ optional<bool> Voice::self_stream() const
     return m_self_stream;
 }
 
-optional<Guild_Member> Voice::member() const
+optional<GuildMember> Voice::member() const
 {
     return m_member;
 }
@@ -79,7 +79,7 @@ void Voice::unmarshal(const QJsonObject &&o)
         m_channel_id = o[QStringLiteral("channel_id")].toString().toULongLong();
     m_user_id = o[QStringLiteral("user_id")].toString().toULongLong();
     if (o.contains(QStringLiteral("member"))) {
-        Guild_Member g;
+        GuildMember g;
         g.unmarshal(o[QStringLiteral("member")].toObject());
         m_member.emplace(g);
     }

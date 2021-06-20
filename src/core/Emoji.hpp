@@ -12,7 +12,6 @@ class Emoji
 {
     snowflake m_id;
     QString m_name;
-    // optional<User> m_user;
     optional<bool> m_require_colons, m_managed, m_animated, m_available;
 
   public:

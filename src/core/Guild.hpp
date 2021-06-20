@@ -160,7 +160,7 @@ class Guild_Preview : public Guild_Base
     const unsigned &online_count() const;
 };
 
-class Guild_Member
+class GuildMember
 {
     // optional<User> m_user;
     optional<bool> m_pending;

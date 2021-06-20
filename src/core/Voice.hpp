@@ -14,7 +14,7 @@ class Voice
     snowflake m_user_id, m_channel_id;
     optional<snowflake> m_guild_id;
     optional<bool> m_self_stream;
-    optional<Guild_Member> m_member;
+    optional<GuildMember> m_member;
     QByteArray m_session_id;
     bool m_deaf, m_mute, m_self_deaf, m_self_mute, m_camera_on, m_surpress;
     QDateTime m_requested_to_speak;
@@ -37,7 +37,7 @@ class Voice
     const QDateTime &requested_to_speak() const;
     optional<snowflake> guild_id() const;
     optional<bool> self_stream() const;
-    optional<Guild_Member> member() const;
+    optional<GuildMember> member() const;
 };
 
 class Voice_Region

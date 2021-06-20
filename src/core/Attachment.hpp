@@ -19,14 +19,9 @@ class Attachment
     optional<QString> content_type() const;
     optional<unsigned> height() const;
     optional<unsigned> width() const;
-    Attachment(snowflake i, QString n, long long s, QString u, QString pu,
-               optional<QString> ct, optional<unsigned> h,
-               optional<unsigned> w) :
-        m_id(i),
-        m_filesize(s), m_filename(n), m_url(u), m_proxyurl(pu),
-        m_content_type(ct), m_height(h), m_width(w)
-    {
-    }
+    Attachment(snowflake i, QString &n, long long s, const QString &u,
+               const QString &pu, const optional<QString> &ct,
+               optional<unsigned> h, optional<unsigned> w);
     Attachment() = default;
 
   private:

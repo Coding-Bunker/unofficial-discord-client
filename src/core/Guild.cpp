@@ -217,7 +217,7 @@ const QList<Guild_Features> &Guild_Base::features() const
     return m_features;
 }
 
-void Guild_Member::unmarshal(const QJsonObject &&o)
+void GuildMember::unmarshal(const QJsonObject &&o)
 {
     // TODO: handle user field
     if (o.contains(QStringLiteral("nick")) &&
@@ -241,42 +241,42 @@ void Guild_Member::unmarshal(const QJsonObject &&o)
         m_permissions = o[QStringLiteral("permissions")].toString();
 }
 
-optional<bool> Guild_Member::pending() const
+optional<bool> GuildMember::pending() const
 {
     return m_pending;
 }
 
-optional<QString> Guild_Member::nick() const
+optional<QString> GuildMember::nick() const
 {
     return m_nick;
 }
 
-optional<QString> Guild_Member::permissions() const
+optional<QString> GuildMember::permissions() const
 {
     return m_permissions;
 }
 
-optional<QDateTime> Guild_Member::premium_join_time() const
+optional<QDateTime> GuildMember::premium_join_time() const
 {
     return m_premium_join_time;
 }
 
-const QList<snowflake> &Guild_Member::roles() const
+const QList<snowflake> &GuildMember::roles() const
 {
     return m_roles;
 }
 
-const QDateTime &Guild_Member::join_time() const
+const QDateTime &GuildMember::join_time() const
 {
     return m_join_time;
 }
 
-bool Guild_Member::deaf() const
+bool GuildMember::deaf() const
 {
     return m_deaf;
 }
 
-bool Guild_Member::mute() const
+bool GuildMember::mute() const
 {
     return m_mute;
 }

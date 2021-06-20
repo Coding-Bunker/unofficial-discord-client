@@ -108,9 +108,3 @@ const QList<Embed> &Message::getEmbeds() const
 {
     return embeds;
 }
-
-/*
-const QList<Component> &Message::getAction_rows() const
-{
-    return action_rows;
-}*/
