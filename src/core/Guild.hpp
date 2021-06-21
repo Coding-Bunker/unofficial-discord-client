@@ -3,7 +3,6 @@
 #include "Channel.hpp"
 #include "Emoji.hpp"
 #include "Role.hpp"
-//#include "User.hpp"
 
 #include <QDateTime>
 #include <QMap>
@@ -116,6 +115,7 @@ class Guild : public Guild_Base
     void setIconBase64(QByteArray &&data);
 
     QList<Channel> channels;
+    void setBannerhash(const QString &newBannerhash);
 
     snowflake public_updates_channel_id() const;
     const QString &preferredlocale() const;

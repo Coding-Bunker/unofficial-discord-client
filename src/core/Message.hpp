@@ -17,23 +17,29 @@ class Message
   public:
     void unmarshal(const QJsonObject &obj);
 
-    enum Type {
-        DEFAULT                                = 0,
-        RECIPIENT_ADD                          = 1,
-        RECIPIENT_REMOVE                       = 2,
-        CALL                                   = 3,
-        CHANNEL_NAME_CHANGE                    = 4,
-        CHANNEL_ICON_CHANGE                    = 5,
-        CHANNEL_PINNED_MESSAGE                 = 6,
-        GUILD_MEMBER_JOIN                      = 7,
-        USER_PREMIUM_GUILD_SUBSCRIPTION        = 8,
-        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1 = 9,
-        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2 = 10,
-        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3 = 11,
-        CHANNEL_FOLLOW_ADD                     = 12,
-        GUILD_DISCOVERY_DISQUALIFIED           = 14,
-        GUILD_DISCOVERY_REQUALIFIED            = 15,
-        REPLY                                  = 19,
+    enum class Type {
+        DEFAULT,
+        RECIPIENT_ADD,
+        RECIPIENT_REMOVE,
+        CALL,
+        CHANNEL_NAME_CHANGE,
+        CHANNEL_ICON_CHANGE,
+        CHANNEL_PINNED_MESSAGE,
+        GUILD_MEMBER_JOIN,
+        USER_PREMIUM_GUILD_SUBSCRIPTION,
+        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1,
+        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2,
+        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3,
+        CHANNEL_FOLLOW_ADD,
+        GUILD_DISCOVERY_DISQUALIFIED = 14,
+        GUILD_DISCOVERY_REQUALIFIED,
+        GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING,
+        GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING,
+        THREAD_CREATED,
+        REPLY,
+        APPLICATION_COMMAND,
+        THREAD_STARTER_MESSAGE,
+        GUILD_INVITE_REMINDER
     };
 
     optional<snowflake> guildID() const;

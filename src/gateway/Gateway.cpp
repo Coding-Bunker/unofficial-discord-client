@@ -43,7 +43,7 @@ void Gateway::identify()
 {
     m_payload->op = Identify;
     const QJsonObject &identity{
-        { "token", DiscordAPI::clientSecret },
+        //{ "token", DiscordAPI::clientSecret },
         // TODO: handle intents instead of hardcoding all
         { "intents", 0b11111111111111 },
         { "properties", QJsonObject{ { "$os", "linux" },
@@ -57,7 +57,7 @@ void Gateway::resume()
 {
     m_payload->op = Resume;
     const QJsonObject &body{
-        { "token", DiscordAPI::clientSecret },
+        //{ "token", DiscordAPI::clientSecret },
 
     };
 }

@@ -1,4 +1,4 @@
-#include "role.hpp"
+#include "Role.hpp"
 
 void Role::unmarshal(const QJsonObject &obj)
 {

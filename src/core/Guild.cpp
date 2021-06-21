@@ -64,6 +64,14 @@ void Guild::addChannel(Channel &&c)
             break;
         case Type::DM:
             break;
+        case Type::GUILD_NEWS_THREAD:
+            break;
+        case Type::GUILD_PUBLIC_THREAD:
+            break;
+        case Type::GUILD_PRIVATE_THREAD:
+            break;
+        case Type::GUILD_STAGE_VOICE:
+            break;
     }
 
     std::sort(channels.begin(), channels.end(),

@@ -19,22 +19,28 @@ void Channel::unmarshal(const QJsonObject &obj)
     member_count  = obj[QStringLiteral("member_count")].toString().toUShort();
 }
 
+/*
+bool key_exists(const QJsonObject &k, QString &l)
+{
+    return !k[l).isNull();
+}*/
+
 snowflake Channel::id() const
 {
     return m_id;
 }
 
-QString Channel::name() const
+optional<QString> Channel::name() const
 {
     return m_name;
 }
 
-snowflake Channel::guildId() const
+optional<snowflake> Channel::guildId() const
 {
     return m_guildId;
 }
 
-int Channel::position() const
+optional<int> Channel::position() const
 {
     return m_position;
 }
@@ -44,7 +50,7 @@ Channel::Type Channel::type() const
     return m_type;
 }
 
-snowflake Channel::last_message_id() const
+optional<snowflake> Channel::last_message_id() const
 {
     return m_last_message_id;
 }

@@ -67,7 +67,7 @@ void User::setChannelsForGuild(const QByteArray &data)
             guilds.begin(), guilds.end(),
             [&](const Guild &g) { return c.guildId() == g.id(); }) };
         if (it == guilds.end()) {
-            qWarning() << "guild id not found for channel " << c.name();
+            qWarning() << "guild id not found for channel " << *c.name();
             continue;
         }
 
