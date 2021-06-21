@@ -4,17 +4,16 @@ import QtQuick.Dialogs
 
 MenuBar {
     id: menu_bar
-    Dialog{
+    Dialog {
         title: "About"
         id: about_diag
         modal: false
-        contentItem : Text {
+        contentItem: Text {
             id: ab
-            property string homepage:
-                "https://github.com/Coding-Bunker/unofficial-discord-client"
+            property string homepage: "https://github.com/Coding-Bunker/unofficial-discord-client"
             anchors.centerIn: parent
             text: "Copyright 2021 Federico Guerinoni and Charlie Lin.\n
-            Homepage: <a href=\""+homepage+"\">here</a>"
+            Homepage: < a href = \"" + homepage + "\">here</a>"
             onLinkActivated: Qt.openUrlExternally(Qt.resolvedUrl(homepage))
             color: Material.foreground
         }
@@ -25,7 +24,7 @@ MenuBar {
             cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
         }
     }
-    Menu{
+    Menu {
         title: "File"
         MenuItem {
             text: "Quit"
@@ -33,7 +32,7 @@ MenuBar {
             onTriggered: Qt.quit()
         }
     }
-    Menu{
+    Menu {
         title: "About"
         MenuItem {
             text: "About this build"
@@ -41,5 +40,3 @@ MenuBar {
         }
     }
 }
-
-
