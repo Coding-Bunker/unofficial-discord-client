@@ -288,4 +288,3 @@ bool GuildMember::mute() const
 {
     return m_mute;
 }
-const QString &Guild::splashHash() const
