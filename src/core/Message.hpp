@@ -57,11 +57,11 @@ class Message
     bool getPinned() const;
 
     const QList<Embed> &getEmbeds() const;
-    const QDateTime& edited_timestamp() const;
+    const QDateTime &edited_timestamp() const;
     Type type() const;
     bool getTts() const;
     bool getMentions_all() const;
-    const QList<Role>& getMentioned_roles() const;
+    const QList<Role> &getMentioned_roles() const;
     const QList<Attachment> &getAttachments() const;
 
   private:
