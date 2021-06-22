@@ -34,13 +34,13 @@ Attachment::Attachment(snowflake i, QString &n, long long s, const QString &u,
                        optional<unsigned> h, optional<unsigned> w) :
     m_id(i),
     m_filesize(s), m_filename(n), m_url(u), m_proxyurl(pu), m_content_type(ct),
-    m_height(h), m_width(w)
-{
+    m_height(h),
+    m_width(w){
 =======
 >>>>>>> c60c38e (Add preliminary support for attachments and roles.)
-}
+    }
 
-snowflake Attachment::id() const
+    snowflake Attachment::id() const
 {
     return m_id;
 }
