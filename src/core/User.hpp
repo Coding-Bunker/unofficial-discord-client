@@ -10,6 +10,7 @@
 
 using std::optional;
 
+class Guild;
 class User : public QObject
 {
     // clang-format off
