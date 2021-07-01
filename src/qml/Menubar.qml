@@ -12,6 +12,8 @@ MenuBar {
             /* beautify ignore:start */
             readonly property string homepage:
                 "https://github.com/Coding-Bunker/unofficial-discord-client"
+            text: "Copyright 2021 Federico Guerinoni and Charlie Lin.<br/>
+                About: <a href=\""+homepage+"\">here<a/>"
             /* beautify ignore:end */
             anchors.centerIn: parent
             onLinkActivated: Qt.openUrlExternally(homepage)
