@@ -63,7 +63,7 @@ Window {
                         anchors.verticalCenter: parent.verticalCenter
                         currentIndex: startValueRole
                         onActivated: settingsModel.setParameter(
-                                         parent.listIdx, index)
+                            parent.listIdx, index)
                     }
                 }
             }

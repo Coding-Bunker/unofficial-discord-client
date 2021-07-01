@@ -9,8 +9,7 @@ MenuBar {
         id: about_diag
         contentItem: Text {
             id: ab
-            readonly property string homepage:
-                "https://github.com/Coding-Bunker/unofficial-discord-client"
+            readonly property string homepage: "https://github.com/Coding-Bunker/unofficial-discord-client"
             anchors.centerIn: parent
             text: "Copyright 2021 Federico Guerinoni and Charlie Lin.<br/>
             Homepage: < a href = \"" + homepage + "\">here</a>"
