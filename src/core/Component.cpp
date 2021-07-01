@@ -3,9 +3,9 @@
 #include <QJsonArray>
 #include <utility>
 
+// FIXME: kludge here
 constexpr int Component::type()
 {
-    // XXX: kludge here
     if (m_component.index() == 0)
         // Action row
         return 1;
@@ -35,19 +35,9 @@ void Component::unmarshal(const QJsonObject &&o)
         }
         m_component.emplace<Action_Row>(a);
     } else {
-        // Button but;
-        // but.unmarshal(o);
-        // m_component.emplace<Button>(but);
+        // TODO: unmarshal button
     }
 }
-
-/*
-template<class T> constexpr T &get(Component &c)
-{
-    int k = c.index();
-    return std::get<k>(c);
-}
-*/
 
 void Button::unmarshal(const QJsonObject &o)
 {
@@ -60,9 +50,7 @@ void Button::unmarshal(const QJsonObject &&o)
     if (o.contains(QStringLiteral("style")))
         m_style = static_cast<Button_Style>(o[QStringLiteral("style")].toInt());
     if (o.contains(QStringLiteral("emoji"))) {
-        // Emoji t;
-        // t.unmarshal(o[QStringLiteral("emoji")].toObject());
-        // m_emoji.emplace(t);
+        // TODO: handle emoji
     }
     if (o.contains(QStringLiteral("label")))
         m_label = o[QStringLiteral("label")].toString();

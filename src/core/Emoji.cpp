@@ -11,11 +11,8 @@ const QString &Emoji::name() const
 {
     return m_name;
 }
-/*
-optional<User> &Emoji::user()
-{
-    return m_user;
-}*/
+
+// TODO: handle getters of subclass of QObject...
 
 optional<bool> Emoji::require_colons() const
 {
@@ -39,21 +36,19 @@ optional<bool> Emoji::available() const
 
 void Emoji::unmarshal(const QJsonObject &o)
 {
-    m_id = o["id"].toString().toULongLong();
-    if (!o["name"].isNull())
-        m_name = o["name"].toString();
-    if (o.contains("require_colons"))
-        m_require_colons = o["require_colons"].toBool();
-    if (o.contains("managed"))
-        m_managed = o["managed"].toBool();
-    if (o.contains("animated"))
-        m_animated = o["animated"].toBool();
-    if (o.contains("available"))
-        m_available = o["available"].toBool();
-    if (o.contains("user")) {
-        const auto &t{ QJsonDocument(o["user"].toObject()) };
-        // User u;
-        // u.populate(t);
-        // m_user.emplace(u);
+    m_id = o[QStringLiteral("id")].toString().toULongLong();
+    if (!o[QStringLiteral("name")].isNull())
+        m_name = o[QStringLiteral("name")].toString();
+    if (o.contains(QStringLiteral("require_colons")))
+        m_require_colons = o[QStringLiteral("require_colons")].toBool();
+    if (o.contains(QStringLiteral("managed")))
+        m_managed = o[QStringLiteral("managed")].toBool();
+    if (o.contains(QStringLiteral("animated")))
+        m_animated = o[QStringLiteral("animated")].toBool();
+    if (o.contains(QStringLiteral("available")))
+        m_available = o[QStringLiteral("available")].toBool();
+    if (o.contains(QStringLiteral("user"))) {
+        const auto &t{ QJsonDocument(o[QStringLiteral("user")].toObject()) };
+        // TODO: handle user object
     }
 }

@@ -36,6 +36,26 @@ void Guild::unmarshal(const QJsonObject &obj)
     }
 }
 
+snowflake Guild::id() const noexcept
+{
+    return m_id;
+}
+
+const QString &Guild::name() const
+{
+    return m_name;
+}
+
+QString Guild::iconHash() const
+{
+    return m_iconHash;
+}
+
+const QString &Guild::bannerhash() const
+{
+    return m_bannerhash;
+}
+
 const QByteArray &Guild::icondata() const noexcept
 {
     return m_icondata;
@@ -160,7 +180,6 @@ bool Guild::is_only_mentioned() const
     return only_mentioned;
 }
 
-<<<<<<< HEAD
 bool Guild::mfa_required() const
 {
     return m_mfa_required;
@@ -242,9 +261,6 @@ const QList<Emoji> &Guild_Base::custom_emojis() const
 }
 
 const QList<Guild_Features> &Guild_Base::features() const
-=======
-const QVariantList &Guild::roles() const
->>>>>>> c60c38e (Add preliminary support for attachments and roles.)
 {
     return m_features;
 }

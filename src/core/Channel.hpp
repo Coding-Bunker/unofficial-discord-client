@@ -44,11 +44,11 @@ class Channel
     QList<Message> messages;
 
     optional<snowflake> last_message_id() const;
-    snowflake parentId() const;
-    const QString &topic() const;
-    bool nfsw() const;
-    unsigned short getMember_count() const;
-    unsigned short getMessage_count() const;
+    optional<snowflake> parentId() const;
+    const optional<QString> &topic() const;
+    optional<bool> nfsw() const;
+    optional<unsigned short> getMember_count() const;
+    optional<unsigned short> getMessage_count() const;
 
   private:
     /*Only the id and type of channel object is technically guranteed to return

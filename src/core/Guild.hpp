@@ -104,11 +104,13 @@ class Guild_Base
 using std::optional;
 class Guild : Guild_Base
 {
+  public:
     void addChannel(Channel &&c);
 
     void addMessageToChannel(Message &&m);
 
     void setIconBase64(QByteArray &&data);
+    const QByteArray &icondata() const noexcept;
 
     QList<Channel> channels;
     void setBannerhash(const QString &newBannerhash);
@@ -127,8 +129,15 @@ class Guild : Guild_Base
     Veri_level verilvl() const;
     Explicit_Filter_level explilvl() const;
     bool is_only_mentioned() const;
+    bool mfa_required() const;
 
-    const QVariantList &roles() const;
+    const QList<Role> &roles() const;
+    void unmarshal(const QJsonObject &);
+
+    snowflake id() const noexcept;
+    const QString &name() const;
+    QString iconHash() const;
+    const QString &bannerhash() const;
 
   private:
     // Guranteed members to be returned in guild object
