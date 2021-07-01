@@ -9,13 +9,11 @@ MenuBar {
         id: about_diag
         contentItem: Text {
             id: ab
+            /* beautify ignore:start */
             readonly property string homepage:
                 "https://github.com/Coding-Bunker/unofficial-discord-client"
-            anchors.centerIn: parent
-            /* beautify ignore:start */
-            text: "Copyright 2021 Federico Guerinoni and Charlie Lin.<br/>
-            Homepage: <a href=\"" + homepage + "\">here</a>"
             /* beautify ignore:end */
+            anchors.centerIn: parent
             onLinkActivated: Qt.openUrlExternally(homepage)
             color: Material.foreground
             font.preferShaping: false

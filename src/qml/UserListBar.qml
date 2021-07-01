@@ -12,10 +12,10 @@ Rectangle {
         width: parent.width - 10
 
         ListView {
-             anchors.fill: parent
-             clip: true
-             model: hml.guildsModel.channelsModel
-             boundsBehavior: ListView.StopAtBounds
+            anchors.fill: parent
+            clip: true
+            model: hml.guildsModel.channelsModel
+            boundsBehavior: ListView.StopAtBounds
         }
     }
 }
