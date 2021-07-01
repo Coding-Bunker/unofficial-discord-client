@@ -11,5 +11,7 @@
         <file>UserInfoBar.qml</file>
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>Menubar.qml</file>
+        <file>UserListBar.qml</file>
     </qresource>
 </RCC>

@@ -1,12 +1,18 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Controls.Material 2.15
-import Qt.labs.qmlmodels 1.0
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import QtQuick.Dialogs
+import QtQuick.Window
+import Qt.labs.qmlmodels
 
-Rectangle {
-    objectName: "settings"
-
-    color: Material.backgroundColor
+Dialog {
+    id: settings_diag
+    property alias sd: settings_diag
+    title: "Settings"
+    standardButtons: Dialog.Save
+    onAccepted: {
+        hmi.saveSettings();
+        settings_diag.close();
+    }
 
     Text {
         id: title
@@ -60,25 +66,6 @@ Rectangle {
                     }
                 }
             }
-        }
-    }
-
-    Button {
-        id: okButton
-
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottomMargin: 10
-            bottom: parent.bottom
-        }
-
-        width: parent.width * .3
-        height: parent.height * .1
-
-        text: qsTr("Ok")
-        onClicked: {
-            hmi.saveSettings()
-            stackview.pop()
         }
     }
 }

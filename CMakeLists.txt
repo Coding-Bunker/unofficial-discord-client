@@ -4,6 +4,7 @@ project(
   unofficial-discord-client
   VERSION 0.1
   DESCRIPTION "Discord unofficial desktop application"
+  HOMEPAGE_URL "https://github.com/Coding-Bunker/unofficial-discord-client/"
   LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -16,6 +17,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if(MSVC)
   set(CMAKE_CXX_FLAGS "/W4 /wd4711 /wd4577 /experimental:external \
         /external:anglebrackets /external:W0")

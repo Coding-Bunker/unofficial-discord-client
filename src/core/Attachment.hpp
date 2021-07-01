@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <optional>
 
+using std::optional;
 class Attachment
 {
   public:

@@ -1,5 +1,6 @@
 #include "Message.hpp"
 
+#include <QJsonArray>
 void Message::unmarshal(const QJsonObject &obj)
 {
     m_id        = obj["id"].toString().toULongLong();
