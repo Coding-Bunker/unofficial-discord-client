@@ -2,18 +2,17 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import QtQuick.Dialogs
 import QtQuick.Window
+import Qt.labs.qmlmodels
 
-Window {
+Dialog {
     id: settings_diag
     property alias sd: settings_diag
     title: "Settings"
-    flags: Qt.Dialog
     standardButtons: Dialog.Save
     onAccepted: {
         hmi.saveSettings();
         settings_diag.close();
     }
-    color: Material.backgroundColor
 
     Text {
         id: title
