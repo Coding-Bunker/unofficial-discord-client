@@ -1,6 +1,5 @@
 import QtQuick.Controls
 import QtQuick.Controls.Material
-import QtQuick.Dialogs
 import QtQuick.Window
 import Qt.labs.qmlmodels
 
