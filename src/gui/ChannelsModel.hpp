@@ -27,7 +27,7 @@ class ChannelsModel : public QAbstractListModel
     QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void select(int index);
-    Q_INVOKABLE void sendMsg(QString txt);
+    Q_INVOKABLE void sendMsg(QString &txt);
 
     int selected() const;
     MessagesModel *msgModel();

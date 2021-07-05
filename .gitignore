@@ -118,3 +118,10 @@ compile_commands.json
 # Folders
 
 build/
+
+# CMake-generated files
+CMakeFiles/
+CMakeCache.txt
+
+# Clangd cached index
+.cache/

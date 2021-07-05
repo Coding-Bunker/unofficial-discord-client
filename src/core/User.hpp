@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Guild.hpp"
+#include "Message.hpp"
 #include "Types.hpp"
 
 #include <QVector>
@@ -10,6 +10,7 @@
 
 using std::optional;
 
+class Guild;
 class User : public QObject
 {
     // clang-format off
