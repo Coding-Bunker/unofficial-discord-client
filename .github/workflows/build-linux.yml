@@ -6,7 +6,7 @@ jobs:
   Build:
     strategy:
       matrix:
-        qt_version: [6.1.0]
+        qt_version: [6.1.2]
         platform: [ubuntu-latest]
         arch: [x64, x86]
       fail-fast: false
