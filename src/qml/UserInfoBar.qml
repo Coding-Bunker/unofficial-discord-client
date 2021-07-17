@@ -8,6 +8,8 @@ Rectangle {
     width: parent.width
 
     Rectangle {
+        id: inner
+
         color: Material.primaryColor
         anchors.centerIn: parent
         height: parent.height - 10
@@ -16,12 +18,25 @@ Rectangle {
         Text {
             text: user.username
             anchors {
+                right: logoutBtn.left
+                rightMargin: 10
+                verticalCenter: parent.verticalCenter
+            }
+            color: Material.accentColor
+            font.pixelSize: 14
+        }
+
+        Button {
+            id: logoutBtn
+
+            text: "logout"
+            height: parent.height * 1.2
+            anchors {
                 right: parent.right
                 verticalCenter: parent.verticalCenter
             }
 
-            color: Material.accentColor
-            font.pixelSize: 14
+            onClicked: auth.requestLogout()
         }
     }
 }

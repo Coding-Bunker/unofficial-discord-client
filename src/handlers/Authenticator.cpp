@@ -32,6 +32,12 @@ void Authenticator::requestLogin(QString &email, QString &pass, QString &twoFA)
     });
 }
 
+void Authenticator::requestLogout()
+{
+    // TODO: implement this
+    qDebug() << "implement me";
+}
+
 void Authenticator::handleLoginFailure(QNetworkReply::NetworkError error,
                                        QString body)
 {
