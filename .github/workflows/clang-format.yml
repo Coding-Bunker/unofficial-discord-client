@@ -18,7 +18,7 @@ jobs:
           clangFormatVersion: 11
           inplace: True
           
-      - uses: EndBug/add-and-commit@v7.2.1
+      - uses: EndBug/add-and-commit@v7.3.0
         name: "Commit clang-format Change"
         with:
           message: 'Run clang-format'
@@ -39,7 +39,7 @@ jobs:
       - name: "🎨 Run js-beautify"
         run: find . -regex '.*\.\(qml\|js\)' -exec js-beautify -r {} \;
 
-      - uses: EndBug/add-and-commit@v7.2.1
+      - uses: EndBug/add-and-commit@v7.3.0
         name: "Commit js-beautify Change"
         with:
           message: 'Run js-beautify'
