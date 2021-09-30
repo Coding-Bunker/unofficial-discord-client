@@ -6,18 +6,37 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
+    menuBar: MenuBar {
+        Menu {
+            title: qsTr("&File")
+            Action {
+                text: qsTr("&Quit")
+                shortcut: Shortcut {
+                    sequence: StandardKey.Quit
+                    context: Qt.ApplicationShortcut
+                }
+                onTriggered: Qt.quit()
+            }
+        }
+        Menu {
+            title: qsTr("&Settings")
+            Action {
+                text: qsTr("&Preferences")
+                shortcut: Shortcut {
+                    sequence: "Ctrl+S" // TODO: change this with StandardKey.Preferences
+                    context: Qt.ApplicationShortcut
+                }
+                onTriggered: stackview.push(settings)
+                enabled: stackview.currentItem.objectName === settings.objectName
+            }
+        }
 
-    Shortcut {
-        sequence: StandardKey.Quit
-        context: Qt.ApplicationShortcut
-        onActivated: Qt.quit()
-    }
-
-    Shortcut {
-        sequence: "Ctrl+S"
-        context: Qt.ApplicationShortcut
-        onActivated: stackview.push(settings)
-        enabled: stackview.currentItem.objectName === settings.objectName
+        Menu {
+            title: qsTr("&Help")
+            Action {
+                text: qsTr("&About")
+            }
+        }
     }
 
     StackView {
@@ -54,7 +73,7 @@ ApplicationWindow {
 
         function onShowError(title, errorMessage) {
             var popupComponent = Qt.createComponent("qrc:/PopupMessage.qml")
-            var popupMessageError = popupComponent.createObject(stackview);
+            var popupMessageError = popupComponent.createObject(stackview)
             popupMessageError.open()
             popupMessageError.title = qsTr(title)
             popupMessageError.message = qsTr(errorMessage)
