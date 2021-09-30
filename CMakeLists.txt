@@ -29,8 +29,8 @@ else()
 endif()
 
 find_program(CLANG_TIDY_COMMAND NAMES clang-tidy)
-if (CLANG_TIDY_COMMAND)
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND};--format-style=file")
-endif ()
+if(CLANG_TIDY_COMMAND)
+  set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND};--format-style=file")
+endif()
 
 add_subdirectory(src)
