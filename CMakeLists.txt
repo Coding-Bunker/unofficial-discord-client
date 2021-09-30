@@ -17,6 +17,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 if(MSVC)
   set(CMAKE_CXX_FLAGS "/W4 /wd4711 /wd4577 /experimental:external \
         /external:anglebrackets /external:W0")
@@ -26,5 +27,10 @@ else()
         -Winit-self -Wfloat-equal -Wformat=2 -Wmissing-include-dirs \
         -Wnull-dereference -Wshadow -Wstrict-overflow=5 -Wtautological-compare")
 endif()
+
+find_program(CLANG_TIDY_COMMAND NAMES clang-tidy)
+if (CLANG_TIDY_COMMAND)
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND};--format-style=file")
+endif ()
 
 add_subdirectory(src)
