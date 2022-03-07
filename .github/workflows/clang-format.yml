@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: DoozyX/clang-format-lint-action@v0.13
         name: "Run clang-format"
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: "Install js-beautify"
         run: sudo npm -g install js-beautify
