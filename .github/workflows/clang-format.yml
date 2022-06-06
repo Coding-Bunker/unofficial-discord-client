@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: DoozyX/clang-format-lint-action@v0.13
+      - uses: DoozyX/clang-format-lint-action@v0.14
         name: "Run clang-format"
         with:
           source: './src'
