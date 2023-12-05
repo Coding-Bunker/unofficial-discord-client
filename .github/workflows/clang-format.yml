@@ -4,18 +4,18 @@ on: [push, pull_request]
 
 jobs:
   clang-format:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-lastest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: DoozyX/clang-format-lint-action@v0.16
+      - uses: DoozyX/clang-format-lint-action@v0.9
         name: "Run clang-format"
         with:
           source: './src'
           extensions: 'hpp,cpp'
-          clangFormatVersion: 11
+          clangFormatVersion: 16
           inplace: True
           
       - uses: EndBug/add-and-commit@v9
@@ -27,7 +27,7 @@ jobs:
   
   js-beautify:
     needs: clang-format
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout

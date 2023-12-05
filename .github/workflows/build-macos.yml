@@ -6,7 +6,7 @@ jobs:
   Build:
     strategy:
       matrix:
-        qt_version: [6.1.2]
+        qt_version: [6.1.2, 6.6.0]
         platform: [macos-latest]
         arch: [x64]
       fail-fast: false
