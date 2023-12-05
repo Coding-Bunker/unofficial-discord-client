@@ -6,7 +6,7 @@ jobs:
   Build:
     strategy:
       matrix:
-        qt_version: [6.1.2]
+        qt_version: [6.1.2, 6.6.0]
         platform: [ubuntu-latest]
         arch: [x64, x86]
       fail-fast: false
@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Installing Qt
-        uses: jurplel/install-qt-action@v4
+        uses: jurplel/install-qt-action@v3.3.0
         with:
           version: ${{ matrix.qt_version }}
           arch: ${{ matrix.qtarch }}
