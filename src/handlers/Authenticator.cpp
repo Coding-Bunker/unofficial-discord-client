@@ -8,7 +8,7 @@
 #include <QNetworkReply>
 #include <QSettings>
 
-void Authenticator::requestLogin(QString &email, QString &pass, QString &twoFA)
+void Authenticator::requestLogin(QString email, QString pass, QString twoFA)
 {
     QNetworkRequest req(DiscordAPI::login);
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");

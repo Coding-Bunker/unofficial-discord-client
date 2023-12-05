@@ -8,8 +8,7 @@ class Authenticator : public QObject
     Q_OBJECT
 
   public:
-    Q_INVOKABLE void requestLogin(QString &email, QString &pass,
-                                  QString &twoFA);
+    Q_INVOKABLE void requestLogin(QString email, QString pass, QString twoFA);
     Q_INVOKABLE void requestLogout();
 
   signals:

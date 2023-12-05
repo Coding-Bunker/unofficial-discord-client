@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Controls.Material 2.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Rectangle {
     color: Material.backgroundColor
@@ -20,8 +20,8 @@ Rectangle {
             boundsBehavior: ListView.StopAtBounds
             delegate: Text {
                 text: nameRole
-                color: hmi.guildsModel.channelsModel.selected ===
-                    index ? Material.accentColor : Material.foreground
+                color: hmi.guildsModel.channelsModel.selected
+                       === index ? Material.accentColor : Material.foreground
 
                 MouseArea {
                     anchors.fill: parent
